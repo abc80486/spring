@@ -1,0 +1,6 @@
+com\fishpro\mybatis\domain\UserDO.class
+com\fishpro\mybatis\dao\UserDao.class
+com\fishpro\mybatis\controller\UserController.class
+com\fishpro\mybatis\MybatisApplication.class
+com\fishpro\mybatis\service\UserService.class
+com\fishpro\mybatis\service\impl\UserServiceImpl.class
