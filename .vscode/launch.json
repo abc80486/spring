@@ -2,6 +2,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - data",
+            "request": "launch",
+            "mainClass": "com.example.demo.data",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - data",
+            "request": "launch",
+            "mainClass": "data"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - MybatisApplication",
             "request": "launch",
             "mainClass": "com.fishpro.mybatis.MybatisApplication"
