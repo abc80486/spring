@@ -4,6 +4,13 @@
             "type": "java",
             "name": "CodeLens (Launch) - data",
             "request": "launch",
+            "mainClass": "com.example.demo.chain_data.data",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - data",
+            "request": "launch",
             "mainClass": "com.example.demo.data",
             "projectName": "demo"
         },

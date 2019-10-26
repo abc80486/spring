@@ -30,7 +30,7 @@ public class data {
         JSONArray usedAmount = JSON.parseArray("[]");
         for (int i = 0; i < sigalNeed.size(); i++) {
             // System.out.println(temp.get(i));
-            useaAmount.=
+          //  sigalNe
         }
     }
 
