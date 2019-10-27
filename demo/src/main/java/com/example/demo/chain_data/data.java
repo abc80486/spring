@@ -7,20 +7,12 @@ import java.util.List;
 
 import com.alibaba.fastjson.*;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/data")
 public class data{
-    //static double output=4000;//������
-    //static double cycleTime = 1.5;//����ʱ�䣻
-    //static double storageSum = 0.0;
-    //ArrayList<Double> sigalNeed,currentPackQuantity;//��̨����e����ǰ��װ����j
-    ArrayList<Double> layer,layerAmount;//������ÿ��������
-    public static ArrayList<Double> getUsedAmount(){//R
-        //��̨ʹ���� = ����*��̨����/��װ����
-        ArrayList<Double> usedAmount = new ArrayList<Double>();
-       // usedAmount = getSigalNeed()*getcurrentPackQuantity();
-        return usedAmount;
-    }
-
     public static String fileIn(String strFile) {
       	String end = "";
         try{
@@ -35,22 +27,37 @@ public class data{
         }
         return end;
     }
-
+/*
     public static void main(String[] args){
        // getStorage(1.5,4000.0);
-        System.out.println(getStorage(1.5,4000.0));
+        System.out.println(getStorage(1.5,3,7,7,4000.0));
     }
-    public static List<Double> getStorage(double CT,double output){
+    */
+    @RequestMapping("/getStorage")
+    public static List<Double> getda(double OUTPUT,double PCT,double LCT,double ECT,double HCT){
+        // getStorage(1.5,4000.0);
+        //List<Double> storage = new ArrayList<Double>();
+        //return getStorage(1.5,3,7,7,4000.0);
+        return getStorage(OUTPUT,PCT,LCT,ECT,HCT);
+     }
+     @RequestMapping(value="/home")
+     public String home(){
+         System.out.println("redirect to home page!");
+         return "index";
+     }
+ 
+    public static List<Double> getStorage(double output,double PCT,double LCT,double ECT,double HCT){
         List<Double> storage = new ArrayList<Double>();
         final double RUBBERBOXVOLUME = 0.0756;
     	final int COUNT = 6;
         //ArrayList<Double> lists = new List<Double>();
-    	String layerFile = "C:\\Users\\xiangbin\\iCloudDrive\\eclipse\\db_con\\src\\chain_data\\layer.json";
-    	String layerAmountFile = "C:\\Users\\xiangbin\\iCloudDrive\\eclipse\\db_con\\src\\chain_data\\layerAmount.json";
-    	String sigalNeedFile = "C:\\Users\\xiangbin\\iCloudDrive\\eclipse\\db_con\\src\\chain_data\\sigalNeed.json";
-    	String currentPackQuantityFile = "C:\\Users\\xiangbin\\iCloudDrive\\eclipse\\db_con\\src\\chain_data\\currentPackQuantity.json";
-    	String demandRubberBoxFile = "C:\\Users\\xiangbin\\iCloudDrive\\eclipse\\db_con\\src\\chain_data\\demandRubberBox.json";
-    	String volumeFile = "C:\\Users\\xiangbin\\iCloudDrive\\eclipse\\db_con\\src\\chain_data\\volume.json";
+        String pFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
+    	String layerFile = pFile+"layer.json";
+    	String layerAmountFile = pFile+"layerAmount.json";
+    	String sigalNeedFile = pFile+"sigalNeed.json";
+    	String currentPackQuantityFile = pFile+"currentPackQuantity.json";
+    	String demandRubberBoxFile = pFile+"demandRubberBox.json";
+    	String volumeFile = pFile+"volume.json";
 
 
     	JSONArray sigalNeed = JSON.parseArray(fileIn(sigalNeedFile));
@@ -65,10 +72,15 @@ public class data{
         JSONArray usedAmount = JSON.parseArray("[]");//R
        
         double  storageAmount = 0.0;
-        double packRequiredSum = 0.0;//包材
-        double electtonicRequiredSum = 0.0;//电子元器件
-        double largestRequiredSum = 0.0;//大件
-        double hardwareRequiredSum = 0.0;//五金
+        double packRequiredSum = 0.0;//鍖呮潗
+        double electtonicRequiredSum = 0.0;//鐢靛瓙鍏冨櫒浠�
+        double largestRequiredSum = 0.0;//澶т欢
+        double hardwareRequiredSum = 0.0;//浜旈噾
+
+        List<Double> packRequired = new ArrayList<Double>();
+        List<Double> largestRequired = new ArrayList<Double>();
+        List<Double> electtonicRequired = new ArrayList<Double>();
+        List<Double> hardwareRequired = new ArrayList<Double>();
 
         int packN = 13;
         int lagN = 9;
@@ -77,40 +89,36 @@ public class data{
     //    int hdwN = 29;
         //
         //Q
-        //计算需求板数量，R列为通用；
-         System.out.println(sigalNeed.size());
+        //璁＄畻闇�姹傛澘鏁伴噺锛孯鍒椾负閫氱敤锛�
+         //System.out.println(sigalNeed.size());
         for (int i = 0; i < sigalNeed.size(); i++) {
             usedAmount.add((int)Math.ceil(output*sigalNeed.getDoubleValue(i)/currentPackQuantity.getDoubleValue(i)));
             if(demandRubberBox.getDoubleValue(i)!=0) {
                 double temp = (int)Math.ceil(volume.getDoubleValue(i)*usedAmount.getDoubleValue(i)/RUBBERBOXVOLUME);
                 demandRubberBox.set(i, temp);//AD
-                requiredBroad.add(temp/12.0);//需求胶箱数量；
+                requiredBroad.add(temp/12.0);//闇�姹傝兌绠辨暟閲忥紱
             }else{
                 double temp = usedAmount.getDoubleValue(i)/layer.getDoubleValue(i)/layerAmount.getDoubleValue(i);
                 requiredBroad.add(temp); 
             }
         }
-        //根据板数计算储位，AF
+        //鏍规嵁鏉挎暟璁＄畻鍌ㄤ綅锛孉F
            double temp = 0.0;
             for(int j=0;j<COUNT;j++){
                 temp += requiredBroad.getDoubleValue(j);
             }
-            packRequiredSum += (int)Math.ceil(temp);//获取第一个值
+            packRequiredSum += (int)Math.ceil(temp);//鑾峰彇绗竴涓��
             //System.out.println(packRequiredSum);
         //for(int i=COUNT;i<pack)
         for (int i = COUNT; i < sigalNeed.size(); i++) {
             //System.out.println(requiredBroad.getDoubleValue(i));
-            //不需要胶箱，直接向上取整；
+            //涓嶉渶瑕佽兌绠憋紝鐩存帴鍚戜笂鍙栨暣锛�
                 int temp2 =  demandRubberBox.getIntValue(i);
                 double tem=0.0;
                 if(temp2==0.0){
                     tem = (int)Math.ceil(requiredBroad.getDoubleValue(i));
-                }else if(temp2 == 1){
-                    tem = 0.25;
-                }else if(temp2 == 2){
-                    tem = 0.5;
-                }else if(temp2 == 3){
-                    tem = 0.75;
+                }else if(temp2 <= 3){
+                    tem = temp2 * 0.25;
                 }else if(temp<=12){
                     tem = 1.0;
                 }else{
@@ -120,22 +128,26 @@ public class data{
             if(i<packN){    
                 packRequiredSum += tem;
                 //System.out.println(packRequiredSum);
+                packRequired.add(tem);
 
             }else if(i<packN+lagN){
                 largestRequiredSum += tem;
-                System.out.println(tem);
+               // System.out.println(tem);
+                largestRequired.add(tem);
             }else if(i<packN+lagN+elsN){
                 electtonicRequiredSum += tem;
+                electtonicRequired.add(tem);
             }else{
                 hardwareRequiredSum += tem;
+                hardwareRequired.add(tem);
             }
-        }
-        storageAmount = CT*(packRequiredSum+largestRequiredSum+electtonicRequiredSum+hardwareRequiredSum);
-        
-        storage.add(packRequiredSum*CT);
-        storage.add(largestRequiredSum*CT);
-        storage.add(electtonicRequiredSum*CT);
-        storage.add(hardwareRequiredSum*CT);
+        }        
+        storage.add(packRequiredSum*PCT);
+        storage.add(largestRequiredSum*LCT);
+        storage.add(electtonicRequiredSum*ECT);
+        storage.add(hardwareRequiredSum*HCT);
+
+        storageAmount = packRequiredSum*PCT + largestRequiredSum*LCT + electtonicRequiredSum*ECT + hardwareRequiredSum*HCT;
         storage.add(storageAmount);
         return storage;
     }
