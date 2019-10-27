@@ -40,10 +40,10 @@ public class data{
         //return getStorage(1.5,3,7,7,4000.0);
         return getStorage(OUTPUT,PCT,LCT,ECT,HCT);
      }
-     @RequestMapping(value="/home")
+     @RequestMapping("home")
      public String home(){
          System.out.println("redirect to home page!");
-         return "index";
+         return "thymeleaf/index";
      }
  
     public static List<Double> getStorage(double output,double PCT,double LCT,double ECT,double HCT){
