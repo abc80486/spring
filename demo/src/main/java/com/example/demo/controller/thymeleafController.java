@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("th")
+//@RequestMapping("th")
 public class thymeleafController {
     @RequestMapping("home")
     public String home(){

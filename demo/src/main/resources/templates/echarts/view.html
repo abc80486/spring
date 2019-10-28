@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html style="height: 100%">
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
    <head>
-       <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    </head>
    <body style="height: 100%; margin: 0">
-       <div id="container" style="height: 60%;width: 50%;"></div>
+       <div id="container" style="height: 60%;width: 60%;"></div>
+       <form style="margin-left:30px;" th:action="@{/view}" th:object="${exdata}" method="POST">
+        供货周期(天): (包材、大件、电子器件、小五金) <br/>
+        <input type="text"  th:field="*{PCT}"  style="height: 15px;width: 60px;margin-left:70px;">
+        <input type="text" th:field="*{LCT}" style="height: 15px;width: 60px;">
+        <input type="text" th:field="*{ECT}"style="height: 15px;width: 60px;">
+        <input type="text" th:field="*{HCT}" style="height: 15px;width: 60px;"><br/>
+        产量: ('GW1111系列'、'GW1122系列'、'GW1813系列'、'A71锁'、'V8锁')<br/>
+        <input type="text" th:field="*{GW11}" style="height: 15px;width: 60px;margin-left:70px;">
+        <input type="text" name="GW12" value=3200 style="height: 15px;width: 60px;">
+        <input type="text" name="GW13" value=800 style="height: 15px;width: 60px;">
+        <input type="text" name="A71" value=2400 style="height: 15px;width: 60px;">
+        <input type="text" name="A8" value=2400 style="height: 15px;width: 60px;">
+        <input type="submit" value="计算储位" style="margin-left:10px;"><br/>
+        储位：<br/>
+        <input type="text"  th:field="*{PSR}" style="height: 15px;width: 60px;margin-left:70px;">
+        <input type="text"  th:field="*{LSR}" style="height: 15px;width: 60px;">
+        <input type="text"  th:field="*{ESR}" style="height: 15px;width: 60px;">
+        <input type="text"  th:field="*{HSR}" style="height: 15px;width: 60px;">
+        </form> 
+
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-       <script type="text/javascript">
+       <script type="text/javascript" th:inline="javascript" th:object="${exdata}" >
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
+var tdata = [[${exdata.PSR}]];
 option = null;
 app.title = '';
 
@@ -33,13 +54,13 @@ option = {
         bottom: '3%',
         containLabel: true
     },
-    xAxis:  {
+    yAxis:  {
         type: 'value',
-        name: '(单位：个)'
+        name: '个'
     },
-    yAxis: {
+    xAxis: {
         type: 'category',
-        data: ['V8锁','A71锁','GW1813系列','GW1122系列','GW1111系列']
+        data: ['GW1111系列','GW1122系列','GW1813系列','A71锁','V8锁']
     },
     series: [
         {
@@ -52,7 +73,7 @@ option = {
                     position: 'insideRight'
                 }
             },
-            data: [320, 302, 301, 334, 390, 330, 320]
+            data: [[[${exdata.PSR}]],123,301, 334,tdata]
         },
         {
             name: '大件',
@@ -88,7 +109,7 @@ option = {
                     position: 'insideRight'
                 }
             },
-            data: [820, 832, 901, 934, 1290, 1330, 1320]
+            data: [567, 832, 901, 934, 1290, 1330, 1320]
         }
     ]
 };;
