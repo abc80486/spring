@@ -167,37 +167,37 @@ public class data{
         double electtonicRequiredSum = 0.0;//
         double largestRequiredSum = 0.0;//
         double hardwareRequiredSum = 0.0;//
+        int packN = 14;
+        int lagN = 9;
+        int elsN = 12;
+
 
         List<Double> packRequired = new ArrayList<Double>();
         List<Double> largestRequired = new ArrayList<Double>();
         List<Double> electtonicRequired = new ArrayList<Double>();
         List<Double> hardwareRequired = new ArrayList<Double>();
 
-        int packN = 14;
-        int lagN = 9;
-        int elsN = 12;
        
     //    int hdwN = 29;
         //
         //Q
-        System.out.println(getSData.sigalNeed.size());
+        //System.out.println(getSData.sigalNeed.size());
         for (int i = 0; i < getSData.sigalNeed.size(); i++) {
             usedAmount.add((int)Math.ceil(output*getSData.sigalNeed.getDoubleValue(i)/getSData.currentPackQuantity.getDoubleValue(i)));
             if(getSData.demandRubberBox.getDoubleValue(i)!=0) {
                 double temp = (int)Math.ceil(getSData.volume.getDoubleValue(i)*usedAmount.getDoubleValue(i)/RUBBERBOXVOLUME);
                 getSData.demandRubberBox.set(i, temp);//AD
-                requiredBroad.add(temp/12.0);//闇�姹傝兌绠辨暟閲忥紱
+                requiredBroad.add(temp/12.0);//
             }else{
                 double temp = usedAmount.getDoubleValue(i)/getSData.layer.getDoubleValue(i)/getSData.layerAmount.getDoubleValue(i);
                 requiredBroad.add(temp); 
             }
         }
-        //鏍规嵁鏉挎暟璁＄畻鍌ㄤ綅锛孉F
            double temp = 0.0;
             for(int j=0;j<COUNT;j++){
                 temp += requiredBroad.getDoubleValue(j);
             }
-            packRequiredSum += (int)Math.ceil(temp);//鑾峰彇绗竴涓��
+            packRequiredSum += (int)Math.ceil(temp);//
             //System.out.println(packRequiredSum);
         //for(int i=COUNT;i<pack)
         int num = getSData.sigalNeed.size();
@@ -205,8 +205,6 @@ public class data{
             System.out.println(requiredBroad.getDoubleValue(i));
         }
         for (int i = COUNT; i < num; i++) {
-            //System.out.println(requiredBroad.getDoubleValue(i));
-            //涓嶉渶瑕佽兌绠憋紝鐩存帴鍚戜笂鍙栨暣锛�
                 int temp2 =  getSData.demandRubberBox.getIntValue(i);
                 double tem=0.0;
                 if(temp2==0.0){
