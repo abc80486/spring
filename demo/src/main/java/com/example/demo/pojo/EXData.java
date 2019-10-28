@@ -1,6 +1,12 @@
 package com.example.demo.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.demo.chain_data.data;
+
 public class EXData {
+
     double PCT = 2.0;
     double LCT = 3.0;
     double ECT = 7.0;
@@ -12,11 +18,21 @@ public class EXData {
     double A71 = 2400.0;
     double A8 = 2400.0;
 
-    double PSR = 0.0;
-    double LSR = 0.0;
-    double ESR = 0.0;
-    double HSR = 0.0;
+   // List<Double> SR = new ArrayList<Double>();
+     double PSR = 0.0;
+     double LSR = 0.0;
+     double ESR = 0.0;
+     double HSR = 0.0;
+    public void getSR(){
 
+        List<Double> storage = new ArrayList<Double>();
+        storage = data.getStorage(this.GW11, this.PCT, this.LCT, this.ECT, this.HCT);
+        this.setPSR(storage.get(0));
+        this.setLSR(storage.get(1));
+        this.setESR(storage.get(2));
+        this.setHSR(storage.get(3));
+         
+    }
     public double getPSR() {
         return PSR;
     }

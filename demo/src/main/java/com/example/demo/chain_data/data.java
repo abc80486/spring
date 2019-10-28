@@ -41,7 +41,16 @@ public class data{
         return getStorage(OUTPUT,PCT,LCT,ECT,HCT);
      }
  
- 
+    // @RequestMapping("/getTest")
+    public static List<Double> getdata(){
+        // getStorage(1.5,4000.0);
+        //List<Double> storage = new ArrayList<Double>();
+        return getStorage(4000,1.5,3,7,7);
+       // return getStorage(OUTPUT,PCT,LCT,ECT,HCT);
+     }
+     public static void main(String[] args){
+        System.out.println(getStorage(4000,1.5,3,7,7));
+     }
     public static List<Double> getStorage(double output,double PCT,double LCT,double ECT,double HCT){
         List<Double> storage = new ArrayList<Double>();
         final double RUBBERBOXVOLUME = 0.0756;
@@ -79,14 +88,14 @@ public class data{
         List<Double> hardwareRequired = new ArrayList<Double>();
 
         int packN = 13;
-        int lagN = 9;
-        int elsN = 5;
+        int lagN = 5;
+        int elsN = 9;
        
     //    int hdwN = 29;
         //
         //Q
         //璁＄畻闇�姹傛澘鏁伴噺锛孯鍒椾负閫氱敤锛�
-         //System.out.println(sigalNeed.size());
+         System.out.println(sigalNeed.size());
         for (int i = 0; i < sigalNeed.size(); i++) {
             usedAmount.add((int)Math.ceil(output*sigalNeed.getDoubleValue(i)/currentPackQuantity.getDoubleValue(i)));
             if(demandRubberBox.getDoubleValue(i)!=0) {
@@ -106,7 +115,8 @@ public class data{
             packRequiredSum += (int)Math.ceil(temp);//鑾峰彇绗竴涓��
             //System.out.println(packRequiredSum);
         //for(int i=COUNT;i<pack)
-        for (int i = COUNT; i < sigalNeed.size(); i++) {
+        int num = sigalNeed.size();
+        for (int i = COUNT; i < num; i++) {
             //System.out.println(requiredBroad.getDoubleValue(i));
             //涓嶉渶瑕佽兌绠憋紝鐩存帴鍚戜笂鍙栨暣锛�
                 int temp2 =  demandRubberBox.getIntValue(i);
@@ -128,14 +138,16 @@ public class data{
 
             }else if(i<packN+lagN){
                 largestRequiredSum += tem;
-               // System.out.println(tem);
+              // System.out.println(tem);
                 largestRequired.add(tem);
             }else if(i<packN+lagN+elsN){
                 electtonicRequiredSum += tem;
+               // System.out.println(tem);
                 electtonicRequired.add(tem);
-            }else{
+            }else {
                 hardwareRequiredSum += tem;
                 hardwareRequired.add(tem);
+                System.out.println(tem);
             }
         }        
         storage.add(packRequiredSum*PCT);
