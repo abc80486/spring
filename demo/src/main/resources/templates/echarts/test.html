@@ -11,12 +11,18 @@
         <th th:text="${power}"></th>
         <p th:text="${power}"></p>
     </tr>
+    <form style="margin-left:30px;" th:action="@{/test}"th:object="${pr}" method="POST">
+        <input type="text"  th:value="*{pr}"  style="height: 15px;width: 60px;margin-left:70px;">
+
+        <input type="submit" value="计算储位" style="margin-left:10px;"><br/>
+        </form> 
+
 </table>
 <script type="text/javascript"  th-inline="javascript">
                // var  k = $[{power}];
-                window.alert("1111");
+               // window.alert("1111");
                 //var  k = [[${power}]];
-                window.alert([[${titles[2]}]]);
+               // window.alert([[${titles[2]}]]);
 </script>
 
 </body>

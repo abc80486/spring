@@ -6,7 +6,17 @@ import java.util.List;
 import com.example.demo.chain_data.data;
 
 public class EXData {
-
+//data 
+/*
+1.OBJECTJson{
+    GW11:[],
+    GW12:[],
+    GW13:[],
+    A71:[],
+    V8:[]
+}
+2.
+*/
      static double PCT = 2.0;
      static double LCT = 3.0;
      static double ECT = 7.0;
@@ -24,6 +34,7 @@ public class EXData {
     static double ESR = 0.0;
     static double HSR = 0.0;
 
+
     public static double PSR12 = 0.0;
     public static double LSR12 = 0.0;
     public static double ESR12 = 0.0;
@@ -34,13 +45,20 @@ public class EXData {
     public static double ESR13 = 0.0;
     public static double HSR13 = 0.0;
 
+    public static List<Double> PSRA71 = new ArrayList<>();
+    public static List<Double> PSRV8 = new ArrayList<>();   
     public static List<Double> list = new ArrayList<Double>();
     public void test(){
         list.add(1.0);
         list.add(2.0);
         list.add(3.0);
         list.add(4.0);
+        PSRA71 = data.getSRa71(A71, 7, 7, 7, 7);
+        PSRV8 = data.getSRv8(V8, 7, 7, 7, 7);
+        System.out.println(PSRA71);
+        System.out.println(PSRV8);
     }
+    
 /*
     public static double gw11sum = PSR + LSR + ESR +HSR;
     public static double gw12sum = PSR12 + LSR12 + ESR12 +HSR12;

@@ -392,10 +392,10 @@ public class data{
             if(ctgy==41){    
 
                 packRequiredSum += tem;
-                System.out.println(tem);
+                //System.out.println(tem);
             }else if(ctgy==42){
                 largestRequiredSum += tem;
-               System.out.println(tem);
+               //System.out.println(tem);
                // largestRequired.add(tem);
             }else if(ctgy==43){
                 electtonicRequiredSum += tem;
@@ -418,7 +418,7 @@ public class data{
     public  static List<Double> getSRv8(double output,double PCT,double LCT,double ECT,double HCT){
         List<Double> storage = new ArrayList<Double>();
         double RUBBERBOXVOLUME = 0.0756;
-    	int COUNT = 2;
+    	int COUNT = 0;
         //ArrayList<Double> lists = new List<Double>();
         JSONArray requiredBroad = JSON.parseArray("[]");//AE
         JSONArray usedAmount = JSON.parseArray("[]");//R
@@ -475,10 +475,10 @@ public class data{
             if(ctgy==51){    
 
                 packRequiredSum += tem;
-                System.out.println(tem);
+                //System.out.println(tem);
             }else if(ctgy==52){
                 largestRequiredSum += tem;
-               System.out.println(tem);
+               //System.out.println(tem);
                // largestRequired.add(tem);
             }else if(ctgy==53){
                 electtonicRequiredSum += tem;
