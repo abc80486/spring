@@ -33,6 +33,14 @@ public class EXData {
     public static double LSR13 = 0.0;
     public static double ESR13 = 0.0;
     public static double HSR13 = 0.0;
+
+    public static List<Double> list = new ArrayList<Double>();
+    public void test(){
+        list.add(1.0);
+        list.add(2.0);
+        list.add(3.0);
+        list.add(4.0);
+    }
 /*
     public static double gw11sum = PSR + LSR + ESR +HSR;
     public static double gw12sum = PSR12 + LSR12 + ESR12 +HSR12;
@@ -40,6 +48,7 @@ public class EXData {
     public static double a71sum = PSR + LSR + ESR +HSR;
     public static double v8sum = PSR + LSR + ESR +HSR;
 */
+
     public static void main(String[] args) {
         EXData a = new EXData();
         a.get();

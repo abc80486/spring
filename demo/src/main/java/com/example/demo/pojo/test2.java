@@ -10,22 +10,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class test2 {
 
     //传入greeting对象实现封装
-    /*
-    @GetMapping("/view")
+    
+    @GetMapping("/test")
     public String greetingForm(Model model) {
-        model.addAttribute("exdata", new EXData());
-        return "echarts/view.html";
+        int[] titles = new int[]{47, 47, 21};
+        int power = 50;
+        model.addAttribute("titles",titles);
+        model.addAttribute("power",power);
+        return "echarts/test.html";
     }
     //将封装的对象转入result.html
     
-    @PostMapping("/view")//@ModelAttribute
+    @PostMapping("/test")//@ModelAttribute
     public String greetingSubmit( EXData exdata) {
         exdata.setPCT(10);
         System.out.print(exdata.getPCT());
         return "/";
        // return "../";
     }
-    */
+    
     
 
 }

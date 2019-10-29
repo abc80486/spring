@@ -39,7 +39,6 @@ public class test {
         exdata.setHSR(storage.get(3));
        */
         exdata.get();
-       
        // exdata.getSR13();
         model.addAttribute("exdata", exdata);
         //model.addAttribute("srdata", storage);
