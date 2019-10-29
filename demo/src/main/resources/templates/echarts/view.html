@@ -5,24 +5,26 @@
    </head>
    <body style="height: 100%; margin: 0">
        <div id="container" style="height: 60%;width: 60%;"></div>
-       <form style="margin-left:30px;" th:action="@{/view}" th:object="${exdata}" method="POST">
+       <form style="margin-left:30px;" th:action="@{/view/cal}" th:object="${exdata}" method="POST">
         供货周期(天): (包材、大件、电子器件、小五金) <br/>
         <input type="text"  th:field="*{PCT}"  style="height: 15px;width: 60px;margin-left:70px;">
         <input type="text" th:field="*{LCT}" style="height: 15px;width: 60px;">
         <input type="text" th:field="*{ECT}"style="height: 15px;width: 60px;">
         <input type="text" th:field="*{HCT}" style="height: 15px;width: 60px;"><br/>
         产量: ('GW1111系列'、'GW1122系列'、'GW1813系列'、'A71锁'、'V8锁')<br/>
-        <input type="text" th:field="*{GW11}" style="height: 15px;width: 60px;margin-left:70px;">
-        <input type="text" name="GW12" value=3200 style="height: 15px;width: 60px;">
-        <input type="text" name="GW13" value=800 style="height: 15px;width: 60px;">
-        <input type="text" name="A71" value=2400 style="height: 15px;width: 60px;">
-        <input type="text" name="A8" value=2400 style="height: 15px;width: 60px;">
+        <input type="text"  value= "*{GW11}" name="GW11" th:field="*{GW11}" style="height: 15px;width: 60px;margin-left:70px;">
+        <input type="text"  value= "*{GW12}" name="GW12" th:field="*{GW12}" style="height: 15px;width: 60px;">
+        <input type="text"  value= "*{GW13}" name="GW13" th:field="*{GW13}" style="height: 15px;width: 60px;">
+        <input type="text"  value= "*{A71}" name="A71" th:field="*{A71}" style="height: 15px;width: 60px;">
+        <input type="text"  value= "*{V8}" name="V8" th:field="*{V8}" style="height: 15px;width: 60px;">
+
         <input type="submit" value="计算储位" style="margin-left:10px;"><br/>
         储位：<br/>
-        <input type="text"  th:field="*{PSR}" style="height: 15px;width: 60px;margin-left:70px;">
+        GW11：<input type="text"  th:field="*{PSR}" style="height: 15px;width: 60px;margin-left:70px;">
         <input type="text"  th:field="*{LSR}" style="height: 15px;width: 60px;">
         <input type="text"  th:field="*{ESR}" style="height: 15px;width: 60px;">
-        <input type="text"  th:field="*{HSR}" style="height: 15px;width: 60px;">
+        <input type="text"  th:field="*{HSR}" style="height: 15px;width: 60px;"><br/>
+
         </form> 
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
@@ -33,6 +35,17 @@ var psr1 = [[${exdata.PSR}]];
 var lsr1 = [[${exdata.LSR}]];
 var esr1 = [[${exdata.ESR}]];
 var hsr1 = [[${exdata.HSR}]];
+
+var psr2 = [[${exdata.PSR12}]];
+var lsr2 = [[${exdata.LSR12}]];
+var esr2 = [[${exdata.ESR12}]];
+var hsr2 = [[${exdata.HSR12}]];
+
+var psr3 = [[${exdata.PSR13}]];
+var lsr3 = [[${exdata.LSR13}]];
+var esr3 = [[${exdata.ESR13}]];
+var hsr3 = [[${exdata.HSR13}]];
+
 var app = {};
 
 option = null;
@@ -77,7 +90,7 @@ option = {
                     position: 'insideRight'
                 }
             },
-            data: [psr1, 132, 101, 134, 90]
+            data: [psr1, psr2, psr3, 134, 90]
         },
         {
             name: '大件',
@@ -89,7 +102,7 @@ option = {
                     position: 'insideRight'
                 }
             },
-            data: [lsr1, 132, 101, 134, 90]
+            data: [lsr1, lsr2, lsr3, 134, 90]
         },
         {
             name: '电子器件',
@@ -101,7 +114,7 @@ option = {
                     position: 'insideRight'
                 }
             },
-            data: [esr1, 182, 191, 234, 290]
+            data: [esr1, esr2, esr3, 234, 290]
         },
         {
             name: '小五金',
@@ -113,10 +126,10 @@ option = {
                     position: 'insideRight'
                 }
             },
-            data: [hsr1, 832, 901, 934, 1290]
+            data: [hsr1, hsr2, hsr3, 934, 1290]
         }
     ]
-};;
+};
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }

@@ -33,22 +33,27 @@ public class data{
         System.out.println(getStorage(1.5,3,7,7,4000.0));
     }
     */
+    /*
     @RequestMapping("/getStorage")
     public static List<Double> getda(double OUTPUT,double PCT,double LCT,double ECT,double HCT){
         // getStorage(1.5,4000.0);
         //List<Double> storage = new ArrayList<Double>();
         //return getStorage(1.5,3,7,7,4000.0);
-        return getStorage(OUTPUT,PCT,LCT,ECT,HCT);
-     }
- 
-     public static void main(String[] args){
-        System.out.println(getSRgw12(3200,2,3,7,7));
+       // return getStorage(OUTPUT,PCT,LCT,ECT,HCT);
      }
 
+
+     public static void main(String[] args){
+         data a = new data();
+        System.out.println(getSRgw13(800.0,2.0,5.0,7.0,7.0));
+        System.out.println(getSRgw13(800.0,2.0,5.0,7.0,7.0));
+
+     }
+*/
     public static List<Double> getStorage(double output,double PCT,double LCT,double ECT,double HCT){
         List<Double> storage = new ArrayList<Double>();
-        final double RUBBERBOXVOLUME = 0.0756;
-    	final int COUNT = 6;
+        double RUBBERBOXVOLUME = 0.0756;
+    	int COUNT = 6;
         //ArrayList<Double> lists = new List<Double>();
         String pFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
     	String layerFile = pFile+"layer.json";
@@ -71,10 +76,10 @@ public class data{
         JSONArray usedAmount = JSON.parseArray("[]");//R
        
         double  storageAmount = 0.0;
-        double packRequiredSum = 0.0;//鍖呮潗
-        double electtonicRequiredSum = 0.0;//鐢靛瓙鍏冨櫒浠�
-        double largestRequiredSum = 0.0;//澶т欢
-        double hardwareRequiredSum = 0.0;//浜旈噾
+        double packRequiredSum = 0.0;//
+        double electtonicRequiredSum = 0.0;//
+        double largestRequiredSum = 0.0;//
+        double hardwareRequiredSum = 0.0;//
 
         List<Double> packRequired = new ArrayList<Double>();
         List<Double> largestRequired = new ArrayList<Double>();
@@ -88,31 +93,28 @@ public class data{
     //    int hdwN = 29;
         //
         //Q
-        //璁＄畻闇�姹傛澘鏁伴噺锛孯鍒椾负閫氱敤锛�
-         System.out.println(sigalNeed.size());
+        // System.out.println(sigalNeed.size());
         for (int i = 0; i < sigalNeed.size(); i++) {
             usedAmount.add((int)Math.ceil(output*sigalNeed.getDoubleValue(i)/currentPackQuantity.getDoubleValue(i)));
             if(demandRubberBox.getDoubleValue(i)!=0) {
                 double temp = (int)Math.ceil(volume.getDoubleValue(i)*usedAmount.getDoubleValue(i)/RUBBERBOXVOLUME);
                 demandRubberBox.set(i, temp);//AD
-                requiredBroad.add(temp/12.0);//闇�姹傝兌绠辨暟閲忥紱
+                requiredBroad.add(temp/12.0);//
             }else{
                 double temp = usedAmount.getDoubleValue(i)/layer.getDoubleValue(i)/layerAmount.getDoubleValue(i);
                 requiredBroad.add(temp); 
             }
         }
-        //鏍规嵁鏉挎暟璁＄畻鍌ㄤ綅锛孉F
            double temp = 0.0;
             for(int j=0;j<COUNT;j++){
                 temp += requiredBroad.getDoubleValue(j);
             }
-            packRequiredSum += (int)Math.ceil(temp);//鑾峰彇绗竴涓��
+            packRequiredSum += (int)Math.ceil(temp);
             //System.out.println(packRequiredSum);
         //for(int i=COUNT;i<pack)
         int num = sigalNeed.size();
         for (int i = COUNT; i < num; i++) {
             //System.out.println(requiredBroad.getDoubleValue(i));
-            //涓嶉渶瑕佽兌绠憋紝鐩存帴鍚戜笂鍙栨暣锛�
                 int temp2 =  demandRubberBox.getIntValue(i);
                 double tem=0.0;
                 if(temp2==0.0){
@@ -155,8 +157,8 @@ public class data{
     }
     public static List<Double> getSRgw12(double output,double PCT,double LCT,double ECT,double HCT){
         List<Double> storage = new ArrayList<Double>();
-        final double RUBBERBOXVOLUME = 0.08;
-    	final int COUNT = 7;
+        double RUBBERBOXVOLUME = 0.08;
+        int COUNT = 7;
         //ArrayList<Double> lists = new List<Double>();
         JSONArray requiredBroad = JSON.parseArray("[]");//AE
         JSONArray usedAmount = JSON.parseArray("[]");//R
@@ -202,7 +204,7 @@ public class data{
         //for(int i=COUNT;i<pack)
         int num = getSData.sigalNeed.size();
         for (int i = 0; i < num; i++){
-            System.out.println(requiredBroad.getDoubleValue(i));
+            //System.out.println(requiredBroad.getDoubleValue(i));
         }
         for (int i = COUNT; i < num; i++) {
                 int temp2 =  getSData.demandRubberBox.getIntValue(i);
@@ -246,6 +248,88 @@ public class data{
         storage.add(storageAmount);
         return storage;
     }
+    
+    //public final static int num13 = getSData.sigalNeed.size();
+    public  static List<Double> getSRgw13(double output,double PCT,double LCT,double ECT,double HCT){
+        List<Double> storage = new ArrayList<Double>();
+        double RUBBERBOXVOLUME = 0.0756;
+    	int COUNT = 5;
+        //ArrayList<Double> lists = new List<Double>();
+        JSONArray requiredBroad = JSON.parseArray("[]");//AE
+        JSONArray usedAmount = JSON.parseArray("[]");//R
+       
+        if(getSData.get("gw13.json")==false) return null;
+        double  storageAmount = 0.0;
+        double packRequiredSum = 0.0;//
+        double electtonicRequiredSum = 0.0;//
+        double largestRequiredSum = 0.0;//
+        double hardwareRequiredSum = 0.0;//
 
+        final int num = getSData.sigalNeed.size();
+       
+    //    int hdwN = 29;
+        //
+        //Q
+       // System.out.println(getSData.sigalNeed.size());
+        for (int i = 0; i < num; i++) {
+            usedAmount.add((int)Math.ceil(output*getSData.sigalNeed.getDoubleValue(i)/getSData.currentPackQuantity.getDoubleValue(i)));
+            if(getSData.demandRubberBox.getDoubleValue(i)!=0) {
+                double temp = (int)Math.ceil(getSData.volume.getDoubleValue(i)*usedAmount.getDoubleValue(i)/RUBBERBOXVOLUME);
+                getSData.demandRubberBox.set(i, temp);//AD
+                requiredBroad.add(temp/12.0);//
+            }else{
+                double temp = usedAmount.getDoubleValue(i)/getSData.layer.getDoubleValue(i)/getSData.layerAmount.getDoubleValue(i);
+                requiredBroad.add(temp); 
+            }
+        }
+           double tempf = 0.0;
+            for(int j=0;j<COUNT;j++){
+                tempf += requiredBroad.getDoubleValue(j);
+            }
+            packRequiredSum += (int)Math.ceil(tempf);//
+         //System.out.println(num13);
+        //for(int i=COUNT;i<pack)
+        //int num = getSData.sigalNeed.size();
+        for (int i = COUNT; i <num; i++) {
+                int temp =  getSData.demandRubberBox.getIntValue(i);
+                double tem=0.0;
+                if(temp==0.0){
+                    tem = (int)Math.ceil(requiredBroad.getDoubleValue(i));
 
+                }else if(temp <= 3){
+                    tem = temp * 0.25;
+                }else if(temp<=12){
+                    tem = 1.0;
+                }else if(temp>12){
+                    tem= (int)Math.ceil(temp/12.0);
+                   // System.out.println(tem);
+                }
+                //System.out.println(tem);    
+            int ctgy = getSData.category.getIntValue(i);
+
+            if(ctgy==31){    
+                packRequiredSum += tem;
+                //System.out.println(tem);
+            }else if(ctgy==32){
+                largestRequiredSum += tem;
+              // System.out.println(tem);
+               // largestRequired.add(tem);
+            }else if(ctgy==33){
+                electtonicRequiredSum += tem;
+               // System.out.println(tem);
+            }else if(ctgy==34){
+                hardwareRequiredSum += tem;
+                //System.out.println(tem);
+            }
+        }        
+       // System.out.println(packRequiredSum);
+       //requiredBroad.clear();
+        storage.add(packRequiredSum*PCT);
+        storage.add(largestRequiredSum*LCT);
+        storage.add(electtonicRequiredSum*ECT);
+        storage.add(hardwareRequiredSum*HCT);
+        storageAmount = packRequiredSum*PCT + largestRequiredSum*LCT + electtonicRequiredSum*ECT + hardwareRequiredSum*HCT;
+        storage.add(storageAmount);
+        return storage;
+    }
 }

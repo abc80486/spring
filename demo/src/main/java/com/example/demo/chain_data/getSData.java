@@ -13,7 +13,8 @@ public class getSData {
     public static JSONArray layerAmount = new JSONArray() ;
     public static JSONArray demandRubberBox = new JSONArray() ;
     public static JSONArray volume =new JSONArray() ;
-    
+    public static JSONArray category =new JSONArray() ;
+
     public static String fileIn(String strFile) {
         String end = "";
       try{
@@ -32,8 +33,16 @@ public class getSData {
         String dataFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
         dataFile += fileAddress; 
         JSONArray sigal = JSON.parseArray(fileIn(dataFile));
+       // sigal = JSON.parseArray(fileIn(dataFile));
         int size = sigal.size();
-       // System.out.println(size);
+       //System.out.println(size);
+        sigalNeed.clear();
+        currentPackQuantity.clear();
+        volume.clear();
+        layer.clear();
+        layerAmount.clear();
+        demandRubberBox.clear();
+        category.clear();
         for(int i=0;i<size;i++){
             JSONArray rol = new JSONArray() ;
             rol = sigal.getJSONArray(i);
@@ -43,11 +52,13 @@ public class getSData {
             layer.add(rol.getDoubleValue(3));
             layerAmount.add(rol.getDoubleValue(4));
             demandRubberBox.add(rol.getDoubleValue(5));
+            category.add(rol.getIntValue(6));
         }
         return true;
     }
     /*
     public static void main(String[] args){
+        getSData.get("gw12.json");
         getSData.get("gw12.json");
         System.out.println(getSData.sigalNeed);
     }

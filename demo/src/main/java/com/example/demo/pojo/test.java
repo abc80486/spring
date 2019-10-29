@@ -19,11 +19,13 @@ public class test {
     @GetMapping("/view")
     public String greetingForm(Model model) {
         EXData exdata = new EXData();
-        exdata.getSR();
+        exdata.get();
+       // exdata.getSR12();
+       // exdata.getSR13();
         model.addAttribute("exdata", exdata);
         return "echarts/view.html";
     }
-    @PostMapping("/view")
+    @PostMapping("/view/cal")
     public String greeForm(Model model,EXData exdata) {
         //Model model=null;
         
@@ -36,7 +38,9 @@ public class test {
         exdata.setESR(storage.get(2));
         exdata.setHSR(storage.get(3));
        */
-        exdata.getSR();
+        exdata.get();
+       
+       // exdata.getSR13();
         model.addAttribute("exdata", exdata);
         //model.addAttribute("srdata", storage);
         return "echarts/view.html";
