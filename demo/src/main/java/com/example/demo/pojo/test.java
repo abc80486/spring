@@ -24,7 +24,7 @@ public class test {
        // exdata.getSR12();
        // exdata.getSR13();
         model.addAttribute("exdata", exdata);
-        return "echarts/view.html";
+        return "echarts/view2.html";
     }
     @PostMapping("/view")
     public String greeForm(Model model,EXData exdata) {
@@ -45,7 +45,7 @@ public class test {
        // model.addAttribute("exda", exdata.PSRA71);
 
         //model.addAttribute("srdata", storage);
-        return "echarts/view.html";
+        return "echarts/view2.html";
     }
 
     

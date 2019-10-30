@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <style>
+      body {
+color:#333;
+padding:0px;
+font-size:12px;
+font-family: Arial, Helvetica, sans-serif;
+}
+.form_content{
+width:575px;
+margin:30px auto;
+padding:10px;
+background:repeat-x top #fff;
+}
+fieldset{
+border:1px #ebebeb solid;
+padding:15px 10px 15px 10px;
+margin:0 0 10px 0;
+float:left; 
+width: 40%;
+height: 40%;
+}
+legend{
+color:#FFFFFF;
+background-color:#0fcdf6;
+padding:2px 5px 2px 5px;
+font-size: 30px;
+}
+legend.optional{
+color:#FFFFFF;
+background-color:#50c150;
+padding:2px 5px 2px 5px;
+}
+
+
+.form-row {
+clear: both;
+float:left;
+padding:5px 5px 5px 5px;
+}
+.form-row-select {
+clear: both;
+float:left;
+padding:10px 5px 5px 5px;
+}
+.field-label {
+width:150px;
+float:left;
+line-height:25px;
+}
+label {
+float:left;
+color:#666666;
+}
+label.left{
+padding:0 20px 0 5px;
+float:left;
+color:#666666;
+}
+.field-widget {
+float:left;
+}
+input.required{
+width:300px;
+height:22px;
+border: 1px solid #95E0EF;
+background-color:#f3fcfe;
+border-left-width:2px;
+padding:5px 0 0 2px;
+float:left;
+}
+input.optional{
+width:300px;
+height:22px;
+border: 1px solid #adedad;
+background-color:#f3fef3;
+border-left-width:2px;
+padding:5px 0 0 2px;
+}
+select.validate-selection{
+width:305px;
+height:28px;
+border: 1px solid #95E0EF;
+background-color:#f3fcfe;
+border-left-width:2px;
+padding:4px 2px 3px 2px;
+float:left;
+}
+textarea.required{
+width:300px;
+height:75px;
+float:left;
+border: 1px solid #95E0EF;
+background-color:#f3fcfe;
+border-left-width:2px;
+}
+textarea.optional{
+width:300px;
+height:75px;
+border: 1px solid #adedad;
+background-color:#f3fef3;
+border-left-width:2px;
+}
+
+input.submit{
+color:#FFFFFF;
+background-color:#0fcdf6;
+padding:2px 5px 2px 5px;
+cursor:pointer;
+border:none;
+}
+input.reset{
+color:#FFFFFF;
+background-color:#50c150;
+cursor:pointer;
+padding:2px 5px 2px 5px;
+border:none;
+}
+
+input.validation-failed, textarea.validation-failed, select.validation-failed {
+border: 1px solid #FF9A7F;
+background-color:#FFF2EF;
+color : #FF3300;
+}
+input.validation-passed, textarea.validation-passed {
+border: 1px solid #00CC00;
+color : #000;
+}
+
+.validation-advice {
+width:50px;
+float:left;
+margin:0px 0 0 10px;
+padding:0px 0 0 25px;
+background:url(images/warning.png) no-repeat left;
+color:#FF9A7F;
+font-size:10px;
+}
+
+.custom-advice {
+margin: 5px 0;
+padding: 5px;
+background-color: #C8AA00;
+color : #FFF;
+font-weight: bold;
+}
+</style>
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 60%;width: 100%;"></div>
+       <p style="color: red;text-align:center;font-size: 30px;background-color: #0fcdf6;margin-top: 0%;">合计总储位：[[${exdata.PSRGW11[4]}+${exdata.PSRGW12[4]}+${exdata.PSRGW13[4]}+${exdata.PSRA71[4]}+${exdata.PSRV8[4]}]]
+       </p>
+       <form id="test" th:action="@{/view}" th:object="${exdata}" method="POST" style="margin-left:10%;">
+       <fieldset>
+        <legend>供货周期</legend>
+        <div class="form-row">
+            <div class="field-label"><label for="field1">包材</label>:</div>
+            <div class="field-widget"><input type="text"  th:field="*{PCT}" name="field1" id="field1" class="required" title="Enter your name" /></div>
+        </div>
+        
+        <div class="form-row">
+            <div class="field-label"><label for="field2">大件</label>:</div>
+            <div class="field-widget"><input type="text" th:field="*{LCT}" name="field2" id="field2" class="required" title="Enter your data" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label for="field2">电子器件</label>:</div>
+            <div class="field-widget"><input type="text" th:field="*{ECT}" name="field2" id="field2" class="required" title="Enter your data" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label for="field2">小五金</label>:</div>
+            <div class="field-widget"><input type="text" th:field="*{HCT}" name="field2" id="field2" class="required" title="Enter your data" /></div>
+        </div>
+        <div class="form-row">
+            <input type="submit" class="submit" value="计算储位" style="height: 54px;width: 305px;font-size: 30px;"/> 
+        </div>
+
+        </fieldset>
+         <fieldset>
+            <legend>输入产量</legend>
+            <div class="form-row">
+                <div class="field-label"><label for="field1">GW1111系列：</label>:</div>
+                <div class="field-widget"><input name="field1"  th:value= "*{GW11}" id="field1" class="required" title="Enter your data" /></div>
+            </div>
+            
+            <div class="form-row">
+                <div class="field-label"><label for="field2">GW1122系列：</label>:</div>
+                <div class="field-widget"><input name="field2" th:value= "*{GW12}" id="field2" class="required" title="Enter your data" /></div>
+            </div>
+            <div class="form-row">
+                <div class="field-label"><label for="field2">GW1813系列：</label>:</div>
+                <div class="field-widget"><input name="field2" th:value= "*{GW13}" id="field2" class="required" title="Enter your data" /></div>
+            </div>
+
+            <div class="form-row">
+                <div class="field-label"><label for="field2">A71锁：</label>:</div>
+                <div class="field-widget"><input name="field2" th:value= "*{A71}"id="field2" class="required" title="Enter your data" /></div>
+            </div>
+            <div class="form-row">
+                <div class="field-label"><label for="field2">V8锁：</label>:</div>
+                <div class="field-widget"><input name="field2" th:value= "*{V8}"id="field2" class="required" title="Enter your data" /></div>
+            </div>
+         </fieldset>
+       </form>
+       
+       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+       <script type="text/javascript" th:inline="javascript"  th:object="${exdata}">
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            app.title = '';
+            option = {
+                    title: {
+                        text: '好太太物料储位计算：',
+                        subtext: 'Hao TaiTai',
+                    },
+                    legend: {
+                        textStyle: { //图例文字的样式
+                            fontSize: 30
+                        },
+                    },
+                    tooltip: {},
+                    dataset: {
+                        source: [
+                            ['category', '包材', '大件', '电子器件','小五金','储位总量'],
+                            ['GW11 储位总计',[[${exdata.PSRGW11[0]}]], [[${exdata.PSRGW11[1]}]], [[${exdata.PSRGW11[2]}]],[[${exdata.PSRGW11[3]}]],[[${exdata.PSRGW11[4]}]]],
+                            ['GW12',[[${exdata.PSRGW12[0]}]], [[${exdata.PSRGW12[1]}]], [[${exdata.PSRGW12[2]}]],[[${exdata.PSRGW12[3]}]],[[${exdata.PSRGW12[4]}]]],
+                            ['GW13', [[${exdata.PSRGW13[0]}]], [[${exdata.PSRGW13[1]}]], [[${exdata.PSRGW13[2]}]],[[${exdata.PSRGW13[3]}]],[[${exdata.PSRGW13[4]}]]],
+                            ['A71(供货周期7天)', [[${exdata.PSRA71[0]}]], [[${exdata.PSRA71[1]}]], [[${exdata.PSRA71[2]}]],[[${exdata.PSRA71[3]}]],[[${exdata.PSRA71[4]}]]],
+                            ['V8(供货周期7天)', [[${exdata.PSRV8[0]}]], [[${exdata.PSRV8[1]}]], [[${exdata.PSRV8[2]}]],[[${exdata.PSRV8[3]}]],[[${exdata.PSRV8[4]}]]]
+
+                        ]
+                    },
+                    xAxis: {type: 'category'},
+                    yAxis: {},
+                    // Declare several bar series, each will be mapped
+                    // to a column of dataset.source by default.
+                    series: [
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+
+                    ]
+                
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        </script>
+
+   </body>
+</html>

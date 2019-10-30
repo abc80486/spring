@@ -32,9 +32,9 @@ public class getSData {
     }
     public static boolean get(String fileAddress){
         //String dataFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
-       // String dataFile = "demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
-        String dataFile = new File(".").getAbsolutePath().toString();
-        dataFile += fileAddress; 
+        String dataFile = "demo\\src\\main\\java\\com\\example\\demo\\chain_data\\"+fileAddress;
+       // String dataFile = new File(".").getAbsolutePath().toString();
+       //String dataFile = fileAddress; 
         JSONArray sigal = JSON.parseArray(fileIn(dataFile));
        // sigal = JSON.parseArray(fileIn(dataFile));
         int size = sigal.size();
