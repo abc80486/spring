@@ -4,143 +4,49 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    </head>
    <body style="height: 100%; margin: 0">
-       <div id="container" style="height: 60%;width: 60%;"></div>
-       <div style="width: 70%;border: 1px gray solid;background-color: azure;margin-left: 5px;">
+       <div id="container" style="height: 60%;width: 100%;"></div>
+       <div style="width: 80%;border: 1px gray solid;background-color: azure;margin-left: 100px;">
        <form style="margin-left:30px;" th:action="@{/view}" th:object="${exdata}" method="POST">
-        输入以下类别的供货周期(天): （A71和V8产品物料供货周期固定为7天） <br/>
-        包材：<input type="text"  th:field="*{PCT}"  style="height: 30px;width: 60px;">
+        输入以下类别的供货周期(天): <br/>
+        包材：<input type="text"  th:field="*{PCT}"  style="height: 30px;width: 60px;margin-top: 5px;">
         大件：<input type="text" th:field="*{LCT}" style="height: 30px;width: 60px;">
         电子器件：<input type="text" th:field="*{ECT}"style="height: 30px;width: 60px;">
-        小五金：<input type="text" th:field="*{HCT}" style="height: 30px;width: 60px;"><br/>
+        小五金：<input type="text" th:field="*{HCT}" style="height: 30px;width: 60px;margin-bottom: 5px;"><br/>
         <div >
-        <p>输入相关产品的产量: </p><br/>
-        GW1111系列：<input type="text"  value= "*{GW11}" name="GW11" th:field="*{GW11}" style="height: 30px;width: 60px;">
-        GW1122系列：<input type="text"  value= "*{GW12}" name="GW12" th:field="*{GW12}" style="height: 30px;width: 60px;">
-        GW1813系列：<input type="text"  value= "*{GW13}" name="GW13" th:field="*{GW13}" style="height: 30px;width: 60px;">
-        A71锁：<input type="text"  value= "*{A71}" name="A71" th:field="*{A71}" style="height: 30px;width: 60px;">
-        V8锁：<input type="text"  value= "*{V8}" name="V8" th:field="*{V8}" style="height: 30px;width: 60px;">
-        </div>
-        <br/>
-        <input type="submit" value="计算储位" style="margin-left:10px;height: 59px;width: 86px;margin-top:1px;margin-left:5px;margin-bottom:1px"><br/>
+        输入相关产品的产量: <br/>
+        GW1111系列：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{GW11}" name="GW11" th:field="*{GW11}" style="height: 30px;width: 60px;">
+        GW1122系列：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{GW12}" name="GW12" th:field="*{GW12}" style="height: 30px;width: 60px;">
+        GW1813系列：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{GW13}" name="GW13" th:field="*{GW13}" style="height: 30px;width: 60px;">
+        A71锁：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{A71}" name="A71" th:field="*{A71}" style="height: 30px;width: 60px;">
+        V8锁：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{V8}" name="V8" th:field="*{V8}" style="height: 30px;width: 60px;"><br/>
+       
+        <p style="color: red;">合计总储位：[[${exdata.PSRGW11[4]}+${exdata.PSRGW12[4]}+${exdata.PSRGW13[4]}+${exdata.PSRA71[4]}+${exdata.PSRV8[4]}]]
+        </p>
+        <input type="submit" value="计算储位" style="margin-left:10px;height: 59px;width: ;margin-top:-20px;margin-left:3px;margin-bottom:10px"><br/>
+
+    </div>
+       
+        <input type="submit" value="计算储位" style="margin-left:10px;height: 59px;width: 86px;margin-top:-20px;margin-left:3px;margin-bottom:10px"><br/>
         </form> 
        </div>
-       <div id="container2" style="height: 60%;width: 60%;"></div>
+       <div id="container2" style="height: 60%;width: 100%;"></div>
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
        <script type="text/javascript" th:inline="javascript"  th:object="${exdata}">
-var dom = document.getElementById("container");
-var myChart = echarts.init(dom);
-var psr1 = [[${exdata.PSR}]];
-var lsr1 = [[${exdata.LSR}]];
-var esr1 = [[${exdata.ESR}]];
-var hsr1 = [[${exdata.HSR}]];
-
-var psr2 = [[${exdata.PSR12}]];
-var lsr2 = [[${exdata.LSR12}]];
-var esr2 = [[${exdata.ESR12}]];
-var hsr2 = [[${exdata.HSR12}]];
-
-var psr3 = [[${exdata.PSR13}]];
-var lsr3 = [[${exdata.LSR13}]];
-var esr3 = [[${exdata.ESR13}]];
-var hsr3 = [[${exdata.HSR13}]];
-
-var app = {};
-
-option = null;
-app.title = '';
-
-option = {
-    title: {
-        text: '好太太生产物料储位计算',
-    },
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    legend: {
-        data: ['包材', '大件','电子器件','小五金'],
-        x: 'right'
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    yAxis:  {
-        type: 'value',
-        name: '个'
-    },
-    xAxis: {
-        type: 'category',
-        data: ['GW1111系列','GW1122系列','GW1813系列','A71','V8']
-    },
-    series: [
-        {
-            name: '包材',
-            type: 'bar',
-            stack: '总量',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'insideRight'
-                }
-            },
-            data: [psr1, psr2, psr3, [[${exdata.PSRA71[0]}]], [[${exdata.PSRV8[0]}]]]
-        },
-        {
-            name: '大件',
-            type: 'bar',
-            stack: '总量',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'insideRight'
-                }
-            },
-            data: [lsr1, lsr2, lsr3,[[${exdata.PSRA71[0]}]], [[${exdata.PSRV8[0]}]]]
-        },
-        {
-            name: '电子器件',
-            type: 'bar',
-            stack: '总量',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'insideRight'
-                }
-            },
-            data: [esr1, esr2, esr3, [[${exdata.PSRA71[2]}]], [[${exdata.PSRV8[2]}]]]
-        },
-        {
-            name: '小五金',
-            type: 'bar',
-            stack: '总量',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'insideRight'
-                }
-            },
-            data: [hsr1, hsr2, hsr3, [[${exdata.PSRA71[3]}]], [[${exdata.PSRV8[3]}]]]
-        }
-    ]
-};
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
-       </script>
-       <script type="text/javascript" th:inline="javascript"  th:object="${exdata}">
-            var dom = document.getElementById("container2");
+            var dom = document.getElementById("container");
             var myChart = echarts.init(dom);
             var app = {};
             option = null;
             app.title = '';
             option = {
-                
-                    legend: {},
+                    title: {
+                        text: '好太太物料储位计算：',
+                        subtext: 'Hao TaiTai',
+                    },
+                    legend: {
+                        textStyle: { //图例文字的样式
+                            fontSize: 30
+                        },
+                    },
                     tooltip: {},
                     dataset: {
                         source: [
