@@ -9,6 +9,7 @@
         <th th:each="title : ${titles}" th:text="${title}"></th>
         <th th:text="${titles[2]}"></th>
         <th th:text="${power}"></th>
+        <th th:text="${dataall.getJSONArray('sr11')}"></th>
         <p th:text="${power}"></p>
     </tr>
     <form style="margin-left:30px;" th:action="@{/test}"th:object="${pr}" method="POST">

@@ -3,20 +3,10 @@ package com.example.demo.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.chain_data.data;
 
 public class EXData {
-//data 
-/*
-1.OBJECTJson{
-    GW11:[],
-    GW12:[],
-    GW13:[],
-    A71:[],
-    V8:[]
-}
-2.
-*/
      static double PCT = 2.0;
      static double LCT = 3.0;
      static double ECT = 7.0;
@@ -34,7 +24,6 @@ public class EXData {
     static double ESR = 0.0;
     static double HSR = 0.0;
 
-
     public static double PSR12 = 0.0;
     public static double LSR12 = 0.0;
     public static double ESR12 = 0.0;
@@ -45,18 +34,34 @@ public class EXData {
     public static double ESR13 = 0.0;
     public static double HSR13 = 0.0;
 
+    public static JSONObject dataAll = new JSONObject();
+    public static JSONObject Indata = new JSONObject();
     public static List<Double> PSRA71 = new ArrayList<>();
-    public static List<Double> PSRV8 = new ArrayList<>();   
+    public static List<Double> PSRV8 = new ArrayList<>();  
+    public static List<Double> PSRGW11 = new ArrayList<>();
+    public static List<Double> PSRGW12 = new ArrayList<>();  
+    public static List<Double> PSRGW13 = new ArrayList<>();
+
     public static List<Double> list = new ArrayList<Double>();
     public void test(){
-        list.add(1.0);
-        list.add(2.0);
-        list.add(3.0);
-        list.add(4.0);
+        
         PSRA71 = data.getSRa71(A71, 7, 7, 7, 7);
         PSRV8 = data.getSRv8(V8, 7, 7, 7, 7);
+        PSRGW11 = data.getStorage(GW11, PCT, LCT, ECT, HCT);
+        PSRGW12 = data.getSRgw12(GW12, PCT, LCT, ECT, HCT);
+        PSRGW13 = data.getSRgw13(GW13, PCT, LCT, ECT, HCT);
         System.out.println(PSRA71);
         System.out.println(PSRV8);
+        //List<List<Double>> te = new ArrayList<>();
+       // te.add(data.getStorage(GW11, PCT, LCT, ECT, HCT));
+        //data.getStorage(GW11, PCT, LCT, ECT, HCT))
+        /*
+        dataAll.put("sr11", data.getStorage(GW11, PCT, LCT, ECT, HCT));
+        dataAll.put("sr12", data.getSRgw12(GW12, PCT, LCT, ECT, HCT));
+        dataAll.put("sr13", data.getSRgw13(GW13, PCT, LCT, ECT, HCT));
+        dataAll.put("sr71", data.getSRa71(A71, PCT, LCT, ECT, HCT));
+        dataAll.put("sr8", data.getSRv8(V8, PCT, LCT, ECT, HCT));
+*/
     }
     
 /*

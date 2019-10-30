@@ -1,5 +1,6 @@
 package com.example.demo.chain_data;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -30,7 +31,9 @@ public class getSData {
       return end;
     }
     public static boolean get(String fileAddress){
-        String dataFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
+        //String dataFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
+        String dataFile = "demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
+
         dataFile += fileAddress; 
         JSONArray sigal = JSON.parseArray(fileIn(dataFile));
        // sigal = JSON.parseArray(fileIn(dataFile));
@@ -56,12 +59,13 @@ public class getSData {
         }
         return true;
     }
-    /*
+    
     public static void main(String[] args){
         getSData.get("gw12.json");
-        getSData.get("gw12.json");
+        //getSData.get("gw12.json");
+        //System.out.println(new File(".").getAbsolutePath());
         System.out.println(getSData.sigalNeed);
     }
-    */
+    
 
 }

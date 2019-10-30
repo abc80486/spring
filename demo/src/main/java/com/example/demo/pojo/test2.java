@@ -3,6 +3,9 @@ package com.example.demo.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.chain_data.data;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,14 @@ public class test2 {
         model.addAttribute("titles",a);
         model.addAttribute("power",power);
         model.addAttribute("pr",pr);
+        JSONObject dataAll = new JSONObject();
+        dataAll.put("sr11", data.getStorage(4000,2,3,7,7));
+        dataAll.put("sr12", data.getSRgw12(4000,2,3,7,7));
+        dataAll.put("sr13", data.getSRgw13(4000,2,3,7,7));
+        dataAll.put("sr71", data.getSRa71(4000,2,3,7,7));
+        dataAll.put("sr8", data.getSRv8(4000,2,3,7,7));
+        dataAll.getJSONArray("sr11");
+        model.addAttribute("dataall",dataAll);
         return "echarts/test.html";
     }
     //将封装的对象转入result.html
