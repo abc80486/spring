@@ -60,6 +60,12 @@ public class getSData {
         return true;
     }
     
-    
+    public static void main(String[] args){
+        // data a = new data();
+       // System.out.println(fileIn("resources/test.txt"));
+        //System.out.println(getSRa71(2400.0,7.0,7.0,7.0,7.0));
+
+     }
+
 
 }

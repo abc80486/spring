@@ -174,10 +174,16 @@ font-weight: bold;
             <div class="form-row">
                 <label for="field2" style="margin-right: 14px;">A71锁：</label>
                 <div class="field-widget"><input name="field2" th:field= "*{A71}"id="field2" class="required" title="Enter your data" /></div>
+                <label for="field2">A71锁：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{A71}"id="field2" class="required" title="Enter your data" /></div>
+
             </div>
             <div class="form-row">
                 <label for="field2" style="margin-right: 21px;">V8锁：</label>
                 <div class="field-widget"><input name="field2" th:field= "*{V8}"id="field2" class="required" title="Enter your data" /></div>
+                <label for="field2">A71锁：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{A71}"id="field2" class="required" title="Enter your data" /></div>
+
             </div>
          </fieldset>
 
@@ -214,6 +220,11 @@ font-weight: bold;
             var dom = document.getElementById("container");
             var myChart = echarts.init(dom);
             var app = {};
+            var bsum = [[${exdata.PSRGW11[0]}+${exdata.PSRGW12[0]}+${exdata.PSRGW13[0]}+${exdata.PSRA71[0]}+${exdata.PSRV8[0]}]];
+            var lsum = [[${exdata.PSRGW11[1]}+${exdata.PSRGW12[1]}+${exdata.PSRGW13[1]}+${exdata.PSRA71[1]}+${exdata.PSRV8[1]}]];
+            var esum = [[${exdata.PSRGW11[2]}+${exdata.PSRGW12[2]}+${exdata.PSRGW13[2]}+${exdata.PSRA71[2]}+${exdata.PSRV8[2]}]];
+            var hsum = [[${exdata.PSRGW11[3]}+${exdata.PSRGW12[3]}+${exdata.PSRGW13[3]}+${exdata.PSRA71[3]}+${exdata.PSRV8[3]}]];
+
             option = null;
             app.title = '';
             option = {
@@ -234,8 +245,8 @@ font-weight: bold;
                             ['GW1112',[[${exdata.PSRGW12[0]}]], [[${exdata.PSRGW12[1]}]], [[${exdata.PSRGW12[2]}]],[[${exdata.PSRGW12[3]}]],[[${exdata.PSRGW12[4]}]]],
                             ['GW1813', [[${exdata.PSRGW13[0]}]], [[${exdata.PSRGW13[1]}]], [[${exdata.PSRGW13[2]}]],[[${exdata.PSRGW13[3]}]],[[${exdata.PSRGW13[4]}]]],
                             ['A71锁(供货周期7天)', [[${exdata.PSRA71[0]}]], [[${exdata.PSRA71[1]}]], [[${exdata.PSRA71[2]}]],[[${exdata.PSRA71[3]}]],[[${exdata.PSRA71[4]}]]],
-                            ['V8锁(供货周期7天)', [[${exdata.PSRV8[0]}]], [[${exdata.PSRV8[1]}]], [[${exdata.PSRV8[2]}]],[[${exdata.PSRV8[3]}]],[[${exdata.PSRV8[4]}]]]
-
+                            ['V8锁(供货周期7天)', [[${exdata.PSRV8[0]}]], [[${exdata.PSRV8[1]}]], [[${exdata.PSRV8[2]}]],[[${exdata.PSRV8[3]}]],[[${exdata.PSRV8[4]}]]],
+                            ['各类别总量', bsum,lsum,esum,hsum]
                         ]
                     },
                     xAxis: {type: 'category'},                       
