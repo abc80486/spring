@@ -45,7 +45,7 @@ public class data{
 */
      public static void main(String[] args){
         // data a = new data();
-        System.out.println(getSRv8(2400.0,7,7,7.0,7.0));
+        System.out.println(getSRv8(2400,7,7,7.0,7.0));
         //System.out.println(getSRa71(2400.0,7.0,7.0,7.0,7.0));
 
      }
@@ -56,7 +56,8 @@ public class data{
     	int COUNT = 6;
         //ArrayList<Double> lists = new List<Double>();
         String pFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
-    	String layerFile = pFile+"layer.json";
+        //String pFile = "";
+        String layerFile = pFile+"layer.json";
     	String layerAmountFile = pFile+"layerAmount.json";
     	String sigalNeedFile = pFile+"sigalNeed.json";
     	String currentPackQuantityFile = pFile+"currentPackQuantity.json";
@@ -121,10 +122,11 @@ public class data{
                     tem = (int)Math.ceil(requiredBroad.getDoubleValue(i));
                 }else if(temp2 <= 3){
                     tem = temp2 * 0.25;
-                }else if(temp<=12){
+                }else if(temp2<=12){
                     tem = 1.0;
-                }else{
+                }else if(temp2>12){
                     tem= (int)Math.ceil(temp2/12.0);
+                    //System.out.println(tem);
                 }
                 //System.out.println(tem);    
             if(i<packN){    
@@ -143,7 +145,7 @@ public class data{
             }else {
                 hardwareRequiredSum += tem;
                 hardwareRequired.add(tem);
-                //System.out.println(tem);
+               // System.out.println(tem);
             }
         }        
         storage.add(packRequiredSum*PCT);
@@ -219,21 +221,22 @@ public class data{
                 }else{
                     tem= (int)Math.ceil(temp2/12.0);
                 }
-                //System.out.println(tem);    
-            if(i<packN){    
+                //System.out.println(tem);  
+                int ctgy = getSData.category.getIntValue(i);  
+            if(ctgy==21){    
                 packRequiredSum += tem;
                 //System.out.println(packRequiredSum);
                 packRequired.add(tem);
 
-            }else if(i<packN+lagN){
+            }else if(ctgy==22){
                 largestRequiredSum += tem;
               // System.out.println(tem);
                 largestRequired.add(tem);
-            }else if(i<packN+lagN+elsN){
+            }else if(ctgy==23){
                 electtonicRequiredSum += tem;
                // System.out.println(tem);
                 electtonicRequired.add(tem);
-            }else {
+            }else if(ctgy==24){
                 hardwareRequiredSum += tem;
                 hardwareRequired.add(tem);
                 //System.out.println(tem);
@@ -369,7 +372,7 @@ public class data{
                 tempf += requiredBroad.getDoubleValue(j);
             }
             packRequiredSum += (int)Math.ceil(tempf);//
-         //System.out.println(num13);
+        // System.out.println(tempf);
         //for(int i=COUNT;i<pack)
         //int num = getSData.sigalNeed.size();
         for (int i = COUNT; i <num; i++) {
@@ -392,7 +395,7 @@ public class data{
             if(ctgy==41){    
 
                 packRequiredSum += tem;
-                //System.out.println(tem);
+               // System.out.println(tem);
             }else if(ctgy==42){
                 largestRequiredSum += tem;
                //System.out.println(tem);

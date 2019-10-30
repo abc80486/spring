@@ -33,8 +33,8 @@ public class getSData {
     public static boolean get(String fileAddress){
         //String dataFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
         String dataFile = "demo\\src\\main\\java\\com\\example\\demo\\chain_data\\"+fileAddress;
-       // String dataFile = new File(".").getAbsolutePath().toString();
-       //String dataFile = fileAddress; 
+       // String dataFile = new File(".").getAbsolutePath().toString()+fileAddress;
+        //String dataFile = fileAddress; 
         JSONArray sigal = JSON.parseArray(fileIn(dataFile));
        // sigal = JSON.parseArray(fileIn(dataFile));
         int size = sigal.size();
@@ -60,12 +60,6 @@ public class getSData {
         return true;
     }
     
-    public static void main(String[] args){
-        getSData.get("gw12.json");
-        //getSData.get("gw12.json");
-        //System.out.println(new File(".").getAbsolutePath());
-        System.out.println(getSData.sigalNeed);
-    }
     
 
 }
