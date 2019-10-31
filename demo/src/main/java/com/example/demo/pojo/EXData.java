@@ -34,6 +34,10 @@ public class EXData {
     public static double ESR13 = 0.0;
     public static double HSR13 = 0.0;
 
+    public static double A71CT = 7;
+    public static double V8CT = 7;
+
+
     public static JSONObject dataAll = new JSONObject();
     public static JSONObject Indata = new JSONObject();
     public static List<Double> PSRA71 = new ArrayList<>();
@@ -45,8 +49,8 @@ public class EXData {
     public static List<Double> list = new ArrayList<Double>();
     public void test(){
         
-        PSRA71 = data.getSRa71(A71, 7, 7, 7, 7);
-        PSRV8 = data.getSRv8(V8, 7, 7, 7, 7);
+        PSRA71 = data.getSRa71(A71, A71CT, A71CT, A71CT, A71CT);
+        PSRV8 = data.getSRv8(V8,V8CT , V8CT, V8CT, V8CT);
         PSRGW11 = data.getStorage(GW11, PCT, LCT, ECT, HCT);
         PSRGW12 = data.getSRgw12(GW12, PCT, LCT, ECT, HCT);
         PSRGW13 = data.getSRgw13(GW13, PCT, LCT, ECT, HCT);
@@ -104,6 +108,20 @@ public class EXData {
         ESR13 = storage.get(2);
         HSR13 = storage.get(3);   
     }
+    public double getA71CT() {
+        return A71CT;
+    }
+    public void setA71CT(double A71CT) {
+        this.A71CT = A71CT;
+    }
+    public double getV8CT() {
+        return V8CT;
+    }
+    public void setV8CT(double V8CT) {
+        this.V8CT = V8CT;
+    }
+
+
     public double getPSR() {
         return PSR;
     }

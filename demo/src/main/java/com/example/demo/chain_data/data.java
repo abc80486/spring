@@ -208,6 +208,7 @@ public class data{
         for (int i = 0; i < num; i++){
             //System.out.println(requiredBroad.getDoubleValue(i));
         }
+        double ex = 0.0;
         for (int i = COUNT; i < num; i++) {
                 int temp2 =  getSData.demandRubberBox.getIntValue(i);
                 double tem=0.0;
@@ -240,10 +241,12 @@ public class data{
                 hardwareRequiredSum += tem;
                 hardwareRequired.add(tem);
                 //System.out.println(tem);
+            }else if(ctgy==223){
+                ex = tem * ECT;
             }
         }        
         storage.add(packRequiredSum*PCT);
-        storage.add(largestRequiredSum*LCT);
+        storage.add(largestRequiredSum*LCT+ex);
         storage.add(electtonicRequiredSum*ECT);
         storage.add(hardwareRequiredSum*HCT);
 
