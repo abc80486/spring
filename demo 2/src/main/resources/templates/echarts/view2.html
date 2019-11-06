@@ -19,9 +19,9 @@ fieldset{
 border:1px #ebebeb solid;
 padding:15px 10px 15px 10px;
 margin:0 0 10px 0;
-float:top; 
-width: 80%;
-height: 20%;
+float:left; 
+width: 30%;
+height: 30%;
 }
 legend{
 color:#FFFFFF;
@@ -38,7 +38,7 @@ padding:2px 5px 2px 5px;
 
 .form-row {
 clear: both;
-float: left;
+float:left;
 padding:5px 5px 5px 5px;
 }
 .form-row-select {
@@ -157,38 +157,62 @@ font-weight: bold;
         <fieldset>
             <legend>输入产量</legend>
             <p>（修改产量，修改周期，点击“计算储位”按钮，计算结果显示在柱形图）</p>
-            <label for="field1" style="margin-left: 3px;">GW1111：</label>
-            <div class="field-widget"><input name="field1"  th:field= "*{Indata.getIntValue('GW11')}" id="field1" class="required" title="Enter your data" /></div>
-            <label for="field2" style="margin-left: 3px;">GW1122：</label>
-            <div class="field-widget"><input name="field2" th:field= "*{GW12}" id="field2" class="required" title="Enter your data" /></div>
-            <label for="field2" style="margin-left: 3px;">GW1813：</label>
-            <div class="field-widget"><input name="field2" th:field= "*{GW13}" id="field2" class="required" title="Enter your data" /></div>
-            <label for="field2" style="margin-left: 3px;">A71锁：</label>
-            <div class="field-widget"><input name="field2" th:field= "*{A71}"id="field2" class="required" title="Enter your data" /></div>
-            <label for="field2" style="margin-left: 3px;">V8锁：</label>
-            <div class="field-widget"><input name="field2" th:field= "*{V8}"id="field2" class="required" title="Enter your data" /></div>
+            <div class="form-row">
+                <label for="field1" style="margin-right: 3px;">GW1111：</label>
+                <div class="field-widget"><input name="field1"  th:field= "*{GW11}" id="field1" class="required" title="Enter your data" /></div>
+            </div>
+            
+            <div class="form-row">
+                <label for="field2"style="margin-right: 1px;">GW1122：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{GW12}" id="field2" class="required" title="Enter your data" /></div>
+            </div>
+            <div class="form-row">
+                <label for="field2">GW1813：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{GW13}" id="field2" class="required" title="Enter your data" /></div>
+            </div>
 
+            <div class="form-row">
+                <label for="field2" style="margin-right: 14px;">A71锁：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{A71}"id="field2" class="required" title="Enter your data" /></div>
+                <label for="field2">周期：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{A71CT}"id="field2" class="required" title="Enter your data" /></div>
+
+            </div>
+            <div class="form-row">
+                <label for="field2" style="margin-right: 21px;">V8锁：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{V8}"id="field2" class="required" title="Enter your data" /></div>
+                <label for="field2">周期：</label>
+                <div class="field-widget"><input name="field2" th:field= "*{V8CT}"id="field2" class="required" title="Enter your data" /></div>
+
+            </div>
          </fieldset>
 
         <fieldset>
         <legend>供货周期</legend>
-        <p>（供货周期仅作用于GW1111、GW1112、GW1813，A71锁和V8锁固定为7天）</p>
-        
-            <label for="field1" style="margin-left: 3px;">包材：</label>
+        <p>（该供货周期仅作用于GW1111、GW1112、GW1813）</p>
+        <div class="form-row">
+            <label for="field1">包材：</label>
             <div class="field-widget"><input type="text"  th:field="*{PCT}" name="field1" id="field1" class="required" title="Enter your name" /></div>
-       
-            <label for="field2"style="margin-left: 3px;">大件：</label>
+        </div>
+        
+        <div class="form-row">
+            <label for="field2">大件：</label>
             <div class="field-widget"><input type="text" th:field="*{LCT}" name="field2" id="field2" class="required" title="Enter your data" /></div>
-        
-            <label for="field2"style="margin-left: 3px;">电子：</label>
+        </div>
+        <div class="form-row">
+            <label for="field2">电子：</label>
             <div class="field-widget"><input type="text" th:field="*{ECT}" name="field2" id="field2" class="required" title="Enter your data" /></div>
-       
-            <label for="field2"style="margin-left: 3px;">五金：</label>
+        </div>
+        <div class="form-row">
+           <label for="field2">五金：</label>
             <div class="field-widget"><input type="text" th:field="*{HCT}" name="field2" id="field2" class="required" title="Enter your data" /></div>
-            <br/><br/><br/>
-            <input type="submit" class="submit" value="计算储位" style="height: 54px;width: 200px;font-size: 30px;margin-left: 0px;"/> 
-        
+        </div>
+
         </fieldset>
+        <div class="form-row" style="float: right;margin-right: 320px;margin-top: -110px;">
+            <input type="submit" class="submit" value="计算储位" style="height: 54px;width: 305px;font-size: 30px;"/> 
+        </div>
+
        </form>
        
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
@@ -196,6 +220,11 @@ font-weight: bold;
             var dom = document.getElementById("container");
             var myChart = echarts.init(dom);
             var app = {};
+            var bsum = [[${exdata.PSRGW11[0]}+${exdata.PSRGW12[0]}+${exdata.PSRGW13[0]}+${exdata.PSRA71[0]}+${exdata.PSRV8[0]}]];
+            var lsum = [[${exdata.PSRGW11[1]}+${exdata.PSRGW12[1]}+${exdata.PSRGW13[1]}+${exdata.PSRA71[1]}+${exdata.PSRV8[1]}]];
+            var esum = [[${exdata.PSRGW11[2]}+${exdata.PSRGW12[2]}+${exdata.PSRGW13[2]}+${exdata.PSRA71[2]}+${exdata.PSRV8[2]}]];
+            var hsum = [[${exdata.PSRGW11[3]}+${exdata.PSRGW12[3]}+${exdata.PSRGW13[3]}+${exdata.PSRA71[3]}+${exdata.PSRV8[3]}]];
+
             option = null;
             app.title = '';
             option = {
@@ -215,9 +244,9 @@ font-weight: bold;
                             ['GW1111',[[${exdata.PSRGW11[0]}]], [[${exdata.PSRGW11[1]}]], [[${exdata.PSRGW11[2]}]],[[${exdata.PSRGW11[3]}]],[[${exdata.PSRGW11[4]}]]],
                             ['GW1112',[[${exdata.PSRGW12[0]}]], [[${exdata.PSRGW12[1]}]], [[${exdata.PSRGW12[2]}]],[[${exdata.PSRGW12[3]}]],[[${exdata.PSRGW12[4]}]]],
                             ['GW1813', [[${exdata.PSRGW13[0]}]], [[${exdata.PSRGW13[1]}]], [[${exdata.PSRGW13[2]}]],[[${exdata.PSRGW13[3]}]],[[${exdata.PSRGW13[4]}]]],
-                            ['A71锁(供货周期7天)', [[${exdata.PSRA71[0]}]], [[${exdata.PSRA71[1]}]], [[${exdata.PSRA71[2]}]],[[${exdata.PSRA71[3]}]],[[${exdata.PSRA71[4]}]]],
-                            ['V8锁(供货周期7天)', [[${exdata.PSRV8[0]}]], [[${exdata.PSRV8[1]}]], [[${exdata.PSRV8[2]}]],[[${exdata.PSRV8[3]}]],[[${exdata.PSRV8[4]}]]]
-
+                            ['A71锁', [[${exdata.PSRA71[0]}]], [[${exdata.PSRA71[1]}]], [[${exdata.PSRA71[2]}]],[[${exdata.PSRA71[3]}]],[[${exdata.PSRA71[4]}]]],
+                            ['V8锁', [[${exdata.PSRV8[0]}]], [[${exdata.PSRV8[1]}]], [[${exdata.PSRV8[2]}]],[[${exdata.PSRV8[3]}]],[[${exdata.PSRV8[4]}]]],
+                            ['各类别总量', bsum,lsum,esum,hsum]
                         ]
                     },
                     xAxis: {type: 'category'},                       

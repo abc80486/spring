@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - HrserverApplication",
+            "request": "launch",
+            "mainClass": "org.sang.HrserverApplication",
+            "projectName": "hrserver"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - EXData",
             "request": "launch",
             "mainClass": "com.example.demo.pojo.EXData",

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 60%;width: 100%;"></div>
+       <div style="width: 80%;border: 1px gray solid;background-color: azure;margin-left: 100px;">
+       <form style="margin-left:30px;" th:action="@{/view}" th:object="${exdata}" method="POST">
+        输入以下类别的供货周期(天): <br/>
+        包材：<input type="text"  th:field="*{PCT}"  style="height: 30px;width: 60px;margin-top: 5px;">
+        大件：<input type="text" th:field="*{LCT}" style="height: 30px;width: 60px;">
+        电子器件：<input type="text" th:field="*{ECT}"style="height: 30px;width: 60px;">
+        小五金：<input type="text" th:field="*{HCT}" style="height: 30px;width: 60px;margin-bottom: 5px;"><br/>
+        <div >
+        输入相关产品的产量: <br/>
+        GW1111系列：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{GW11}" name="GW11" th:field="*{GW11}" style="height: 30px;width: 60px;">
+        GW1122系列：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{GW12}" name="GW12" th:field="*{GW12}" style="height: 30px;width: 60px;">
+        GW1813系列：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{GW13}" name="GW13" th:field="*{GW13}" style="height: 30px;width: 60px;">
+        A71锁：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{A71}" name="A71" th:field="*{A71}" style="height: 30px;width: 60px;">
+        V8锁：<input type="checkbox" name="sex" value="male"><input type="text"  value= "*{V8}" name="V8" th:field="*{V8}" style="height: 30px;width: 60px;"><br/>
+       
+        <p style="color: red;">合计总储位：[[${exdata.PSRGW11[4]}+${exdata.PSRGW12[4]}+${exdata.PSRGW13[4]}+${exdata.PSRA71[4]}+${exdata.PSRV8[4]}]]
+        </p>
+        <input type="submit" value="计算储位" style="margin-left:10px;height: 59px;width: ;margin-top:-20px;margin-left:3px;margin-bottom:10px"><br/>
+
+    </div>
+       
+        <input type="submit" value="计算储位" style="margin-left:10px;height: 59px;width: 86px;margin-top:-20px;margin-left:3px;margin-bottom:10px"><br/>
+        </form> 
+       </div>
+       <div id="container2" style="height: 60%;width: 100%;"></div>
+       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+       <script type="text/javascript" th:inline="javascript"  th:object="${exdata}">
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            app.title = '';
+            option = {
+                    title: {
+                        text: '好太太物料储位计算：',
+                        subtext: 'Hao TaiTai',
+                    },
+                    legend: {
+                        textStyle: { //图例文字的样式
+                            fontSize: 30
+                        },
+                    },
+                    tooltip: {},
+                    dataset: {
+                        source: [
+                            ['category', '包材', '大件', '电子器件','小五金','储位总量'],
+                            ['GW11',[[${exdata.PSRGW11[0]}]], [[${exdata.PSRGW11[1]}]], [[${exdata.PSRGW11[2]}]],[[${exdata.PSRGW11[3]}]],[[${exdata.PSRGW11[4]}]]],
+                            ['GW12',[[${exdata.PSRGW12[0]}]], [[${exdata.PSRGW12[1]}]], [[${exdata.PSRGW12[2]}]],[[${exdata.PSRGW12[3]}]],[[${exdata.PSRGW12[4]}]]],
+                            ['GW13', [[${exdata.PSRGW13[0]}]], [[${exdata.PSRGW13[1]}]], [[${exdata.PSRGW13[2]}]],[[${exdata.PSRGW13[3]}]],[[${exdata.PSRGW13[4]}]]],
+                            ['A71', [[${exdata.PSRA71[0]}]], [[${exdata.PSRA71[1]}]], [[${exdata.PSRA71[2]}]],[[${exdata.PSRA71[3]}]],[[${exdata.PSRA71[4]}]]],
+                            ['V8', [[${exdata.PSRV8[0]}]], [[${exdata.PSRV8[1]}]], [[${exdata.PSRV8[2]}]],[[${exdata.PSRV8[3]}]],[[${exdata.PSRV8[4]}]]]
+
+                        ]
+                    },
+                    xAxis: {type: 'category'},
+                    yAxis: {},
+                    // Declare several bar series, each will be mapped
+                    // to a column of dataset.source by default.
+                    series: [
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+                        {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                show: true,
+                                position: 'outside'
+                                }
+                            },
+                        },
+
+                    ]
+                
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        </script>
+
+   </body>
+</html>

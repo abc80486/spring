@@ -2,23 +2,56 @@
 <html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <style>
+                @keyframes rowup {
+                    0% {
+                        -webkit-transform: translate3d(0, 0, 0);
+                        transform: translate3d(0, 0, 0);
+                    }
+                    100% {
+                        -webkit-transform: translate3d(0, [[-20*${titles.size()}]]px, 0);
+                        transform: translate3d(0, [[-20*${titles.size()}]]px, 0);
+                    }
+                }
+                .list{
+                    width: 20px;
+                    border: 1px solid #999;
+                    margin: 20px auto;
+                    position: relative;
+                    height: 20px;
+                    overflow: hidden;
+                }
+                .item{
+                    height:20px;
+                    width: 20px;
+                }
+                .list .rowup{
+                    -webkit-animation: 5s rowup linear infinite normal ;
+                    animation: 5s rowup linear infinite normal ;
+                    animation-timing-function:steps([[${titles.size()}]]) ;
+                    position: relative;
+                }
+      </style>
    </head>
    <body style="height: 100%; margin: 0">
 <table>
     <tr>
         <th th:each="title : ${titles}" th:text="${title}"></th>
         <th th:text="${titles[2]}"></th>
-        <th th:text="${power}"></th>
-        <th th:text="${dataall.getJSONArray('sr11')}"></th>
-        <p th:text="${power}"></p>
+        <p th:text="${pr.getpr()}"></p>
     </tr>
-    <form style="margin-left:30px;" th:action="@{/test}"th:object="${pr}" method="POST">
-        <input type="text"  th:value="*{pr}"  style="height: 15px;width: 60px;margin-left:70px;">
-
+    <form style="margin-left:30px;" th:action="@{/test}" th:object="${pr}" method="POST">
+        <input type="text"   th:value="${pr.getpr()==0?'':pr.getpr()}"  style="height: 15px;width: 60px;margin-left:70px;">
+        
         <input type="submit" value="计算储位" style="margin-left:10px;"><br/>
         </form> 
 
 </table>
+<div class="list">
+    <div class="cc rowup">
+        <div class="item" th:each="title : ${titles}" th:text="${title}">10</div>
+    </div>
+</div>
 <script type="text/javascript"  th-inline="javascript">
                // var  k = $[{power}];
                // window.alert("1111");

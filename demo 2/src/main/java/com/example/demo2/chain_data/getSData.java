@@ -1,13 +1,13 @@
 package com.example.demo.chain_data;
 
-//import java.io.File;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
-public class GetSData {
+public class getSData {
     public static JSONArray sigalNeed = new JSONArray() ;;
     public static JSONArray currentPackQuantity = new JSONArray() ;;
     public static JSONArray layer = new JSONArray() ;
@@ -31,8 +31,12 @@ public class GetSData {
       return end;
     }
     public static boolean get(String fileAddress){
-        String dataFile = "resources\\inputdata\\"+fileAddress; 
+        //String dataFile = "C:\\Users\\xiangbin\\iCloudDrive\\code\\java\\SPRING\\demo\\src\\main\\java\\com\\example\\demo\\chain_data\\";
+        String dataFile = "demo\\src\\main\\java\\com\\example\\demo\\chain_data\\"+fileAddress;
+       // String dataFile = new File(".").getAbsolutePath().toString()+fileAddress;
+        //String dataFile = fileAddress; 
         JSONArray sigal = JSON.parseArray(fileIn(dataFile));
+       // sigal = JSON.parseArray(fileIn(dataFile));
         int size = sigal.size();
        //System.out.println(size);
         sigalNeed.clear();
@@ -57,7 +61,9 @@ public class GetSData {
     }
     
     public static void main(String[] args){
-        System.out.println(fileIn("resources/hello.txt"));
+        // data a = new data();
+       // System.out.println(fileIn("resources/test.txt"));
+        //System.out.println(getSRa71(2400.0,7.0,7.0,7.0,7.0));
 
      }
 
