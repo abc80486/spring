@@ -22,6 +22,7 @@ public class test2 {
     @GetMapping("/test")
     public String greetingForm(Model model) {
         //int[] titles = new int[]{47, 47, 21};
+        
         List<Double> a = new ArrayList<>();
         a.add(1.0);
         a.add(2.0);
@@ -48,7 +49,18 @@ public class test2 {
       model.addAttribute("pr",PR);
       return "echarts/test.html";
        // return "../";
-    }   
+    } 
+    @GetMapping("/page")
+    public String paghuu(Model model) {
+        List<Double> a = new ArrayList<>();
+        a.add(1.0);
+        a.add(2.0);
+        a.add(3.0);
+        model.addAttribute("titles",a);
+        return "pages_model/page_test/index.html";
+    }
+ 
+      
 }
 class AS{
     int pr;
