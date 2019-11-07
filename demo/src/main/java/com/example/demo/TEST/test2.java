@@ -50,17 +50,8 @@ public class test2 {
       return "echarts/test.html";
        // return "../";
     } 
-    @GetMapping("/page")
-    public String paghuu(Model model) {
-        List<Double> a = new ArrayList<>();
-        a.add(1.0);
-        a.add(2.0);
-        a.add(3.0);
-        model.addAttribute("titles",a);
-        return "pages_model/page_test/index.html";
-    }
+
  
-      
 }
 class AS{
     int pr;
