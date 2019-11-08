@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,7 @@
       <div class="container">
         <div class="form-outer text-center d-flex align-items-center">
           <div class="form-inner">
-            <div class="logo text-uppercase"><span>Dash</span><strong class="text-primary">Express</strong></div>
+            <div class="logo text-uppercase"><span th:value="#{user.name}"></span><strong class="text-primary">Express</strong></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
             <form class="text-left form-validate">
               <div class="form-group-material">
@@ -60,7 +60,6 @@
           </div>
           <div class="copyrights text-center">
             <p>Design by Bootstrapious</p>
-            
           </div>
         </div>
       </div>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
    <head>
-        <link rel="stylesheet" type="text/css" media="all" href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+       <!-- <link rel="stylesheet" type="text/css" media="all" href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+       -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <style>
                 @keyframes rowup {
                     0% {
@@ -38,8 +39,9 @@
 <table>
     <tr>
         <th th:each="title : ${titles}" th:text="${title}"></th>
-        
-        <p th:text="#{user2.name}"></p>
+        <th th:each="title : ${titles}" th:text="${title}"></th>
+
+        <p th:text="#{user.name}"></p>
     </tr>
     <form style="margin-left:30px;" th:action="@{/test}" th:object="${pr}" method="POST">
         <input type="text"   th:value="${pr.getpr()==0?'':pr.getpr()}"  style="height: 15px;width: 60px;margin-left:70px;">
