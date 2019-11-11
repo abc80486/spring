@@ -1,26 +1,7 @@
 {
     "configurations": [
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - HrserverApplication",
-            "request": "launch",
-            "mainClass": "org.sang.HrserverApplication",
-            "projectName": "hrserver"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - EXData",
-            "request": "launch",
-            "mainClass": "com.example.demo.pojo.EXData",
-            "projectName": "demo"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - getSData",
-            "request": "launch",
-            "mainClass": "com.example.demo.chain_data.getSData",
-            "projectName": "demo"
-        },
+       
+       
         {
             "type": "java",
             "name": "CodeLens (Launch) - data",
@@ -41,18 +22,7 @@
             "request": "launch",
             "mainClass": "data"
         },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - MybatisApplication",
-            "request": "launch",
-            "mainClass": "com.fishpro.mybatis.MybatisApplication"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - DemoApplication",
-            "request": "launch",
-            "mainClass": "com.dabing.jdbc.DemoApplication"
-        },
+        
         {
             "type": "java",
             "name": "CodeLens (Launch) - DemoApplication",

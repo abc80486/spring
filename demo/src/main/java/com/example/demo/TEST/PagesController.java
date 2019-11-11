@@ -17,7 +17,6 @@ public class PagesController {
     }
     @GetMapping("/login")
     public String login(Model model) {
-
         return "pages_model/page_test/login.html";
     }
 
