@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+    <form style="margin-left:30px;" th:action="@{/addCar}" th:object="${pojo}" method="GET">
+        id：<input type="text"  th:field="*{id}" style="height: 30px;width: 60px;margin-top: 5px;">
+        carName：<input type="text" th:field="*{carName}" style="height: 30px;width: 60px;">
+        carContent：<input type="text" th:field="*{carContent}" style="height: 30px;width: 60px;">
+        carType：<input type="text" th:field="*{carType}" style="height: 30px;width: 60px;margin-bottom: 5px;"><br/>
+        createTime:<input type="text" th:field="*{createTime}" style="height: 30px;width: 60px;">
+        updateTime:<input type="text" th:field="*{updateTime}" style="height: 30px;width: 60px;margin-bottom: 5px;"><br/>
+        <input type="submit" value="SUBMIT" style="margin-left:10px;height: 59px;margin-top:-20px;margin-left:3px;margin-bottom:10px"><br/>
+
+    </form> 
+</body>
+</html>

@@ -1,28 +1,49 @@
 {
     "configurations": [
-       
-       
         {
             "type": "java",
-            "name": "CodeLens (Launch) - data",
+            "name": "CodeLens (Launch) - JPATestApplication",
             "request": "launch",
-            "mainClass": "com.example.demo.chain_data.data",
-            "projectName": "demo"
+            "mainClass": "com.example.jpa.JPATestApplication",
+            "projectName": "jpa"
         },
         {
             "type": "java",
-            "name": "CodeLens (Launch) - data",
+            "name": "CodeLens (Launch) - ThymeleafApplication",
             "request": "launch",
-            "mainClass": "com.example.demo.data",
-            "projectName": "demo"
+            "mainClass": "src.main.java.com.neo.ThymeleafApplication",
+            "projectName": "SPRING_104897a8"
         },
         {
             "type": "java",
-            "name": "CodeLens (Launch) - data",
+            "name": "CodeLens (Launch) - ThymeleafApplication",
             "request": "launch",
-            "mainClass": "data"
+            "mainClass": "com.neo.ThymeleafApplication"
         },
-        
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DemoApp",
+            "request": "launch",
+            "mainClass": "com.example2.test_jdbc.DemoApp"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DemoApp",
+            "request": "launch",
+            "mainClass": "com.example.test_jdbc.DemoApp"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DemoApp",
+            "request": "launch",
+            "mainClass": "com.example.demo.DemoApp"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "com.dabing.App"
+        },
         {
             "type": "java",
             "name": "CodeLens (Launch) - DemoApplication",
