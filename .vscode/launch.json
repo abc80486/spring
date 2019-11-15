@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - DemoApplication",
+            "request": "launch",
+            "mainClass": "com.dabing.mobile.DemoApplication"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - MybatisAnnotationApplication",
             "request": "launch",
             "mainClass": "com.neo.MybatisAnnotationApplication"

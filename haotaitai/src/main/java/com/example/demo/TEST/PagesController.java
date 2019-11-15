@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PagesController {
     @GetMapping("/page")
     public String index(ModelAndView model) {
-        return "pages_model/page_test/index.html";
+        return "pages_model/hbuild/index.html";
     }
     @GetMapping("/register")
     public String register(Model model) {

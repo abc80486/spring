@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;
+			}
+			
+		</style>
+		<style>
+			.chart {
+				height: 200px;
+				margin: 0px;
+				padding: 0px;
+			}
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			h5:first-child {
+				margin-top: 15px;
+			}
+		</style>
+		<script src="js/mui.min.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">东莞格力展厅</h1>
+		</header>
+		
+		<div id="slider" class="mui-slider" style="margin-top: 45px;margin-bottom: 0; height: 240px;" >
+			<div class="mui-slider-group mui-slider-loop">
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="images/zt3.jpg">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/zt0.jpg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/zt1.jpg">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/zt2.jpg">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/zt3.jpg">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="images/zt0.jpg">
+					</a>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		<div class="mui-content" style="margin-top: -40px;">
+			<h5>展厅设备状态</h5>
+			<div class="mui-card">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						异形插件机
+						<div id="switch1" class="mui-switch mui-active">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						注塑机
+						<div id="switch2"class="mui-switch mui-active">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						CNC机床
+						<div class="mui-switch mui-active">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						自动生产线（玲珑煲）
+						<div class="mui-switch mui-active">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+		<div class="mui-content" style="margin-top: -40px;">
+			<h5>展厅设备数据</h5>
+			<div class="mui-content-padded">
+				<h5>异形插件机</h5>
+				<div class="chart" id="lineChart"></div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+				});
+			var slider = mui("#slider");	
+			slider.slider({
+				interval: 2000
+			});
+			document.getElementById("switch2").addEventListener("toggle",function(event){
+			  if(event.detail.isActive){
+			    document.getElementById("switch1").classList.add('mui-active');
+			    
+			  }else{
+			    document.getElementById("switch1").classList.remove('mui-active');
+			  }
+			})
+			
+			//document.getElementById("switch1").classList.add('mui-active');
+			//var col1 = mui("#col");
+			
+			
+		</script>
+		<script src="libs/echarts-all.js"></script>
+			<script>
+				var getOption = function(chartType) {
+					var chartOption = chartType == 'pie' ? {
+						calculable: false,
+						series: [{
+							name: '访问来源',
+							type: 'pie',
+							radius: '65%',
+							center: ['50%', '50%'],
+							data: [{
+								value: 335,
+								name: '直接访问'
+							}, {
+								value: 310,
+								name: '邮件营销'
+							}, {
+								value: 234,
+								name: '联盟广告'
+							}, {
+								value: 135,
+								name: '视频广告'
+							}, {
+								value: 1548,
+								name: '搜索引擎'
+							}]
+						}]
+					} : {
+						legend: {
+							data: ['产量', '有效运行时间']
+						},
+						grid: {
+							x: 35,
+							x2: 10,
+							y: 30,
+							y2: 25
+						},
+						toolbox: {
+							show: false,
+							feature: {
+								mark: {
+									show: true
+								},
+								dataView: {
+									show: true,
+									readOnly: false
+								},
+								magicType: {
+									show: true,
+									type: ['line', 'bar']
+								},
+								restore: {
+									show: true
+								},
+								saveAsImage: {
+									show: true
+								}
+							}
+						},
+						calculable: false,
+						xAxis: [{
+							type: 'category',
+							data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+						}],
+						yAxis: [{
+							type: 'value',
+							splitArea: {
+								show: true
+							}
+						}],
+						series: [{
+							name: '产量',
+							type: chartType,
+							data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+						}, {
+							name: '有效运行时间',
+							type: chartType,
+							data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+						}]
+					};
+					return chartOption;
+				};
+				var byId = function(id) {
+					return document.getElementById(id);
+				};
+				var lineChart = echarts.init(byId('lineChart'));
+				lineChart.setOption(getOption('line'));
+				/*byId("echarts").addEventListener('tap',function(){
+					var url = this.getAttribute('data-url');
+					plus.runtime.openURL(url);
+				},false);
+				*/
+			</script>
+		
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+		/* function tryapitest(){ */
+		$(function(){
+		$.getJSON('http://192.168.55.215:8080/selectListCars').done(function (data) {
+				 		        console.log(data);
+				 		    });
+		    
+		
+		 })
+		
+		
+	</script>
+	
+	}
+	</body>
+</html>

@@ -67,13 +67,9 @@ JPA{
 SpringMVC{
     
 }
-data{
-    表创建{
-
-    }
-    表操作{
-        增{
-            输入：1.
-        }
-    }
+springApplication{
+    1.springApplication运行静态run方法，参数为.class文件及字符串数组；
+    Class<?>
+    2.run方法返回值为一个配置应用上下文ConfigurableApplicationContext
+    
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<iframe src="http://www.baidu.com"></iframe>
+	<script>
+		/* function tryapitest(){ */
+		
+		    $.ajax({
+				
+		        url:"http://192.168.55.215:8080/add",
+		
+		        type:"post",
+		
+		        dataType: "json",
+				
+				data:{userName:"test",passWord:"test",userSex:"MAN"},
+				
+		        success: function(result) {
+		
+		            alert("get data"); 
+					   //alert(data[0].id);
+					   //alert(XMLHttpRequest.status);
+		
+		        },
+		
+		        error: function(XMLHttpRequest, textStatus, errorThrown) {
+		
+		            //console.log("error");  
+					//alert(XMLHttpRequest.status);
+		
+		            //alert(XMLHttpRequest.readyState);
+		
+		            alert(textStatus);
+		
+		        },
+		
+		    });
+			/*
+			$.ajax({
+                url: "http://localhost:8080/ajax",
+                dataType: "jsonp",
+                jsonp:"callback2",
+                success: function (res) {
+                    result = res;
+                },
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+		
+		//console.log("error");  
+		alert(XMLHttpRequest.status);
+
+		alert(XMLHttpRequest.readyState);
+
+		alert(textStatus);
+
+	},
+
+            });
+
+            // 由于是异步请求，需要使用setTimeout来校验
+            setTimeout(function () {
+                expect(result).toEqual({
+                    "data":"get1ok"
+                });
+
+                // 校验完成，通知jasmine框架
+                done();
+            },100);
+			*/
+	</script>
+	</body>
+</html>
