@@ -1,0 +1,12 @@
+geli{
+    shire{
+
+    }
+    mybatis{
+
+    }
+    jpa{
+
+    }
+    
+}
