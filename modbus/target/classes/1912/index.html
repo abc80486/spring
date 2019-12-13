@@ -109,7 +109,7 @@
         <h6></h6>
         <ul class="mui-table-view" style="font-size: 6px;">
               <li class="mui-table-view-cell" style="height: 30px;">
-                制冷回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp1" type="text" value="12.5" placeholder="40.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+                制冷回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp1" type="text"  placeholder="40.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">
                 制热回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp2"type="text"  placeholder="15.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
@@ -303,17 +303,17 @@
       //var butterfly_valve2;var butterfly_valve2_ctrl_addr = 10;
       function coil_ctrl(id,addr){
         document.getElementById(id).addEventListener("toggle",function(event){
-          var status;
+          var statu;
           if(event.detail.isActive){
-            status = true;
+            statu = true;
           }else{
-            status = false;
+            statu = false;
           }
             $.ajax({
                 url :  "/coil_ctrl",
                 type : 'POST',
                 data : {
-                  addr:addr,status:status
+                  addr:addr,status:statu
                 },
                 success : function(data) {
                     //alert(data);
@@ -325,23 +325,37 @@
             });
         });
       };
-      function register_ctrl(id,addr){
-        var temp1 = document.getElementById("temp1").value;
-        var temp1 = document.getElementById("temp2").value;
-        var temp1 = document.getElementById("temp3").value;
-        var temp1 = document.getElementById("temp4").value;
-        var hum = document.getElementById("hum").value;
-
-      };
-
-      coil_ctrl("wp1",1);//1号电机
-      coil_ctrl("wp2",2);//2号电机
+      coil_ctrl("wp1",85);//1号电机
+      coil_ctrl("wp2",7);//2号电机
       coil_ctrl("wp3",3);//3号电机
       coil_ctrl("air_conditioner",4);//组合式空调
       coil_ctrl("crew1",5);//1号机组
       coil_ctrl("crew2",6);//2号机组
       coil_ctrl("valve1",7);//1号蝶阀
       coil_ctrl("valve2",8);//2号蝶阀
+
+      function registerCtrl(id,adr){
+        var temp = document.getElementById(id);
+        temp.addEventListener("change",function(){
+          dataTemp = temp.value;
+          $.ajax({
+                url :  "/registerCtrl",
+                type : 'POST',
+                data : {
+                  addr:adr,data:dataTemp
+                }
+            });  
+        });
+      };
+      registerCtrl("temp1",1);
+      registerCtrl("temp2",2);
+      registerCtrl("temp3",3);
+      registerCtrl("temp4",4);
+      registerCtrl("hum",5);
+
+
+
+
   </script>
   
 

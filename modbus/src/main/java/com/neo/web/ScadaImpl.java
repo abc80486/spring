@@ -18,7 +18,6 @@ public class ScadaImpl {
     private static final int SLAVEID = 1;
 
     // bit table
-    private static final int WATERPUMP = 0;
     // bit table
 
     static ModbusMaster master = null;
@@ -48,18 +47,52 @@ public class ScadaImpl {
     }
 
     // @Override
-    public void getData() {
-        // boolean[] coil01 = master.readCoils(SLAVEID, 0, quantity);
-        // 数字量输入
-        // boolean[] coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
-        // 保持寄存器
-        // int[] register03 = (master.readHoldingRegisters(SLAVEID, 0, quantity));
-        // 输入寄存器
-        // int[] register04 = master.readInputRegisters(SLAVEID, 0, quantity);
+   // public static  int quantity = 10;
+    public static String getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
+         String out="";
+         int quantity = 10;
+         boolean[] coil01 = master.readCoils(SLAVEID, 0, quantity);
+         boolean[] coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
+         int[] register03 = (master.readHoldingRegisters(SLAVEID, 0, quantity));
+         int[] register04 = master.readInputRegisters(SLAVEID, 0, quantity);
+         out += System.out.printf("%8s %8s %8s %8s %8s\n","address" , "01" ,  "02"  ," 03",  " 04").toString();
+         out += System.out.printf("----------------------------------------------\n").toString();
+         
+         for(int i=0;i<quantity;i++){
+            // System.out.print();
+             out += System.out.printf("%8d %8b %8b %8d %8d\n",i+1,coil01[i],coil02[i],register03[i],register04[i]);
+         }
+         out = out.toString();
+         System.out.println(out);
+         return out;
+         
 
     }
     private static long waterPumpOpTime = 1l;
     public static List<String> log = new ArrayList<>();
+    public static boolean setRegister(int addr,int col) {
+        Date now = new Date();
+        try {
+            if(now.getTime()-waterPumpOpTime < 100l){
+                log.add(now.toString()+"不可频繁操作，请稍后再试！");
+                System.out.println(now.toString()+"不可频繁操作，请稍后再试！");
+                return false;
+            }
+            else{
+                //master.writeSingleCoil(SLAVEID, addr, col);
+                master.writeSingleRegister(SLAVEID, addr,(int)col);
+                waterPumpOpTime = now.getTime();
+                log.add(now.toString() + " 地址" + addr + " = " + (int)col + " 设置成功");
+                System.out.println(now.toString() + " 地址" + addr + " = " + (int)col + " 设置成功");
+                return true;
+            }
+        } catch (Exception e) {
+            log.add(now.toString() + " 地址" + addr + "  设置失败");
+            System.out.println(now.toString() + " 地址" + addr + "  设置失败");
+            return false;
+        }
+    }
+
     public static void setCoil(int addr,boolean col) {
             try {
                 Date now = new Date();
@@ -69,7 +102,7 @@ public class ScadaImpl {
                 }
                 else{
                     master.writeSingleCoil(SLAVEID, addr, col);
-                    master.writeSingleRegister(SLAVEID, addr, data);
+                    //master.writeSingleRegister(SLAVEID, addr, data);
                     waterPumpOpTime = now.getTime();
                     if(col == true){
                         log.add(now.toString() + " 地址" + addr + " 启动成功");

@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MybatisAnnotationApplication",
+            "request": "launch",
+            "mainClass": "com.neo.MybatisAnnotationApplication",
+            "projectName": "spring-boot-mybatis-annotation"
+        }
+    ]
+}
