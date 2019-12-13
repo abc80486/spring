@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MybatisAnnotationApplication",
+            "request": "launch",
+            "mainClass": "com.neo.MybatisAnnotationApplication",
+            "projectName": "spring-boot-mybatis-annotation"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - C3P0Test",
+            "request": "launch",
+            "mainClass": "com.neo.test.C3P0Test",
+            "projectName": "spring-boot-mybatis-annotation"
+        }
+    ]
+}

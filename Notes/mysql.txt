@@ -1,0 +1,20 @@
+mysql触发器{
+    作用{
+        1.表数据异常监控
+        2.表数据汇总统计
+    }
+    创建{
+        create trigger tri_Name  -- tri_Name代表触发器名称
+        tirgger_time trigger_event on tableName  -- tirgger_time为触发时机，可选值有after/before，trigger_event为触发事件，可选值有insert/update/delete
+        for each row   -- 这句话在mysql是固定的，表示任何一条记录上的操作满足触发事件都会触发该触发器。 
+        begin  
+            sql语句;  
+        end
+    }
+    查看{
+        show triggers from databaseName;
+    }
+    删除{
+        drop trigger if exists databaseName.tri_Name; 
+    }
+}

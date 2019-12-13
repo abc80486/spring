@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <title>MaxiBiz Bootstrap Business Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+  <link href="lib/hover/hoverex-all.css" rel="stylesheet">
+  <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
+  <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/colors/blue.css">
+
+  <!-- mui -->
+  <link rel="stylesheet" href="css/mui.min.css">
+ 
+
+</head>
+
+<body>
+  
+  <!-- end topbar -->
+
+  <header class="header" style="margin: 0;">
+    <div class="container" style="margin: 0;" >
+      <div class="site-header clearfix">
+        <div class="col-lg-3 col-md-3 col-sm-12 title-area">
+          <div class="site-title" id="title">
+            <a href="index.html" title="">
+              <h4>东莞格力</br><span>中央空调群控系统</span></h4>
+            </a>
+          </div>
+        </div>
+        <!-- title area -->
+        <div class="col-lg-9 col-md-12 col-sm-12">
+          <div id="nav" class="right">
+            <div class="container clearfix">
+              <ul id="jetmenu" class="jetmenu blue">
+                <li class="active"><a href="index.html">监控中心</a>
+                </li>
+                <li><a href="#">趋势分析</a>
+                </li>
+                <li><a href="#">能耗统计</a>
+                </li>
+                <li><a href="#">异常报警</a>
+                </li>
+                <li><a href="#">定时设置</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- nav -->
+        </div>
+        <!-- title area -->
+      </div>
+      <!-- site header -->
+    </div>
+    <!-- end container -->
+  </header>
+  <!-- end header -->
+  <div style="position: relative;">
+    <img src="img/main5.jpg" alt="" class="img-responsive">  
+    <div style="position: absolute;top:0%;right: 10px;">
+      <div class="mui-content-padded" style="width: 250px;">
+        <h6>组合式空调</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                启停控制
+                <div id="air_conditioner" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                  <div class="mui-switch-handle" style="height: 100%;"></div>
+                </div>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">
+                控制方式&nbsp;&nbsp;
+                <input name="radio1" type="radio"><label>制冷</label>
+                <input name="radio1" type="radio"><label>制热</label>
+                <input name="radio1" type="radio"><label>自动</label>
+                <input name="radio1" type="radio"><label>副热</label>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">机组运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">回风温度(°C)<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+              <li class="mui-table-view-cell"style="height: 30px;">送风温度(°C)<span class="mui-badge mui-badge-inverted" id="spindle_current">20.0</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">回风温度(%)<span class="mui-badge mui-badge-inverted" id="tool_in_use">60</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">送风湿度(%)<span class="mui-badge mui-badge-inverted" id="tool_number">60</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">机组控制方式<span class="mui-badge mui-badge-inverted" id="tool_life">远程</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="position: absolute;top:270px;right: 10px;">
+      <div class="mui-content-padded" style="width: 250px;">
+        <h6></h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                制冷回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp1" type="text" value="12.5" placeholder="40.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">
+                制热回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp2"type="text"  placeholder="15.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">
+                供冷温度设定值(℃)<span class="mui-badge mui-badge-inverted"><input id="temp3"type="text"  placeholder="26.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">
+                供热温度设定值(℃)<span class="mui-badge mui-badge-inverted"><input id="temp4"type="text"  placeholder="32.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">
+                供热湿度设定值(%)<span class="mui-badge mui-badge-inverted"><input id="hum" type="text"  placeholder="15.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+              </li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="position: absolute;bottom:20px;left: 270px;">
+      <div class="mui-content-padded" style="width: 200px;float:left;">
+        <h6>1#水泵电机</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                启停控制
+                <div id="wp1" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                  <div class="mui-switch-handle" style="height: 100%;"></div>
+                </div>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="total_processing_time">远程</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+        </ul>
+      </div>
+      <div class="mui-content-padded" style="width: 200px;float:left;">
+        <h6>2#水泵电机</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                启停控制
+                <div id="wp2" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                  <div class="mui-switch-handle" style="height: 100%;"></div>
+                </div>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="total_processing_time">远程</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+        </ul>
+      </div>
+      <div class="mui-content-padded" style="width: 200px;float:left;">
+        <h6>3#水泵电机</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                启停控制
+                <div id="wp3" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                  <div class="mui-switch-handle" style="height: 100%;"></div>
+                </div>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="total_processing_time">远程</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="position: absolute;top:0%;left: 10px;">
+      <div class="mui-content-padded" style="width: 150px;">
+        <h6>1#机组</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                启停控制
+                <div id="crew1" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                  <div class="mui-switch-handle" style="height: 100%;"></div>
+                </div>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">机组运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">出水温度(°C)<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+              <li class="mui-table-view-cell"style="height: 30px;">进水温度(°C)<span class="mui-badge mui-badge-inverted" id="spindle_current">20.0</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="position: absolute;top:0%;left: 170px;">
+        <div class="mui-content-padded" style="width: 150px;">
+          <h6>1#蝶阀</h6>
+          <ul class="mui-table-view" style="font-size: 6px;">
+                <li class="mui-table-view-cell" style="height: 30px;">
+                  启停控制
+                  <div id="valve1" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                    <div class="mui-switch-handle" style="height: 100%;"></div>
+                  </div>
+                </li>
+                <li class="mui-table-view-cell" style="height: 30px;">蝶阀状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+                <li class="mui-table-view-cell"style="height: 30px;">控制方式<span class="mui-badge mui-badge-inverted" id="tool_life">远程</span></li>
+          </ul>
+        </div>
+    </div>
+
+    <div style="position: absolute;top:200px;left: 10px;">
+      <div class="mui-content-padded" style="width: 150px;">
+        <h6>2#机组</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+              <li class="mui-table-view-cell" style="height: 30px;">
+                启停控制
+                <div id="crew2" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                  <div class="mui-switch-handle" style="height: 100%;"></div>
+                </div>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">机组运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">出水温度(°C)<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+              <li class="mui-table-view-cell"style="height: 30px;">进水温度(°C)<span class="mui-badge mui-badge-inverted" id="spindle_current">20.0</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="position: absolute;top:200px;left: 170px;">
+        <div class="mui-content-padded" style="width: 150px;">
+          <h6>2#蝶阀</h6>
+          <ul class="mui-table-view" style="font-size: 6px;">
+                <li class="mui-table-view-cell" style="height: 30px;">
+                  启停控制
+                  <div id="valve2" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
+                    <div class="mui-switch-handle" style="height: 100%;"></div>
+                  </div>
+                </li>
+                <li class="mui-table-view-cell" style="height: 30px;">蝶阀状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
+                <li class="mui-table-view-cell"style="height: 30px;">控制方式<span class="mui-badge mui-badge-inverted" id="tool_life">远程</span></li>
+          </ul>
+        </div>
+    </div>
+
+    <div style="position: absolute;top:400px;left: 10px;">
+      <div class="mui-content-padded" style="width: 250px;">
+        <h6>其他</h6>
+        <ul class="mui-table-view" style="font-size: 6px;">
+            <li class="mui-table-view-cell"style="height: 30px;">冷冻总管供水温度(°C)<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+            <li class="mui-table-view-cell"style="height: 30px;">冷冻总管回水温度(°C)<span class="mui-badge mui-badge-inverted" id="spindle_current">20.0</span></li>
+            <li class="mui-table-view-cell"style="height: 30px;">冷冻总管供水压力(Pa)<span class="mui-badge mui-badge-inverted" id="tool_in_use">26728</span></li>
+            <li class="mui-table-view-cell"style="height: 30px;">冷冻总管回水压力(Pa)<span class="mui-badge mui-badge-inverted" id="tool_number">25028</span></li>
+            <li class="mui-table-view-cell"style="height: 30px;">冷冻总管回水瞬时流量(m³)<span class="mui-badge mui-badge-inverted" id="tool_life">0.0</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <div class="copyrights">
+      <div class="container">
+        <div class="col-lg-6 col-md-6 col-sm-12 columns footer-left">
+          <p>Copyright ©GREE 2019 - 2019 All rights reserved.</p>
+        </div>
+        <!-- end widget -->
+        <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
+          <div class="footer-menu right">
+            <ul class="menu">
+              <li><a href="index.html">监控中心</a></li>
+              <li><a href="about.html">趋势分析</a></li>
+              <li><a href="#">能耗统计</a></li>
+              <li><a href="#">异常报警</a></li>
+              <li><a href="contact">定时设置</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- end large-6 -->
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- end copyrights -->
+  </footer>
+  <!-- end footer -->
+  <div class="dmtop">Scroll to Top</div>
+  <script src="js/mui.min.js"></script>
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/php-mail-form/validate.js"></script>
+  <script src="lib/prettyphoto/js/prettyphoto.js"></script>
+  <script src="lib/isotope/isotope.min.js"></script>
+  <script src="lib/hover/hoverdir.js"></script>
+  <script src="lib/hover/hoverex.min.js"></script>
+  <script src="lib/unveil-effects/unveil-effects.js"></script>
+  <script src="lib/owl-carousel/owl-carousel.js"></script>
+  <script src="lib/jetmenu/jetmenu.js"></script>
+  <script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
+  <script src="lib/jigowatt/jigowatt.js"></script>
+  <script src="lib/easypiechart/easypiechart.min.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+  <script>
+      //var butterfly_valve1;var butterfly_valve1_ctrl_addr = 9;
+      //var butterfly_valve2;var butterfly_valve2_ctrl_addr = 10;
+      function coil_ctrl(id,addr){
+        document.getElementById(id).addEventListener("toggle",function(event){
+          var status;
+          if(event.detail.isActive){
+            status = true;
+          }else{
+            status = false;
+          }
+            $.ajax({
+                url :  "/coil_ctrl",
+                type : 'POST',
+                data : {
+                  addr:addr,status:status
+                },
+                success : function(data) {
+                    //alert(data);
+                },
+                error : function(msg) {
+                  //alert(msg);
+                  alert(JSON.stringify(msg));
+                }
+            });
+        });
+      };
+      function register_ctrl(id,addr){
+        var temp1 = document.getElementById("temp1").value;
+        var temp1 = document.getElementById("temp2").value;
+        var temp1 = document.getElementById("temp3").value;
+        var temp1 = document.getElementById("temp4").value;
+        var hum = document.getElementById("hum").value;
+
+      };
+
+      coil_ctrl("wp1",1);//1号电机
+      coil_ctrl("wp2",2);//2号电机
+      coil_ctrl("wp3",3);//3号电机
+      coil_ctrl("air_conditioner",4);//组合式空调
+      coil_ctrl("crew1",5);//1号机组
+      coil_ctrl("crew2",6);//2号机组
+      coil_ctrl("valve1",7);//1号蝶阀
+      coil_ctrl("valve2",8);//2号蝶阀
+  </script>
+  
+
+</body>
+</html>

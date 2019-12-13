@@ -207,9 +207,190 @@ java{
         负载均衡实现方式，策略？
         限流主要的算法？令牌桶算法的缺点在哪？（导致不公平性）
     }
-    impl{
-        1.ajax发送get请求传递参数；
-        2.ajax发送post请求传递参数；
-        3.iframe使用，页面传递；
+    java core class{
+        Class.class{
+            inner_class{
+                AnnotationData
+                Atomic
+                EnclosingMethodInfo
+                MethodArray
+                ReflectionData<T>
+            }
+            final_variable{
+                ANNOTATION ENUM SYNTHETIC serialVersionUID serialPersistentFields
+            }
+            variable{
+                cachedConstructor newinstanceCallerCache name classLoader allPermDomain
+                useCaches reflectionData classRedefinedCount genericInfo
+            }
+            native_method{
+                registerNatives() isInstance() isAssignableForm() isInterface()
+                isArray() isPrimitive() getName0() getSuperclass() getInterfaces0()
+                getComponentType() getModifiers() getSigners() getEnclosingMethod0()
+                getDeclaringClass0() getProtectionDomain0() getPrimitiveClass()
+                getGenericSignature0() getRawAnnotations() getRawTypeAnnotations()
+                getConstantPool() getDeclaredFields0() getDeclaredMethods0()
+                getDeclaredConstructors0() getDeclaredClassses0() desiredAssertionStatus0()
+            }
+            method{
+                registerNatives()
+                Class(ClassLoader)
+                toString()
+                toGenericString()
+                forName(String)
+                forName(String,boolean,ClassLoader)
+                forName(String,boolean,ClassLoader,Class<?>)
+                newInstance()
+                isInstance(Object)
+                isAssignableForm(Class<?>)
+                isInterface()
+                isArray()
+                isPermitive()
+                isAnnotation()
+                isSynthetic()
+                getName()
+                getName0()
+                getClassLoader()
+                getClassLoader0()
+                getTypeParameters()
+                getSuperclass()
+                getGenericSuperclass()
+                getPackage()
+                getInterfaces()
+                getInterfaces0()
+                getGenericInterfaces()
+                getComponentType()
+                getModifiers()
+                getSigners()
+                setSigners(Object[])
+                getEnclosingMethod()
+                getEnclosingMethod0()
+                getEnclasingMethodInfo()
+                toClass(Type)
+                getEnclosingConstructor()
+                getDeclaringClass()
+                getDeclaringClass0()
+                getEnclosingClass()
+                getSimpleName()
+                getTypeName()
+                isAsciiDigit(char)
+                getCanonicalName()
+                isAnnoymousClass()
+                isLocalClass()
+                isMemberClass()
+                getSimpleBinaryName()
+                isLocalOrAnnoymousClass()
+                getClasses()
+                getFields()
+                getMethods()
+                getConstructors()
+                getFields(String)
+                getMethod(String,Class<?>...)
+                getConstructor(Class<?>...)
+                getDeclaredClasses()
+                getDeclaredFields()
+                getDeclaredMethods()
+                getDeclaredConstructors()
+                getDeclaredField(String)
+                getDeclaredMethod(String,Class<?>...)
+                getDeclaredConstructor(Class<?>...)
+                getResourceAsStream(String)
+                getResource(String)
+                getProtectionDomain()
+                getProtectionDomain0()
+                getPrimitiveClass(String)
+                checkMemberAccess(int,Class<?>,boolean)
+                checkPackageAccess(ClassLoader,boolean)
+                resolveName(String)
+                reflectionData()
+                newReflectionData(SoftReference<ReflectionData<T>>,int)
+                getGenericSignature0()
+                getFactory()
+                getGenericInfo()
+                getRawAnnotations()
+                getRawTypeAnnotations()
+                getExecutableTypeAnnotationBytes(Executable)
+                getConstantPool()
+                privateGetDeclaredFields(boolean)
+                privateGetPublicFields(Set<Class<?>>)
+                addAll(Collection<Field>,Field[])
+                privateGetDaclaredConstructors(boolean)
+                privateGetDeclaredMethods(boolean)
+                privateGetPublicMethods()
+                searchFields(Field[],String)
+                getField0(String)
+                searchMethods(Method[],String,Class<?>[])
+                getMethod0(String,Class<?>[],boolean)
+                privateGetMethodRecursive(String,Class<?>[],boolean,MethodArray)
+                getConstructor0(Class<?>[],int)
+                arrayContentsEQ(Object[],Object[])
+                copyFields(Field[])
+                copyMethods(Method[])
+                copyConstructors(Constructor<U>[])<U>
+                getDeclaredFields0(boolean)
+                getDeclaredMethods0(boolean)
+                getDeclaredConstructors0(boolean)
+                getDeclaredClasses0()
+                argumentTypesToString(Class<?>)
+                desiredAssertionsStatus0(Class<?>)
+                isEnum()
+                getReflectionFactory()
+                chechInitted()
+                getEnumConstants()
+                getEnumConstantsShared()
+                enumConstantDtretory()
+                cast(Object)
+                cannotCastMsg(Object)
+                asSubclass(Class<U>)<U>
+                getAnnotation(Class<A>)<A extends Annotation>
+                isAnnotationPresent(Class<? extends Annotation>)
+                getAnnotationsByType(Class<A>)<A extends Annotation>
+                getAnnotations()
+                getDeclaredAnnotation(Class<A>)<A extends Annotation>
+                getDeclaredAnnotationsByType(Class<A>)<A extends Annotation>
+                getDeclaredAnnotations()
+                annotationData()
+                crateAnnotationData(int)
+                casAnnotationType(AnnotationType,AnnotationType)
+                getAnnotationType()
+                getDeclaredAnnotationMap()
+                getAnnotatedSuperclass()
+                getAnnotatedInterfaces()
+            }
+        }
+    }
+    java core method{
+        JDK反射机制生成代理{
+            Proxy.newProxyInstance{
+                class.clone()
+                System.getSecurityManager()
+                Reflection.getCallerClass()
+                Proxy.checkProxyAccess()
+                Proxy.getProxyClass0()
+                Proxy.checkNewProxyPermission()
+                class.getConstructor()
+                Modifier.isPublic()
+                class.getModifiers()
+                constructor.setAccessible()
+                AccessController.doPrivileged()
+                constructor.newInstance()
+            }
+            method.invoke(){
+            }
+        }
+        CGLIB代理{
+            methodProxy.invokeSuper(object, args){
+
+            }
+            enhancer.setSuperclass(Chinese.class){
+
+            }
+            enhancer.setCallback(chineseProxy){
+
+            }
+            enhancer.create(){
+
+            }
+        }
     }
 }
