@@ -151,8 +151,8 @@
                   <div class="mui-switch-handle" style="height: 100%;"></div>
                 </div>
               </li>
-              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
-              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="total_processing_time">远程</span></li>
+              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="wp2_status">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="wp2_mode">远程</span></li>
               <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
         </ul>
       </div>
@@ -165,8 +165,8 @@
                   <div class="mui-switch-handle" style="height: 100%;"></div>
                 </div>
               </li>
-              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
-              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="total_processing_time">远程</span></li>
+              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="wp3_status">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="wp3_mode">远程</span></li>
               <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
         </ul>
       </div>
@@ -365,6 +365,15 @@
     var wp1_status = document.getElementById("wp1_status");
     var wp1_mode = document.getElementById("wp1_mode");
 
+    var wp2 = document.getElementById("wp2").classList;
+    var wp2_status = document.getElementById("wp2_status");
+    var wp2_mode = document.getElementById("wp2_mode");
+
+    var wp3 = document.getElementById("wp3").classList;
+    var wp3_status = document.getElementById("wp3_status");
+    var wp3_mode = document.getElementById("wp3_mode");
+
+
     //var data;
     //setInterval(function(){
       $.ajax({
@@ -375,9 +384,29 @@
           //alert(data[2]);
           data[0]==false?wp1.remove("mui-active"):wp1.add("mui-active");//controller
           data[1]==false?wp1_status.innerHTML="运行中":wp1_status.innerHTML="已停止";//controller status
-          data[2]==false?wp1_mode.innerHTML="手动":wp1_mode.innerHTML="远程";//controller status
+          data[2]==false?wp1_mode.innerHTML="手动":wp1_mode.innerHTML="远程";//controller mode
           //if(data[2]==false) wp1_mode.innerHTML="手动";
           //else wp1_mode.innerHTML="远程";
+          data[3]==false?wp2.remove("mui-active"):wp2.add("mui-active");//controller
+          data[4]==false?wp2_status.innerHTML="运行中":wp2_status.innerHTML="已停止";//controller status
+          data[5]==false?wp2_mode.innerHTML="手动":wp2_mode.innerHTML="远程";//controller mode
+
+          data[6]==false?wp3.remove("mui-active"):wp3.add("mui-active");//controller
+          data[7]==false?wp3_status.innerHTML="运行中":wp3_status.innerHTML="已停止";//controller status
+          data[8]==false?wp3_mode.innerHTML="手动":wp3_mode.innerHTML="远程";//controller mode
+
+          data[9]==false?valve1.remove("mui-active"):valve1.add("mui-active");//controller
+          if(data[10]==true) valve1_status.innerHTML="开到位";//controller status
+          if(data[11]==true) valve1_status.innerHTML="关到位";//controller mode
+          if(data[10]==false && data[11]==false) valve1_status.innerHTML = "切换中..."
+          data[12]==false?valve1_mode.innerHTML="手动":valve1_mode.innerHTML="远程";
+
+          data[13]==false?valve2.remove("mui-active"):valve2.add("mui-active");//controller
+          if(data[14]==true) valve2_status.innerHTML="开到位";//controller status
+          if(data[15]==true) valve2_status.innerHTML="关到位";//controller mode
+          if(data[14]==false && data[15]==false) valve2_status.innerHTML = "切换中..."
+          data[16]==false?valve2_mode.innerHTML="手动":valve2_mode.innerHTML="远程";
+
         },
       })
     //},1000)
