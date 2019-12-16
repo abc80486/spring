@@ -3,6 +3,9 @@ package com.neo.web;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.intelligt.modbus.jlibmodbus.exception.ModbusIOException;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusNumberException;
 import com.intelligt.modbus.jlibmodbus.exception.ModbusProtocolException;
@@ -27,7 +30,12 @@ public class RestPages {
         temp = Math.round(data * 10);
         return ScadaImpl.setRegister(addr, temp);
     }
-
+    @GetMapping("/getHFData")
+    public List<Float> getHFData(){
+        List<Float> data = new ArrayList<>();
+        
+        return data;
+    }
     @GetMapping(value = "/bitdata")
     public String getMethodName()
             throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
