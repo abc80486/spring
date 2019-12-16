@@ -2,7 +2,7 @@
 <html lang="en" style="height: 100%;" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <title>MaxiBiz Bootstrap Business Template</title>
+  <title>东莞格力群控系统</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -107,21 +107,25 @@
     <div style="position: absolute;top:270px;right: 10px;">
       <div class="mui-content-padded" style="width: 250px;">
         <h6></h6>
+
         <ul class="mui-table-view" style="font-size: 6px;">
               <li class="mui-table-view-cell" style="height: 30px;">
-                制冷回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp1" type="text"  placeholder="40.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+                供冷回水温度(℃)<span class="mui-badge mui-badge-inverted"><input id="temp1" type="text"  placeholder="40.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">
-                制热回水温度设置(℃)<span class="mui-badge mui-badge-inverted"><input id="temp2"type="text"  placeholder="15.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+                制热回水温度(℃)<span class="mui-badge mui-badge-inverted"><input id="temp2"type="text"  placeholder="15.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">
-                供冷温度设定值(℃)<span class="mui-badge mui-badge-inverted"><input id="temp3"type="text"  placeholder="26.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+                水泵关闭延时(s)<span class="mui-badge mui-badge-inverted"><input id="temp3"type="text"  placeholder="1.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">
-                供热温度设定值(℃)<span class="mui-badge mui-badge-inverted"><input id="temp4"type="text"  placeholder="32.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+                水泵开启延时(s)<span class="mui-badge mui-badge-inverted"><input id="temp4"type="text"  placeholder="1.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">
-                供热湿度设定值(%)<span class="mui-badge mui-badge-inverted"><input id="hum" type="text"  placeholder="15.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+                机组开启延时(s)<span class="mui-badge mui-badge-inverted"><input id="hum" type="text"  placeholder="1.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
+              </li>
+              <li class="mui-table-view-cell" style="height: 30px;">
+                阀门开启延时(s)<span class="mui-badge mui-badge-inverted"><input id="valv" type="text"  placeholder="1.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
         </ul>
       </div>
@@ -200,8 +204,8 @@
                     <div class="mui-switch-handle" style="height: 100%;"></div>
                   </div>
                 </li>
-                <li class="mui-table-view-cell" style="height: 30px;">蝶阀状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
-                <li class="mui-table-view-cell"style="height: 30px;">控制方式<span class="mui-badge mui-badge-inverted" id="tool_life">远程</span></li>
+                <li class="mui-table-view-cell" style="height: 30px;">蝶阀状态<span class="mui-badge mui-badge-inverted" id="valve1_status">停止</span></li>
+                <li class="mui-table-view-cell"style="height: 30px;">控制方式<span class="mui-badge mui-badge-inverted" id="valve1_mode">远程</span></li>
           </ul>
         </div>
     </div>
@@ -234,8 +238,8 @@
                     <div class="mui-switch-handle" style="height: 100%;"></div>
                   </div>
                 </li>
-                <li class="mui-table-view-cell" style="height: 30px;">蝶阀状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
-                <li class="mui-table-view-cell"style="height: 30px;">控制方式<span class="mui-badge mui-badge-inverted" id="tool_life">远程</span></li>
+                <li class="mui-table-view-cell" style="height: 30px;">蝶阀状态<span class="mui-badge mui-badge-inverted" id="valve2_status">停止</span></li>
+                <li class="mui-table-view-cell"style="height: 30px;">控制方式<span class="mui-badge mui-badge-inverted" id="valve2_mode">远程</span></li>
           </ul>
         </div>
     </div>
@@ -327,7 +331,7 @@
       };
       coil_ctrl("wp1",5-1);//1号电机1号手动自动，2状态，5号控制
       coil_ctrl("wp2",86-1);//2号电机7手动自动，8号状态，86控制
-      coil_ctrl("wp3",75-5);//3号电机71手动自动，72状态，75控制
+      coil_ctrl("wp3",75-1);//3号电机71手动自动，72状态，75控制
      // coil_ctrl("air_conditioner",4);//组合式空调
       //coil_ctrl("crew1",5);//1号机组
       //coil_ctrl("crew2",6);//2号机组
@@ -348,15 +352,15 @@
             });  
         });
       };
-      registerCtrl("temp1",1);
-      registerCtrl("temp2",2);
-      registerCtrl("temp3",3);
-      registerCtrl("temp4",4);
-      registerCtrl("hum",5);
-
+      registerCtrl("temp1",16);
+      registerCtrl("temp2",15);
+      registerCtrl("temp3",12);
+      registerCtrl("temp4",14);
+      registerCtrl("hum",13);
+      registerCtrl("valv",11);
       //04供水压力 05回水压力 06供水温度 07回水温度 17瞬时流量 18回水总流量
-      //回水温度设置16，制热回水温度15，水泵延迟关闭时间12，水泵延迟开启时间14，机组延迟开启时间13，阀门延迟关闭时间11
-      //供冷温度设定值
+      //供冷回水温度设置16，制热回水温度15，水泵延迟关闭时间12，水泵延迟开启时间14，机组延迟开启时间13，阀门延迟关闭时间11
+      
   </script>
   
   <script>
@@ -372,6 +376,15 @@
     var wp3 = document.getElementById("wp3").classList;
     var wp3_status = document.getElementById("wp3_status");
     var wp3_mode = document.getElementById("wp3_mode");
+
+    var valve1 = document.getElementById("valve1").classList;
+    var valve1_status = document.getElementById("valve1_status");
+    var valve1_mode = document.getElementById("valve1_mode");
+
+    var valve2 = document.getElementById("valve2").classList;
+    var valve2_status = document.getElementById("valve2_status");
+    var valve2_mode = document.getElementById("valve2_mode");
+
 
 
     //var data;

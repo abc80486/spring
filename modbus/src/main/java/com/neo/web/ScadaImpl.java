@@ -57,14 +57,13 @@ public class ScadaImpl {
    public static int[] register04;
 
     public static boolean getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
-         //String out="";
-         Map<String,Integer> data = new HashMap<>();
          int quantity = 100;
           coil01 = master.readCoils(SLAVEID, 0, quantity);
           coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
           register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
-          printdata(coil01, coil02, register03, register04, quantity);
+          System.out.println("DATA GET SUCCESS.");
+          //printdata(coil01, coil02, register03, register04, quantity);
         /*
          data.put("wp1_ctrl", coil01[5-1]!=false?1:0);//
          data.put("wp1_status", coil01[2-1]!=false?1:0);//
@@ -89,48 +88,10 @@ public class ScadaImpl {
          data.put("valve2_mode", coil01[25-1]!=false?1:0);//
         */
          //data.put(key, value)
-         List<Boolean> k = new ArrayList<>();
-         //k = (Collection)coil01;
-             k.add(coil01[4]);
-             k.add(coil01[1]);
-             k.add(coil01[0]);
-
-             k.add(coil01[85]);
-             k.add(coil01[7]);
-             k.add(coil01[6]);
-
-             k.add(coil01[74]);
-             k.add(coil01[71]);
-             k.add(coil01[70]);
-
-             k.add(coil01[81]);
-             k.add(coil01[78]);
-             k.add(coil01[79]);
-             k.add(coil01[77]);
-
-             k.add(coil01[28]);
-             k.add(coil01[25]);
-             k.add(coil01[26]);
-             k.add(coil01[24]);
-            
-         List<Integer> p = new ArrayList<>();
-            p.add(register03[3]);
-            p.add(register03[4]);
-            p.add(register03[5]);
-            p.add(register03[6]);
-            p.add(register03[16]);
-            p.add(register03[17]);
-
-            p.add(register03[15]);
-            p.add(register03[14]);
-            p.add(register03[11]);
-            p.add(register03[13]);
-            p.add(register03[12]);
-            p.add(register03[10]);
          return true;
          
     }
-    public static void printdata(boolean[] coil01,boolean[] coil02,int[] register03,int[] register04,int quantity){
+    public static void printdata(int quantity){
         System.out.printf("%8s %8s %8s %8s %8s\n","address" , "01" ,  "02"  ," 03",  " 04").toString();
         System.out.printf("----------------------------------------------\n").toString();
         for(int i=0;i<quantity;i++){

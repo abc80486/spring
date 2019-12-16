@@ -71,5 +71,9 @@ public class RestPages {
         data.add(ScadaImpl.register03[10]);
         return data;
     }
+    @GetMapping("/printdata")
+    public void printdata(){
+        ScadaImpl.printdata(100);
+    }
     
 }
