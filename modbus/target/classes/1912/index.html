@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;">
+<html lang="en" style="height: 100%;" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>MaxiBiz Bootstrap Business Template</title>
@@ -133,12 +133,12 @@
         <ul class="mui-table-view" style="font-size: 6px;">
               <li class="mui-table-view-cell" style="height: 30px;">
                 启停控制
-                <div id="wp1" class="mui-switch mui-switch-blue mui-switch-mini mui-active"style="height: 60%;">
+                <div id="wp1" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
                   <div class="mui-switch-handle" style="height: 100%;"></div>
                 </div>
               </li>
-              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="spindle_speed">停止</span></li>
-              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="total_processing_time">远程</span></li>
+              <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="wp1_status">停止</span></li>
+              <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="wp1_mode">远程</span></li>
               <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
         </ul>
       </div>
@@ -328,14 +328,13 @@
       coil_ctrl("wp1",5-1);//1号电机1号手动自动，2状态，5号控制
       coil_ctrl("wp2",86-1);//2号电机7手动自动，8号状态，86控制
       coil_ctrl("wp3",75-5);//3号电机71手动自动，72状态，75控制
-      coil_ctrl("air_conditioner",4);//组合式空调
-      coil_ctrl("crew1",5);//1号机组
-      coil_ctrl("crew2",6);//2号机组
+     // coil_ctrl("air_conditioner",4);//组合式空调
+      //coil_ctrl("crew1",5);//1号机组
+      //coil_ctrl("crew2",6);//2号机组
       coil_ctrl("valve1",82-1);//1号蝶阀78手动自动，79开到位，80关到位，82控制
       coil_ctrl("valve2",29-1);//2号蝶阀25手动自动，26开到位，27关到位，29控制
 
       //coil_ctrl("valve2",1-1);//1手动自动
-
       function registerCtrl(id,adr){
         var temp = document.getElementById(id);
         temp.addEventListener("change",function(){
@@ -358,24 +357,34 @@
       //04供水压力 05回水压力 06供水温度 07回水温度 17瞬时流量 18回水总流量
       //回水温度设置16，制热回水温度15，水泵延迟关闭时间12，水泵延迟开启时间14，机组延迟开启时间13，阀门延迟关闭时间11
       //供冷温度设定值
-
-
-
-
   </script>
   
   <script>
-    /*
-    setInterval(function(){
+    //mui("#wp1").switch().toggle();
+    var wp1 = document.getElementById("wp1").classList;
+    var wp1_status = document.getElementById("wp1_status");
+    var wp1_mode = document.getElementById("wp1_mode");
+
+    //var data;
+    //setInterval(function(){
       $.ajax({
-        url : "/registerCtrl",
-        type : 'POST',
-        data : {
-          addr:1,data:(Math.random()*10+30).toFixed(1)-0
-        }
+        url : "/getData",
+        type : 'GET',
+        dataType: "json",
+        success : function(data){
+          //alert(data[2]);
+          data[0]==false?wp1.remove("mui-active"):wp1.add("mui-active");//controller
+          data[1]==false?wp1_status.innerHTML="运行中":wp1_status.innerHTML="已停止";//controller status
+          data[2]==false?wp1_mode.innerHTML="手动":wp1_mode.innerHTML="远程";//controller status
+          //if(data[2]==false) wp1_mode.innerHTML="手动";
+          //else wp1_mode.innerHTML="远程";
+        },
       })
-    },1000)
-    */
+    //},1000)
+    
+    function setdata(){
+
+    }
   </script>
 
 </body>

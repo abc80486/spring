@@ -15,11 +15,5 @@ public class MybatisAnnotationApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MybatisAnnotationApplication.class, args);
-		try {
-			ScadaImpl.getData();
-		} catch (ModbusProtocolException | ModbusNumberException | ModbusIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
