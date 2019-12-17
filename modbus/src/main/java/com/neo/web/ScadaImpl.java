@@ -16,8 +16,8 @@ import com.intelligt.modbus.jlibmodbus.master.ModbusMasterFactory;
 import com.intelligt.modbus.jlibmodbus.tcp.TcpParameters;
 
 public class ScadaImpl {
-    private static final String ADDR = "127.0.0.1";
-    //private static final String ADDR = "172.16.72.78";
+    //private static final String ADDR = "127.0.0.1";
+    private static final String ADDR = "172.16.72.78";
     private static final int SLAVEID = 1;
 
     // bit table
@@ -62,7 +62,7 @@ public class ScadaImpl {
           coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
           register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
-          System.out.println("DATA GET SUCCESS.");
+          System.out.println(new Date() + " DATA GET SUCCESS.");
           //printdata(coil01, coil02, register03, register04, quantity);
         /*
          data.put("wp1_ctrl", coil01[5-1]!=false?1:0);//
