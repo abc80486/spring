@@ -22,7 +22,7 @@ public class ServicesCtrl implements Serializable {
         this.operation = operation;
         this.mode = mode;
         this.service = service;
-        this.time = new Date();
+        //this.time = new Date();
     }
 
     
