@@ -18,7 +18,7 @@ public class RestPages {
     @PostMapping("/coil_ctrl")
     public boolean setCoil(int addr, boolean status) {
         ScadaImpl.setCoil(addr, status);
-        return status;
+        return false;
     }
 
     @PostMapping("/registerCtrl")
