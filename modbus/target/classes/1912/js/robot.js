@@ -1,5 +1,5 @@
-function robot(){
-    var dom = document.getElementById("robot");
+function examp(id){
+    var dom = document.getElementById(id);
     var myChart = echarts.init(dom);
     var app = {};
     var option = null;
@@ -65,4 +65,4 @@ function robot(){
         myChart.setOption(option, true);
     }
 };
-robot();
+//robot();

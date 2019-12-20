@@ -22,7 +22,7 @@
 <body>
     <header class="header" style="margin: 0;">
     <div class="container" style="margin: 0;" >
-        <div class="site-header clearfix">
+        <div class="site-header clearfix"></div>
         <div class="col-lg-3 col-md-3 col-sm-12 title-area">
             <div class="site-title" id="title">
             <a href="index.html" title="">
@@ -34,9 +34,9 @@
             <div id="nav" class="right">
             <div class="container clearfix">
                 <ul id="jetmenu" class="jetmenu blue">
-                <li class="active"><a href="index.html">监控中心</a>
+                <li><a href="index.html">监控中心</a>
                 </li>
-                <li><a href="TrendAnalysis.html">趋势分析</a>
+                <li class="active"><a href="TrendAnalysis.html">趋势分析</a>
                 </li>
                 <li><a href="#">能耗统计</a>
                 </li>
@@ -51,13 +51,33 @@
         </div>
     </div>
     </header>
-    <div style="position: relative;left:15px;top:10px;height: 560px;width:1220px;border:aqua solid 2px;">
-        <div id="robot" style="position: absolute;left:15px;top:10px;height: 180px;width:250px;border:aqua solid 2px;">
-        </div>    
+    <div style="position: relative;left:15px;top:10px;height: 560px;width:1220px;border:rgb(152, 161, 161) solid 2px;">
+        <div  style="position: absolute;left:15px;top:10px;border:rgb(152, 161, 161) solid 2px;height: 250px;width: 870px;">
+            <span style="font-size: 5px;margin-left: 12px;">设备运行时间统计</span>
+            <div id="dayRunTime" style="position: absolute;left:15px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="weekRunTime" style="position: absolute;left:300px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="monthRunTime" style="position: absolute;left:585px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+        </div>
+
+        <div  style="position:absolute;left:900px;top:10px;border:rgb(152, 161, 161) solid 2px;height: 250px;width: 300px;">
+            <span style="font-size: 5px;margin-left: 12px;">设备在线数量</span>
+            <div id="equipmentNum" style="position: absolute;left:15px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+        </div>
+
+        <div  style="position: absolute;left:15px;top:280px;border:rgb(152, 161, 161) solid 2px;height: 250px;width: 1185px;">
+            <span style="font-size: 5px;margin-left: 12px;">系统数据</span>
+            <div id="dayRunTime" style="position: absolute;left:15px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="weekRunTime" style="position: absolute;left:300px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="monthRunTime" style="position: absolute;left:585px;top:30px;height: 180px;width:250px;border:rgb(152, 161, 161) solid 2px;"></div>    
+        </div>
+
+
+
     </div>
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="js/echarts-all.js"></script>
 
     <script src="js/robot.js"></script>
+    <script>examp("dayRunTime")</script>
 </body>
 </html>
