@@ -14,8 +14,14 @@ import com.intelligt.modbus.jlibmodbus.exception.ModbusProtocolException;
 import com.intelligt.modbus.jlibmodbus.master.ModbusMaster;
 import com.intelligt.modbus.jlibmodbus.master.ModbusMasterFactory;
 import com.intelligt.modbus.jlibmodbus.tcp.TcpParameters;
+import com.neo.mapper.ServicesCtrlMapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ScadaImpl {
+    @Autowired
+    private static ServicesCtrlMapper servicesCtrlMapper;
+
     private static final String ADDR = "127.0.0.1";
     //private static final String ADDR = "172.16.72.78";
     private static final int SLAVEID = 1;
@@ -48,27 +54,21 @@ public class ScadaImpl {
             System.out.println("connect error!");
         }
     }
-
     // @Override
    // public static  int quantity = 10;
    public static boolean[] coil01;
    public static boolean[] coil02;
    public static int[] register03;
    public static int[] register04;
-    static int k=0;
+    //static int main_data=-1;
     public static boolean getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
-         int quantity = 100;
-         k++;
+          int quantity = 100;
           coil01 = master.readCoils(SLAVEID, 0, quantity);
           coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
           register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
-
-          if(k>=100) {
-              System.out.println(new Date() + " DATA GET SUCCESS.");
-              k=0;
-        }
-          //printdata(coil01, coil02, register03, register04, quantity);
+          //servicesCtrlMapper.insertStatusData(-1l);
+          //printdata(10);
         /*
          data.put("wp1_ctrl", coil01[5-1]!=false?1:0);//
          data.put("wp1_status", coil01[2-1]!=false?1:0);//
@@ -116,7 +116,9 @@ public class ScadaImpl {
             }
             else{
                 //master.writeSingleCoil(SLAVEID, addr, col);
-                master.writeSingleRegister(SLAVEID, addr,(int)col);
+                if(register03[addr]!=col)
+                  master.writeSingleRegister(SLAVEID, addr,(int)col);
+                else return false;
                 waterPumpOpTime = now.getTime();
                 log.add(now.toString() + " 地址" + addr + " = " + (int)col + " 设置成功");
                 System.out.println(now.toString() + " 地址" + addr + " = " + (int)col + " 设置成功");
@@ -137,8 +139,8 @@ public class ScadaImpl {
                     System.out.println("不可频繁操作，请稍后再试！");
                 }
                 else{
-                    master.writeSingleCoil(SLAVEID, addr, col);
-                    //master.writeSingleRegister(SLAVEID, addr, data);
+                    if(coil01[addr]!=col) master.writeSingleCoil(SLAVEID, addr, col);
+                    else return;
                     waterPumpOpTime = now.getTime();
                     if(col == true){
                         log.add(now.toString() + " 地址" + addr + " 启动成功");
@@ -150,20 +152,10 @@ public class ScadaImpl {
                     }
                 }
             } catch (ModbusProtocolException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (ModbusNumberException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (ModbusIOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            
-            try {
-                Thread.sleep(1000l);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
     }

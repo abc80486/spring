@@ -1,43 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" style="height: 100%;">
 <head>
   <meta charset="utf-8">
   <title>东莞格力群控系统</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
-
-  <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
-
-  <!-- Bootstrap CSS File -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Libraries CSS Files -->
   <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
   <link href="lib/hover/hoverex-all.css" rel="stylesheet">
   <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
   <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
-
-  <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/colors/blue.css">
-
-  <!-- mui -->
   <link rel="stylesheet" href="css/mui.min.css">
  
 
 </head>
 
->
   
   <!-- end topbar -->
-
+<body>
   <header class="header" style="margin: 0;">
     <div class="container" style="margin: 0;" >
       <div class="site-header clearfix">
@@ -55,7 +42,7 @@
               <ul id="jetmenu" class="jetmenu blue">
                 <li class="active"><a href="index.html">监控中心</a>
                 </li>
-                <li><a href="#">趋势分析</a>
+                <li><a href="TrendAnalysis.html">趋势分析</a>
                 </li>
                 <li><a href="#">能耗统计</a>
                 </li>
@@ -269,7 +256,7 @@
           <div class="footer-menu right">
             <ul class="menu">
               <li><a href="index.html">监控中心</a></li>
-              <li><a href="about.html">趋势分析</a></li>
+              <li><a href="TrendAnalysis.html">趋势分析</a></li>
               <li><a href="#">能耗统计</a></li>
               <li><a href="#">异常报警</a></li>
               <li><a href="contact">定时设置</a></li>
@@ -331,7 +318,19 @@
         type : 'GET',
         dataType: "json",
         //success : function(data){
-        success : function(d){data = d;}});
+        success : function(d){data = d;}
+      });
+      $.ajax({
+        url : "/equipment/insertDB",
+        type : 'GET',
+
+        success : function(data){
+          
+        },
+        error : function(e){
+          alert(e);
+        }
+      });
           //alert(data[2]);
          // data[1]==false?wp1.remove("mui-active"):wp1.add("mui-active");//controller
           if(data[1] ^ wp1.contains("mui-active")){
@@ -377,47 +376,49 @@
 
        // },
       //})
-    },600);
+    },800);
     function coil_ctrl(id,addr){
       document.getElementById(id).addEventListener("toggle",function(event){
         var statu;
         if(event.detail.isActive){
-            statu = true;
+          statu = true;
         }else{
           statu = false;
         }
-          $.ajax({
+        if(id=="wp2"&&data[5]==false || id=="wp1"&&data[2]==false || id=="wp3"&&data[8]==false ||id=="valve1"&&data[12]==false || id=="valve2"&&data[16]==false){
+          //alert("手动模式不允许操作！")
+        }
+        else
+        coil_ajax(addr,statu);
+      });
+    };
+    function coil_ajax(ad,st){
+      $.ajax({
               url :  "/coil_ctrl",
               type : 'POST',
               data : {
-                addr:addr,status:statu
+                addr:ad,status:st
               },
               success : function(data) {
-                  //alert(data);
               },
               error : function(msg) {
-                //alert(msg);
                 alert(JSON.stringify(msg));
               }
           });
-        
-      });
-    };
+    }
     //if(data[2]==true)
-    if(data[2]==true)
+    //if(data[2]==true)
     coil_ctrl("wp1",5-1);//1号电机1号手动自动，2状态，5号控制
-    //else alert("手动模式下不允许操作，请设置为自动模式.")
-    //alert(wp1_mode.innerHTML);
-    if(data[5]==true)
+    //if(data[5]==true)
     coil_ctrl("wp2",86-1);//2号电机7手动自动，8号状态，86控制
-    if(data[8]==true)
+    //if(data[8]==true)
     coil_ctrl("wp3",75-1);//3号电机71手动自动，72状态，75控制
    // coil_ctrl("air_conditioner",4);//组合式空调
     //coil_ctrl("crew1",5);//1号机组
     //coil_ctrl("crew2",6);//2号机组
-    if(data[12]==true)
+    //if(data[12]==true)
     coil_ctrl("valve1",82-1);//1号蝶阀78手动自动，79开到位，80关到位，82控制
-    if(data[16]==true)
+    //if(data[16]==true)
     coil_ctrl("valve2",29-1);//2号蝶阀25手动自动，26开到位，27关到位，29控制
 
     //coil_ctrl("valve2",1-1);//1手动自动

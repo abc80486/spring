@@ -37,7 +37,7 @@ public class RestPages {
         data.add(ScadaImpl.coil01[4]);
         data.add(ScadaImpl.coil01[1]);
         data.add(ScadaImpl.coil01[0]);
-
+        
         data.add(ScadaImpl.coil01[85]);
         data.add(ScadaImpl.coil01[7]);
         data.add(ScadaImpl.coil01[6]);
