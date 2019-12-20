@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - a",
+            "request": "launch",
+            "mainClass": "com.neo.service.a",
+            "projectName": "spring-boot-mybatis-annotation"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - WaterPump1",
+            "request": "launch",
+            "mainClass": "com.neo.service.WaterPump1",
+            "projectName": "spring-boot-mybatis-annotation"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - text",
             "request": "launch",
             "mainClass": "com.neo.TEXT.text",
