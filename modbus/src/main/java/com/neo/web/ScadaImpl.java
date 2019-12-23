@@ -17,7 +17,9 @@ import com.intelligt.modbus.jlibmodbus.tcp.TcpParameters;
 import com.neo.mapper.ServicesCtrlMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ScadaImpl {
     @Autowired
     private static ServicesCtrlMapper servicesCtrlMapper;
@@ -60,14 +62,16 @@ public class ScadaImpl {
    public static boolean[] coil02;
    public static int[] register03;
    public static int[] register04;
-    //static int main_data=-1;
+
+    //static long timewp1= new Date().getTime();
     public static boolean getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
           int quantity = 100;
           coil01 = master.readCoils(SLAVEID, 0, quantity);
           coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
           register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
-          //servicesCtrlMapper.insertStatusData(-1l);
+          //if(ScadaImpl.coil01[1]==true) 
+          //servicesCtrlMapper.updateDataWP1(new Date().getTime()-timewp1, "2019/12/23");;
           //printdata(10);
         /*
          data.put("wp1_ctrl", coil01[5-1]!=false?1:0);//
