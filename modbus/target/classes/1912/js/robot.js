@@ -92,7 +92,7 @@ function examp(id){
         //data1.shift();
         //data1.push((Math.random() * 50 + 360).toFixed(1) - 0);
         myChart.setOption(option);
-    }, 1100);
+    }, 3100);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }

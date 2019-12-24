@@ -68,7 +68,7 @@ public class ScadaImpl {
    public static int[] register04;
 
     //static long timewp1= new Date().getTime();
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "* * * * * ?")
     public static boolean getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
           int quantity = 100;
           coil01 = master.readCoils(SLAVEID, 0, quantity);
@@ -77,7 +77,7 @@ public class ScadaImpl {
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
           //if(ScadaImpl.coil01[1]==true) 
           //servicesCtrlMapper.updateDataWP1(new Date().getTime()-timewp1, "2019/12/23");;
-          printdata(10);
+          //printdata(10);
         /*
          data.put("wp1_ctrl", coil01[5-1]!=false?1:0);//
          data.put("wp1_status", coil01[2-1]!=false?1:0);//
