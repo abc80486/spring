@@ -3,13 +3,15 @@ function examp(id){
     var myChart = echarts.init(dom);
     var app = {};
     var option = null;
+
+
     option = {
         title: {
             text: '今日',
             textStyle: {fontSize: 8}
         },
         legend: {
-            data:['运行时间(h)','启动次数(次)'],
+            data:['运行时间(m)','启动次数(次)'],
             textStyle: {fontSize: 10}
         },
         tooltip: {
@@ -40,13 +42,13 @@ function examp(id){
                 }
         ],
         series: [{
-            name:'运行时间(h)',
-            data: [120, 200, 150, 80, 70, 110, 130],
+            name:'运行时间(m)',
+            data: [120, 200, 150, 80, 70, 110],
             type: 'bar',
         },
         {
             name:'启动次数(次)',
-            data: [120, 200, 150, 80, 70, 110, 130],
+            data: [120, 200, 150, 80, 70, 110],
             type: 'bar',
             yAxisIndex: 1,
         }
@@ -55,12 +57,42 @@ function examp(id){
     setInterval(function (){
         var data0 = option.series[0].data;
         var data1 = option.series[1].data;
-        data0.shift();
-        data0.push((Math.random()*100 + 300).toFixed(1) - 0);
-        data1.shift();
-        data1.push((Math.random() * 50 + 360).toFixed(1) - 0);
+        $.ajax({
+            url : "/analysisData/runtime",
+            type : 'GET',
+            data : {
+                startDate : "2019/12/24",endDate : "2019/12/24"
+            },
+            success : function(data){
+              //alert(data[0].wp1_rt_day)
+              data0[0] = ((data[0].wp1_rt_day)/60000).toFixed(1) - 0;
+              data1[0] = data[0].wp1_run_times_day;
+
+              data0[1] = ((data[0].wp2_rt_day)/60000).toFixed(1) - 0;
+              data1[1] = data[0].wp2_run_times_day;
+
+              data0[2] = ((data[0].wp3_rt_day)/60000).toFixed(1) - 0;
+              data1[2] = data[0].wp3_run_times_day;
+
+              data0[3] = ((data[0].crew1_rt_day)/60000).toFixed(1) - 0;
+              data1[3] = data[0].crew11_run_times_day;
+
+              data0[4] = ((data[0].crew2_rt_day)/60000).toFixed(1) - 0;
+              data1[4] = data[0].crew2_run_times_day;
+
+              data0[5] = ((data[0].aircon_rt_day)/60000).toFixed(1) - 0;
+              data1[5] = data[0].aircon_run_times_day;
+            },
+            error : function(e){
+              alert(e);
+            }    
+        });
+        //data0.shift();
+        //data0.push((Math.random()*100 + 300).toFixed(1) - 0);
+        //data1.shift();
+        //data1.push((Math.random() * 50 + 360).toFixed(1) - 0);
         myChart.setOption(option);
-    }, 3100);
+    }, 1100);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
