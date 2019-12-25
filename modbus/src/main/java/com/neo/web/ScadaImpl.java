@@ -32,9 +32,6 @@ public class ScadaImpl {
     //private static final String ADDR = "172.16.72.78";
     private static final int SLAVEID = 1;
 
-    // bit table
-    // bit table
-
     static ModbusMaster master = null;
     static {
         try {
@@ -66,7 +63,7 @@ public class ScadaImpl {
    public static boolean[] coil02;
    public static int[] register03;
    public static int[] register04;
-
+   public static List<Object> data = new ArrayList<>();
     //static long timewp1= new Date().getTime();
     @Scheduled(cron = "* * * * * ?")
     public static boolean getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
@@ -75,36 +72,48 @@ public class ScadaImpl {
           coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
           register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
-          //if(ScadaImpl.coil01[1]==true) 
-          //servicesCtrlMapper.updateDataWP1(new Date().getTime()-timewp1, "2019/12/23");;
-          //printdata(10);
-        /*
-         data.put("wp1_ctrl", coil01[5-1]!=false?1:0);//
-         data.put("wp1_status", coil01[2-1]!=false?1:0);//
-         data.put("wp1_mode", coil01[1-1]!=false?1:0);//
 
-         data.put("wp2_ctrl", coil01[86-1]!=false?1:0);//
-         data.put("wp2_status", coil01[8-1]!=false?1:0);//
-         data.put("wp2_mode", coil01[7-1]!=false?1:0);//
+          //List<Object> data = new ArrayList<>();
 
-         data.put("wp3_ctrl", coil01[75-1]!=false?1:0);//
-         data.put("wp3_status", coil01[72-1]!=false?1:0);//
-         data.put("wp3_mode", coil01[71-1]!=false?1:0);//
-
-         data.put("valve1_ctrl", coil01[82-1]!=false?1:0);//
-         data.put("valve1_open_status", coil01[79-1]!=false?1:0);//
-         data.put("valve1_close_status", coil01[80-1]!=false?1:0);//
-         data.put("valve1_mode", coil01[78-1]!=false?1:0);//
-
-         data.put("valve2_ctrl", coil01[29-1]!=false?1:0);//
-         data.put("valve2_open_status", coil01[26-1]!=false?1:0);//
-         data.put("valve2_close_status", coil01[27-1]!=false?1:0);//
-         data.put("valve2_mode", coil01[25-1]!=false?1:0);//
-        */
-         //data.put(key, value)
-         return true;
-         
+          data.add(ScadaImpl.coil01[4]);
+          data.add(ScadaImpl.coil01[1]);
+          data.add(ScadaImpl.coil01[0]);
+          
+          data.add(ScadaImpl.coil01[85]);
+          data.add(ScadaImpl.coil01[7]);
+          data.add(ScadaImpl.coil01[6]);
+  
+          data.add(ScadaImpl.coil01[74]);
+          data.add(ScadaImpl.coil01[71]);
+          data.add(ScadaImpl.coil01[70]);
+  
+          data.add(ScadaImpl.coil01[81]);
+          data.add(ScadaImpl.coil01[78]);
+          data.add(ScadaImpl.coil01[79]);
+          data.add(ScadaImpl.coil01[77]);
+  
+          data.add(ScadaImpl.coil01[28]);
+          data.add(ScadaImpl.coil01[25]);
+          data.add(ScadaImpl.coil01[26]);
+          data.add(ScadaImpl.coil01[24]);
+  
+          data.add(ScadaImpl.register03[3]);
+          data.add(ScadaImpl.register03[4]);
+          data.add(ScadaImpl.register03[5]);
+          data.add(ScadaImpl.register03[6]);
+          data.add(ScadaImpl.register03[16]);
+          data.add(ScadaImpl.register03[17]);
+  
+          data.add(ScadaImpl.register03[15]);
+          data.add(ScadaImpl.register03[14]);
+          data.add(ScadaImpl.register03[11]);
+          data.add(ScadaImpl.register03[13]);
+          data.add(ScadaImpl.register03[12]);
+          data.add(ScadaImpl.register03[10]);
+          
+          return true;
     }
+    
     public static void printdata(int quantity){
         System.out.printf("%8s %8s %8s %8s %8s\n","address" , "01" ,  "02"  ," 03",  " 04").toString();
         System.out.printf("----------------------------------------------\n").toString();

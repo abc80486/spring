@@ -16,6 +16,10 @@ public class AnalysisData implements Serializable {
    private int wp3_run_times_day;
    private int crew1_rt_day;
    private int crew1_run_times_day;
+   
+   private int crew2_rt_day;
+   private int crew2_run_times_day;
+
    private int aircon_rt_day;
    private int aircon_run_times_day;
 

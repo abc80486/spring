@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Test",
+            "request": "launch",
+            "mainClass": "com.neo.service.Test",
+            "projectName": "spring-boot-mybatis-annotation"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - a",
             "request": "launch",
             "mainClass": "com.neo.service.a",

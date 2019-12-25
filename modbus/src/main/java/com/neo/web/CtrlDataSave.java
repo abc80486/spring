@@ -9,11 +9,10 @@ import com.neo.mapper.ServicesCtrlMapper;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 
-@RestController
+
 @Configurable
 @EnableScheduling
 public class CtrlDataSave {
@@ -25,28 +24,28 @@ public class CtrlDataSave {
         this.servicesCtrlMapper = servicesCtrlMapper;
     }
     static long dataNum = -1l;
-    static long wp1Date = new Date().getTime();
+    //static long wp1Date = new Date().getTime();
     static List<Object> dataLast = null;
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy/MM/dd");
+    static String now = DATEFORMAT.format(new Date());
+
+    @Scheduled(cron = "1 0 * * * ?")
+    public String getDate(){
+        now = DATEFORMAT.format(new Date());
+        return now;
+    }
 
     @Scheduled(cron = "* * * * * ?")
     public String analysisDataSave() {
-        // long wp1Date=0l;
-        Date now = new Date();
         List<Object> data = new ArrayList<>(40);
+
         if (dataNum == -1l) {
             for (int i = 0; i < 40; i++) {
                 data.add(-1);
             }
-            wp1Date = new Date().getTime();
+            //wp1Date = now.getTime();
             dataLast = new ArrayList<>(data);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
             servicesCtrlMapper.insertStatusData(dataNum);
             servicesCtrlMapper.insertTest(data);
         }
@@ -72,6 +71,7 @@ public class CtrlDataSave {
         data.add(ScadaImpl.coil01[25]);
         data.add(ScadaImpl.coil01[26]);
         data.add(ScadaImpl.coil01[24]);
+
         long temp = 0;
         int len = data.size();
 
@@ -79,22 +79,22 @@ public class CtrlDataSave {
             if((boolean)data.get(i) == true) temp += 2<<len-1-i;
         }
             if((boolean)data.get(1)==true) {
-                servicesCtrlMapper.updateDataWP1(new Date().getTime()-wp1Date, dateFormat.format(new Date()));
-                if(dataNum == -1 || (boolean)dataLast.get(1)!=true) servicesCtrlMapper.updateDataWP1Times(dateFormat.format(now));
+                servicesCtrlMapper.updateDataWP1(1000L,now);
+                if(dataNum == -1 || (boolean)dataLast.get(1)!=true) servicesCtrlMapper.updateDataWP1Times(now);
                 //System.out.println("电机1运行时间增加。。。");
             }
 
             if((boolean)data.get(4)==true) {
-                servicesCtrlMapper.updateDataWP2(now.getTime()-wp1Date, dateFormat.format(now));
-                if(dataNum == -1 || (boolean)dataLast.get(4)!=true) servicesCtrlMapper.updateDataWP2Times(dateFormat.format(now));
+                servicesCtrlMapper.updateDataWP2(1000L, now);
+                if(dataNum == -1 || (boolean)dataLast.get(4)!=true) servicesCtrlMapper.updateDataWP2Times(now);
                 //System.out.println("电机2运行时间增加。。。");
 
             }
 
             if((boolean)data.get(7)==true) {
-                servicesCtrlMapper.updateDataWP3(now.getTime()-wp1Date, dateFormat.format(now));
-                if(dataNum == -1 || (boolean)dataLast.get(7)!=true) servicesCtrlMapper.updateDataWP3Times(dateFormat.format(now));
-               // System.out.println("电机3运行时间增加。。。");
+                servicesCtrlMapper.updateDataWP3(1000l, now);
+                if(dataNum == -1 || (boolean)dataLast.get(7)!=true) servicesCtrlMapper.updateDataWP3Times(now);
+                //System.out.println("电机3运行时间增加。。。");
 
             }
 
@@ -110,7 +110,7 @@ public class CtrlDataSave {
         dataLast = new ArrayList<>(data);
         dataLast.add(now);
 
-        wp1Date = new Date().getTime();
+       // wp1Date = new Date().getTime();
         return data+"</br>"+dataNum+"</br>"+dataLast;
     }
     

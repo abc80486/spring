@@ -1,4 +1,4 @@
-function examp(id){
+function month(id){
     var dom = document.getElementById(id);
     var myChart = echarts.init(dom);
     var app = {};
@@ -7,12 +7,12 @@ function examp(id){
 
     option = {
         title: {
-            text: dat.toLocaleDateString(),
+            text: '本周',
             
             textStyle: {fontSize: 9}
         },
         legend: {
-            data:['运行时间(m)','启动次数(次)'],
+            data:['运行时间(h)','启动次数(次)'],
             textStyle: {fontSize: 8},
             x : '52'
         },
@@ -47,7 +47,7 @@ function examp(id){
                 }
         ],
         series: [{
-            name:'运行时间(m)',
+            name:'运行时间(h)',
             data: [0,0,0,0,0,0],
             type: 'bar',
             itemStyle: {
@@ -70,48 +70,64 @@ function examp(id){
         }
         ]
     };
-    function inter(){
+    setInterval(function (){
         var data0 = option.series[0].data;
         var data1 = option.series[1].data;
 
         var date = new Date();
-        date .toLocaleDateString()
+        //var week = data.getDay();
+        var nowlong = date.getTime();
+        var week = date.getDay();
+        var monlong = nowlong - (week-1)*24*60*60*1000;
+        var mondate = (new Date(monlong));
         $.ajax({
             url : "/analysisData/runtime",
             type : 'GET',
             data : {
-                startDate : date.toLocaleDateString(),endDate : date.toLocaleDateString()
+                startDate : mondate.toLocaleDateString(),endDate : date.toLocaleDateString()
             },
             success : function(data){
               //alert(data[0].wp1_rt_day)
-              data0[0] = ((data[0].wp1_rt_day)/60000).toFixed(1) - 0;
-              //data0[0] = ((int)(data[0].wp1_rt_day)/60000)+":"+(data[0].wp1_rt_day)%60000;
-              data1[0] = (data[0].wp1_run_times_day);
+              var len = data.length;
+              //alert(len);
+              var i;
+              var datat = 0;
+              var datas = 0;
+              for( i=0;i<len;i++) {datat += data[i].wp1_rt_day;datas += data[i].wp1_run_times_day;}
+              data0[0] = (datat/60000/60).toFixed(1) - 0;
+              data1[0] = datas;
 
-              data0[1] = ((data[0].wp2_rt_day)/60000).toFixed(1) - 0;
-              data1[1] = (data[0].wp2_run_times_day);
+              datat = 0;datas = 0;
+              for( i=0;i<len;i++) {datat += data[i].wp2_rt_day;datas += data[i].wp2_run_times_day;}
+              data0[1] = (datat/60000/60).toFixed(1) - 0;
+              data1[1] = datas;
 
-              data0[2] = ((data[0].wp3_rt_day)/60000).toFixed(1) - 0;
-              data1[2] = (data[0].wp3_run_times_day);
+              datat = 0;datas = 0;
+              for( i=0;i<len;i++) {datat += data[i].wp3_rt_day;datas += data[i].wp3_run_times_day;}
+              data0[2] = (datat/60000/60).toFixed(1) - 0;
+              data1[2] = datas;
 
-              data0[3] = ((data[0].crew1_rt_day)/60000).toFixed(1) - 0;
-              data1[3] = (data[0].crew1_run_times_day);
+              for( i=0;i<len;i++) {datat += data[i].crew1_rt_day;datas += data[i].crew1_run_times_day;}
+              data0[3] = (datat/60000/60).toFixed(1) - 0;
+              data1[3] = datas;
 
-              data0[4] = ((data[0].crew2_rt_day)/60000).toFixed(1) - 0;
-              data1[4] = (data[0].crew2_run_times_day);
+              datat = 0;datas = 0;
+              for( i=0;i<len;i++) {datat += data[i].crew2_rt_day;datas += data[i].crew2_run_times_day;}
+              data0[4] = (datat/60000/60).toFixed(1) - 0;
+              data1[4] = datas;
 
-              data0[5] = ((data[0].aircon_rt_day)/60000).toFixed(1) - 0;
-              data1[5] = (data[0].aircon_run_times_day);
+              datat = 0;datas = 0;
+              for( i=0;i<len;i++) {datat += data[i].aircon_rt_day;datas += data[i].aircon_run_times_day;}
+              data0[5] = (datat/60000/60).toFixed(1) - 0;
+              data1[5] = datas;
 
             },
             error : function(e){
-              //alert(e);
+              alert(e);
             }    
         });
         myChart.setOption(option);
-        return inter;
-    };
-    setInterval(inter(),10*1000);
+    }, 2*1000);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
