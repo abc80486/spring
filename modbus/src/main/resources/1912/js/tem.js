@@ -39,6 +39,7 @@ setInterval(function(){
         var myChart = echarts.init(dom);
         var app = {};
         var option = null;
+        //if(type==1){tem1=pre1;tem2=pre2;}
         option = {
             tooltip: {
                 trigger: 'axis',
@@ -116,5 +117,91 @@ setInterval(function(){
             myChart.setOption(option, true);
         }
     };
-    //cjj("tube1");
-},5*1000);
+    function showpre(id){
+        var dom = document.getElementById(id);
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option = null;
+        //if(type==1){tem1=pre1;tem2=pre2;}
+        option = {
+            tooltip: {
+                trigger: 'axis',
+            },
+            grid: {
+                x: 50,y: 30,x2:32,y2:30,
+                containLabel: true
+            },
+
+            legend: {
+                data:['供水压力', '回水压力']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: (function (){
+                        var now = new Date();
+                        var res = [];
+                        var len = 10;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
+                },
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    name: 'Pa',
+                    max: 80000,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }
+            
+            ],
+            series: [
+                {
+                    name:'供水压力',
+                    type:'line',
+                    data:pre1,
+                    label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                    },                    
+
+                },
+                {
+                    name:'回水压力',
+                    type:'line',
+                    data:pre2,
+                }
+            ]
+        };
+        app.count = 11;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    };
+
+    showtem("tube1");
+    showpre("tube3");
+
+},1*1000);
