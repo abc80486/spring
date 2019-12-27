@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+   </head>
+
+<body>
+    
+    <h1>hello thymeleaf</h1>
+    <p>hello</p>
+    <div id="test" th:fragment="model">
+        <p th:text="${pr}">a</p>
+    </div>
+    <div>aaaa</div>
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script>
+       // setTimeout(' $("#test").load("/test")',2000);
+       //setInterval(function(){alert(1)},1000);
+        setInterval(function(){
+            var url = '/test';
+            $('#test').load(url);
+            //alert("yes");
+        },100000);
+        //$("#test").load("/test");
+    </script>
+</body>
+</html>

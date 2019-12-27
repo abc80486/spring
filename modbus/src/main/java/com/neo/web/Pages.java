@@ -12,4 +12,13 @@ public class Pages{
     public String index(Model model){
         return "index.html";
     }
+
+    @GetMapping("/TrendAnalysis")
+    //@ResponseBody
+    public String TrendAnalysis(Model model){
+        return "TrendAnalysis.html";
+    }
+
+
+
 }

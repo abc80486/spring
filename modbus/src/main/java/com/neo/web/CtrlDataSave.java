@@ -25,7 +25,7 @@ public class CtrlDataSave {
     }
     static long dataNum = -1l;
     //static long wp1Date = new Date().getTime();
-    static List<Object> dataLast = null;
+    public static List<Object> dataLast = null;
 
     static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy/MM/dd");
     static String now = DATEFORMAT.format(new Date());
@@ -108,7 +108,7 @@ public class CtrlDataSave {
         }
 
         dataLast = new ArrayList<>(data);
-        dataLast.add(now);
+        dataLast.add(new Date());
 
        // wp1Date = new Date().getTime();
         return data+"</br>"+dataNum+"</br>"+dataLast;

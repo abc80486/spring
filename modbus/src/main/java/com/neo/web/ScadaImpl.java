@@ -74,7 +74,7 @@ public class ScadaImpl {
           register04 = master.readInputRegisters(SLAVEID, 0, quantity);
 
           //List<Object> data = new ArrayList<>();
-
+          data.clear();
           data.add(ScadaImpl.coil01[4]);
           data.add(ScadaImpl.coil01[1]);
           data.add(ScadaImpl.coil01[0]);
@@ -110,7 +110,7 @@ public class ScadaImpl {
           data.add(ScadaImpl.register03[13]);
           data.add(ScadaImpl.register03[12]);
           data.add(ScadaImpl.register03[10]);
-          
+          data.add(new Date());
           return true;
     }
     

@@ -25,7 +25,4 @@ public class MybatisAnnotationApplication {
 		//ServicesCtrlController a = new ServicesCtrlController();
 		//a.test2();
 	}
-	private static void init(){
-		
-	}
 }

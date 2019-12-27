@@ -39,7 +39,7 @@ public class ServicesCtrlController{
         return temp;
     }
 
-    @GetMapping("/insertDB")
+    //@GetMapping("/insertDB")
     @Scheduled(cron = "* * * * * ?")
     public String analysisDataSave(){
         return new CtrlDataSave(servicesCtrlMapper).analysisDataSave();

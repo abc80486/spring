@@ -1,10 +1,11 @@
-function week(id){
+function weekRuntimeFunc(id){
     var dom = document.getElementById(id);
     var myChart = echarts.init(dom);
     var app = {};
     var option = null;
     var dat = new Date();
 
+    //function inte(){
     option = {
         title: {
             text: '本周',
@@ -12,9 +13,9 @@ function week(id){
             textStyle: {fontSize: 9}
         },
         legend: {
-            data:['运行时间(h)','启动次数(次)'],
-            textStyle: {fontSize: 8},
-            x : '52'
+            data:['运行时间(h)','平均每天时间(h)'],
+           // textStyle: {fontSize: 8,interval:0},
+            x : 25
         },
         tooltip: {
             trigger: 'axis',textStyle: {fontSize: 8}
@@ -42,6 +43,7 @@ function week(id){
                 {
                     type: 'value',
                     scale: true,
+                    max: 24,
                     min : 0,
                     boundaryGap: [0.2, 0.2]
                 }
@@ -58,7 +60,7 @@ function week(id){
         },
 
         {
-            name:'启动次数(次)',
+            name:'平均每天时间(h)',
             data: [0,0,0,0,0,0],
             type: 'bar',
             yAxisIndex: 1,
@@ -95,45 +97,48 @@ function week(id){
               var datas = 0;
               for( i=0;i<len;i++) {datat += data[i].wp1_rt_day;datas += data[i].wp1_run_times_day;}
               data0[0] = (datat/60000/60).toFixed(1) - 0;
-              data1[0] = datas;
+              data1[0] = (data0[0]/len).toFixed(2);
 
               datat = 0;datas = 0;
               for( i=0;i<len;i++) {datat += data[i].wp2_rt_day;datas += data[i].wp2_run_times_day;}
               data0[1] = (datat/60000/60).toFixed(1) - 0;
-              data1[1] = datas;
+              data1[1] = (data0[1]/len).toFixed(2);
 
               datat = 0;datas = 0;
               for( i=0;i<len;i++) {datat += data[i].wp3_rt_day;datas += data[i].wp3_run_times_day;}
               data0[2] = (datat/60000/60).toFixed(1) - 0;
-              data1[2] = datas;
+              data1[2] = (data0[2]/len).toFixed(2);
 
               for( i=0;i<len;i++) {datat += data[i].crew1_rt_day;datas += data[i].crew1_run_times_day;}
               data0[3] = (datat/60000/60).toFixed(1) - 0;
-              data1[3] = datas;
+              data1[3] = (data0[3]/len).toFixed(2);
 
               datat = 0;datas = 0;
               for( i=0;i<len;i++) {datat += data[i].crew2_rt_day;datas += data[i].crew2_run_times_day;}
               data0[4] = (datat/60000/60).toFixed(1) - 0;
-              data1[4] = datas;
+              data1[4] = (data0[4]/len).toFixed(2);
 
               datat = 0;datas = 0;
               for( i=0;i<len;i++) {datat += data[i].aircon_rt_day;datas += data[i].aircon_run_times_day;}
               data0[5] = (datat/60000/60).toFixed(1) - 0;
-              data1[5] = datas;
+              data1[5] = (data0[5]/len).toFixed(2);
 
             },
             error : function(e){
-              alert(e);
+              //alert(e);
             }    
         });
-        myChart.setOption(option);
+        myChart.setOption(option,true);
         return inte;
     };
-    inte();
-    setInterval(inte(),10*1000);
+    setTimeout(inte(),4);
+    setInterval(inte(),7*1000);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
+
+    
+
 };
-
-
+//inte();
+//ajax;

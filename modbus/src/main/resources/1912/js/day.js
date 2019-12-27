@@ -1,4 +1,4 @@
-function examp(id){
+function dayRuntimeFunc(id){
     var dom = document.getElementById(id);
     var myChart = echarts.init(dom);
     var app = {};
@@ -13,8 +13,8 @@ function examp(id){
         },
         legend: {
             data:['运行时间(m)','启动次数(次)'],
-            textStyle: {fontSize: 8},
-            x : '52'
+            //textStyle: {fontSize: 40},
+            x : '62'
         },
         tooltip: {
             trigger: 'axis',textStyle: {fontSize: 8}
@@ -111,7 +111,8 @@ function examp(id){
         myChart.setOption(option);
         return inter;
     };
-    setInterval(inter(),10*1000);
+    setTimeout(inter(),1);
+    setInterval(inter(),6*1000);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }

@@ -19,7 +19,9 @@
   <link rel="stylesheet" href="css/colors/blue.css">
   <link rel="stylesheet" href="css/mui.min.css">
  
-
+  <script type="text/javascript">
+    document.write("<script src='**.js?"+Math.random()+"'><\/script>");
+  </script>
 </head>
 
   
@@ -40,9 +42,9 @@
           <div id="nav" class="right">
             <div class="container clearfix">
               <ul id="jetmenu" class="jetmenu blue">
-                <li class="active"><a href="index.html">监控中心</a>
+                <li class="active"><a href="/index">监控中心</a>
                 </li>
-                <li><a href="TrendAnalysis.html">趋势分析</a>
+                <li><a href="/TrendAnalysis">趋势分析</a>
                 </li>
                 <li><a href="#">能耗统计</a>
                 </li>
@@ -319,17 +321,6 @@
         dataType: "json",
         //success : function(data){
         success : function(d){data = d;}
-      });
-      $.ajax({
-        url : "/equipment/insertDB",
-        type : 'GET',
-
-        success : function(data){
-          
-        },
-        error : function(e){
-          //alert(e);
-        }
       });
           //alert(data[2]);
          // data[1]==false?wp1.remove("mui-active"):wp1.add("mui-active");//controller
