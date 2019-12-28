@@ -204,4 +204,4 @@ setInterval(function(){
     showtem("tube1");
     showpre("tube3");
 
-},1*1000);
+},10*1000);
