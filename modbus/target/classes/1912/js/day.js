@@ -42,6 +42,7 @@ function dayRuntimeFunc(id){
                 {
                     type: 'value',
                     scale: true,
+                    max: 20,
                     min : 0,
                     boundaryGap: [0.2, 0.2]
                 }

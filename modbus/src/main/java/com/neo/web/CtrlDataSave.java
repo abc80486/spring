@@ -41,6 +41,7 @@ public class CtrlDataSave {
         List<Object> data = new ArrayList<>(40);
 
         if (dataNum == -1l) {
+            get();
             for (int i = 0; i < 40; i++) {
                 data.add(-1);
             }
