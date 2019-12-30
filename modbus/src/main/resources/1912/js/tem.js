@@ -45,7 +45,7 @@ setInterval(function(){
                 trigger: 'axis',
             },
             grid: {
-                x: 30,y: 30,x2:32,y2:30,
+                x: 45,y: 30,x2:32,y2:30,
                 containLabel: true
             },
 
@@ -86,8 +86,9 @@ setInterval(function(){
                     type: 'value',
                     scale: true,
                     name: '摄氏度',
-                    max: 50,
-                    min: 0,
+                    //max: 50,
+                    //minInterval: 0.1,
+                   // min: 0,
                     boundaryGap: [0.2, 0.2]
                 }
             
@@ -169,8 +170,8 @@ setInterval(function(){
                     type: 'value',
                     scale: true,
                     name: 'Pa',
-                    max: 80000,
-                    min: 0,
+                    //max: 70000,
+                    //min: 0,
                     boundaryGap: [0.2, 0.2]
                 }
             
@@ -204,4 +205,4 @@ setInterval(function(){
     showtem("tube1");
     showpre("tube3");
 
-},10*1000);
+},2*1000);

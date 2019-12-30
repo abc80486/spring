@@ -323,12 +323,10 @@
         //success : function(data){
         success : function(d){data = d;}
       });
-          //alert(data[2]);
-         // data[1]==false?wp1.remove("mui-active"):wp1.add("mui-active");//controller
           if(data[1] ^ wp1.contains("mui-active")){
             mui("#wp1").switch().toggle();
           }
-          //if(data[1]==true) mui("#wp1").switch();
+
           data[1]==false?wp1_status.innerHTML="已停止":wp1_status.innerHTML="运行中";//controller status
           data[2]==false?wp1_mode.innerHTML="手动":wp1_mode.innerHTML="远程";//controller mode
           //if(data[2]==false) wp1_mode.innerHTML="手动";
@@ -378,7 +376,8 @@
           statu = false;
         }
         if(id=="wp2"&&data[5]==false || id=="wp1"&&data[2]==false || id=="wp3"&&data[8]==false ||id=="valve1"&&data[12]==false || id=="valve2"&&data[16]==false){
-          //alert("手动模式不允许操作！")
+          //alert("手动模式不允许操作！")id
+          mui("#"+id).switch().toggle();
         }
         else
         coil_ajax(addr,statu);

@@ -115,6 +115,7 @@ public class ScadaImpl {
     }
     
     public static void printdata(int quantity){
+        System.out.println(data);
         System.out.printf("%8s %8s %8s %8s %8s\n","address" , "01" ,  "02"  ," 03",  " 04").toString();
         System.out.printf("----------------------------------------------\n").toString();
         for(int i=0;i<quantity;i++){
@@ -127,7 +128,7 @@ public class ScadaImpl {
     public static boolean setRegister(int addr,int col) {
         Date now = new Date();
         try {
-            if(now.getTime()-waterPumpOpTime < 100l){
+            if(now.getTime()-waterPumpOpTime < 300l){
                 log.add(now.toString()+"不可频繁操作，请稍后再试！");
                 System.out.println(now.toString()+"不可频繁操作，请稍后再试！");
                 return false;
@@ -152,7 +153,7 @@ public class ScadaImpl {
     public static void setCoil(int addr,boolean col) {
             try {
                 Date now = new Date();
-                if(now.getTime()-waterPumpOpTime < 100l){
+                if(now.getTime()-waterPumpOpTime < 300l){
                     log.add("不可频繁操作，请稍后再试！");
                     System.out.println("不可频繁操作，请稍后再试！");
                 }
