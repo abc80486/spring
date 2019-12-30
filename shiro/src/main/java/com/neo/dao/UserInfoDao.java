@@ -1,9 +1,19 @@
 package com.neo.dao;
 
-import com.neo.model.UserInfo;
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-public interface UserInfoDao extends CrudRepository<UserInfo,Long> {
+import com.neo.model.UserInfo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserInfoDao extends JpaRepository<UserInfo, Long> {
     /**通过username查找用户信息;*/
     public UserInfo findByUsername(String username);
+
+    @Query(value = "select u.id, u.username from UserInfo u ")
+    public List<UserInfo> findAll();
 }

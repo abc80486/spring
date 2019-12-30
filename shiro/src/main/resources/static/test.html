@@ -1,0 +1,24 @@
+<html>
+    <head></head>
+    <body>
+        <h1>TEST</h1>
+        <script src="js/jquery.min.js"></script>
+        <script>
+            $.ajax({
+                url : "/userInfo/userList" ,
+                type : 'GET',
+                data : {
+
+                },
+                success : function(data){
+                    alert("success"+data);
+                },
+                error : function(e){
+                    alert("error"+e);
+                }
+
+
+            });
+        </script>
+    </body>
+</html>

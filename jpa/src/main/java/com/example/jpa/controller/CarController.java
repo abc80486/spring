@@ -1,6 +1,7 @@
 package com.example.jpa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +31,8 @@ public class CarController {
      * @param pojo 传参模型
      * @return Integer
      */
-    @PutMapping(value = "/addCar")
-    public CarPojo add(@RequestBody CarPojo pojo) {
+    @GetMapping(value = "/addCar")
+    public CarPojo add( CarPojo pojo,BindingResult result) {
         return carService.add(pojo);
     }
 

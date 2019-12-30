@@ -1,21 +1,31 @@
 package com.neo.web;
 
+import java.util.List;
+
+import com.neo.model.UserInfo;
+import com.neo.sevice.UserInfoService;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/userInfo")
 public class UserInfoController {
 
+    @Autowired
+    private UserInfoService userInfoService;
     /**
      * 用户查询.
      * @return
      */
     @RequestMapping("/userList")
     @RequiresPermissions("userInfo:view")//权限管理;
-    public String userInfo(){
-        return "userInfo";
+    public List<UserInfo> userInfo(){
+        System.out.println(userInfoService.findAll().toString());
+        return  userInfoService.findAll();
     }
 
     /**
