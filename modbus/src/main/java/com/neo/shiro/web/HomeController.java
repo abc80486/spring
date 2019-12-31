@@ -10,9 +10,15 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
-    @RequestMapping({"/","/index"})
+
+    @RequestMapping("/index")
     public String index(){
-        return"/index";
+        return "index";
+    }
+
+    @RequestMapping("/index2")
+    public String index2(){
+        return "index";
     }
 
     @RequestMapping("/login")
@@ -40,7 +46,7 @@ public class HomeController {
         }
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理
-        return "/login";
+        return "login";
     }
 
     @RequestMapping("/403")

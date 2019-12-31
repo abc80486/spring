@@ -110,6 +110,14 @@ public class ScadaImpl {
           data.add(ScadaImpl.register03[13]);
           data.add(ScadaImpl.register03[12]);
           data.add(ScadaImpl.register03[10]);
+
+          data.add(ScadaImpl.register03[64]);
+          data.add(ScadaImpl.register03[65]);
+          data.add(ScadaImpl.register03[66]);
+          data.add(ScadaImpl.register03[67]);
+          data.add(ScadaImpl.register03[68]);
+          data.add(ScadaImpl.register03[69]);
+
           data.add(new Date());
           return true;
     }
@@ -154,19 +162,19 @@ public class ScadaImpl {
             try {
                 Date now = new Date();
                 if(now.getTime()-waterPumpOpTime < 300l){
-                    log.add("不可频繁操作，请稍后再试！");
-                    System.out.println("不可频繁操作，请稍后再试！");
+                    //log.add("不可频繁操作，请稍后再试！");
+                    System.out.println(now.toString()+" 不可频繁操作，请稍后再试！");
                 }
                 else{
                     if(coil01[addr]!=col) master.writeSingleCoil(SLAVEID, addr, col);
                     else return;
                     waterPumpOpTime = now.getTime();
                     if(col == true){
-                        log.add(now.toString() + " 地址" + addr + " 启动成功");
+                        //log.add(now.toString() + " 地址" + addr + " 启动成功");
                         System.out.println(now.toString() + " 地址" + addr + "  启动成功");
                     }
                     else{
-                        log.add(now.toString() + " 地址" + addr + "  关闭成功");
+                        //log.add(now.toString() + " 地址" + addr + "  关闭成功");
                         System.out.println(now.toString() + " 地址" + addr + "  关闭成功");
                     }
                 }

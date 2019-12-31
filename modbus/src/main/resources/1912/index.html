@@ -24,6 +24,8 @@
   <script type="text/javascript">
     document.write("<script src='**.js?"+Math.random()+"'><\/script>");
   </script>
+
+
 </head>
 
   
@@ -39,7 +41,6 @@
             </a>
           </div>
         </div>
-        <!-- title area -->
         <div class="col-lg-9 col-md-12 col-sm-12">
           <div id="nav" class="right">
             <div class="container clearfix">
@@ -53,18 +54,20 @@
                 </li>
                 <li><a href="#">定时设置</a>
                 </li>
+                <li style="width: 300px;height:50px;border: 1px solid blue;float:right">
+                  <form action="/login" method="post" style="position: relative;">
+                     <div style="float: left;height: 20px; width: 80px;margin: 5px;"><input style="font-size: 10px;margin: 0;" type="text" name="username"  placeholder="账号"/></div>
+                     <div style="float: left;height: 20px; width: 80px;margin: 5px;"><input style="font-size: 10px;margin: 0px;" type="text" name="password"  placeholder="密码"/></div>
+                      <input style="float: left;height: 40px; width: 60px;margin: 5px;" type="submit" value="登录"/>
+                  </form>
+                </li>
               </ul>
             </div>
           </div>
-          <!-- nav -->
         </div>
-        <!-- title area -->
       </div>
-      <!-- site header -->
     </div>
-    <!-- end container -->
   </header>
-  <!-- end header -->
   <div style="position: relative;">
     <img src="img/main5.jpg" alt="" class="img-responsive">  
     <div style="position: absolute;top:0%;right: 10px;">
@@ -127,13 +130,16 @@
         <ul class="mui-table-view" style="font-size: 6px;">
               <li class="mui-table-view-cell" style="height: 30px;">
                 启停控制
+                
                 <div id="wp1" class="mui-switch mui-switch-blue mui-switch-mini"style="height: 60%;">
                   <div class="mui-switch-handle" style="height: 100%;"></div>
                 </div>
+                
+
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="wp1_status">停止</span></li>
               <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="wp1_mode">远程</span></li>
-              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="wp1_power">20.5</li>
         </ul>
       </div>
       <div class="mui-content-padded" style="width: 200px;float:left;">
@@ -147,7 +153,7 @@
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="wp2_status">停止</span></li>
               <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="wp2_mode">远程</span></li>
-              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="wp2_power">20.5</li>
         </ul>
       </div>
       <div class="mui-content-padded" style="width: 200px;float:left;">
@@ -161,7 +167,7 @@
               </li>
               <li class="mui-table-view-cell" style="height: 30px;">运行状态<span class="mui-badge mui-badge-inverted" id="wp3_status">停止</span></li>
               <li class="mui-table-view-cell"style="height: 30px;">本地/远程<span class="mui-badge mui-badge-inverted" id="wp3_mode">远程</span></li>
-              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="system_error_code">20.5</li>
+              <li class="mui-table-view-cell"style="height: 30px;">耗电功率（W）<span class="mui-badge mui-badge-inverted" id="wp3_power">20.5</li>
         </ul>
       </div>
     </div>
@@ -258,8 +264,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
           <div class="footer-menu right">
             <ul class="menu">
-              <li><a href="index.html">监控中心</a></li>
-              <li><a href="TrendAnalysis.html">趋势分析</a></li>
+              <li><a href="index">监控中心</a></li>
+              <li><a href="TrendAnalysis">趋势分析</a></li>
               <li><a href="#">能耗统计</a></li>
               <li><a href="#">异常报警</a></li>
               <li><a href="contact">定时设置</a></li>
@@ -313,20 +319,20 @@
     var valve2 = document.getElementById("valve2").classList;
     var valve2_status = document.getElementById("valve2_status");
     var valve2_mode = document.getElementById("valve2_mode");
-
     var data;
+
+    var firstLoad = 1;
+    var interTime =500;
     setInterval(function(){
       $.ajax({
         url : "/getData",
         type : 'GET',
         dataType: "json",
-        //success : function(data){
         success : function(d){data = d;}
       });
           if(data[1] ^ wp1.contains("mui-active")){
             mui("#wp1").switch().toggle();
           }
-
           data[1]==false?wp1_status.innerHTML="已停止":wp1_status.innerHTML="运行中";//controller status
           data[2]==false?wp1_mode.innerHTML="手动":wp1_mode.innerHTML="远程";//controller mode
           //if(data[2]==false) wp1_mode.innerHTML="手动";
@@ -364,9 +370,13 @@
           document.getElementById("hum").value = data[27];
           document.getElementById("valv").value = data[28];
 
-       // },
-      //})
-    },1000);
+          document.getElementById("wp1_power").innerHTML = data[29];
+          document.getElementById("wp2_power").innerHTML = data[31];
+          document.getElementById("wp3_power").innerHTML = data[33];
+
+          firstLoad = 0;
+          interTime = 1000;
+    },interTime);
     function coil_ctrl(id,addr){
       document.getElementById(id).addEventListener("toggle",function(event){
         var statu;
@@ -376,11 +386,10 @@
           statu = false;
         }
         if(id=="wp2"&&data[5]==false || id=="wp1"&&data[2]==false || id=="wp3"&&data[8]==false ||id=="valve1"&&data[12]==false || id=="valve2"&&data[16]==false){
-          //alert("手动模式不允许操作！")id
-          mui("#"+id).switch().toggle();
+          if(firstLoad == 0) mui("#"+id).switch().toggle();
         }
         else
-        coil_ajax(addr,statu);
+          coil_ajax(addr,statu);
       });
     };
     function coil_ajax(ad,st){
@@ -391,9 +400,10 @@
                 addr:ad,status:st
               },
               success : function(data) {
+                setTimeout("",1000);
               },
               error : function(msg) {
-                alert(JSON.stringify(msg));
+                //alert(JSON.stringify(msg));
               }
           });
     }

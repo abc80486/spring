@@ -25,7 +25,12 @@ public class ShiroConfig {
 
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 
-		filterChainDefinitionMap.put("/1912/css", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/static/**", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/index", "anon");//允许访问的文件
+
+		//filterChainDefinitionMap.put("/1912/js/**", "anon");//允许访问的文件
+		//filterChainDefinitionMap.put("/1912/lib/**", "anon");//允许访问的文件
+		//filterChainDefinitionMap.put("/1912/css/**", "anon");//允许访问的文件
 
 		filterChainDefinitionMap.put("/logout", "logout");//登出页面
 
@@ -33,9 +38,8 @@ public class ShiroConfig {
 
 		shiroFilterFactoryBean.setLoginUrl("/login");//拦截器工厂设置登录路径
 
-		shiroFilterFactoryBean.setSuccessUrl("/index");//拦截器工厂设置登录跳转路径
+		shiroFilterFactoryBean.setSuccessUrl("/index2");//拦截器工厂设置登录跳转路径
 
-		
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");//拦截器工厂设置未授权路径
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);//设置过滤链
