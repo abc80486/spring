@@ -1,26 +1,37 @@
 package com.neo.shiro.web;
 
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.neo.shiro.model.UserInfo;
+
 import java.util.Map;
 
 @Controller
 public class HomeController {
 
+    
     @RequestMapping("/index")
     public String index(){
         return "index";
     }
 
-    @RequestMapping("/index2")
-    public String index2(){
-        return "index";
+    @GetMapping("/getUser")
+    @ResponseBody
+    public String getUser(){
+        UserInfo t =  (UserInfo)(SecurityUtils.getSubject().getPrincipal());
+        if(t==null) return "null";
+        return t.getUsername();
     }
-
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Map<String, Object> map) throws Exception{
         System.out.println("HomeController.login()");

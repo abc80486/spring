@@ -21,52 +21,78 @@
   <link rel="stylesheet" href="css/colors/blue.css">
   <link rel="stylesheet" href="css/mui.min.css">
  
-  <script type="text/javascript">
-    document.write("<script src='**.js?"+Math.random()+"'><\/script>");
-  </script>
-
+  <script>
+    setInterval(function(){   
+        var date = new Date();   
+        var year = date.getFullYear();    //获取当前年份   
+        var mon = date.getMonth()+1;      //获取当前月份   
+        var da = date.getDate();          //获取当前日   
+        var day = date.getDay();          //获取当前星期几   
+        var h = date.getHours();          //获取小时   
+        var m = date.getMinutes();        //获取分钟   
+        var s = date.getSeconds();        //获取秒   
+        var d = document.getElementById('Date');  
+        switch(day){
+            case 0 : day = "日"; break;
+            case 1 : day = "一"; break;
+            case 2 : day = "二"; break;
+            case 3 : day = "三"; break;
+            case 4 : day = "四"; break;
+            case 5 : day = "五"; break;
+            case 6 : day = "六"; 
+        }  
+        d.innerHTML= '北京时间： '+ year+' 年 '+mon+' 月 '+da+' 日  '+'  星期'+day+'   '+h+':'+m+':'+s;  
+    },1000)
+</script>
 
 </head>
 
   
   <!-- end topbar -->
 <body>
-  <header class="header" style="margin: 0;">
-    <div class="container" style="margin: 0;" >
-      <div class="site-header clearfix">
-        <div class="col-lg-3 col-md-3 col-sm-12 title-area">
-          <div class="site-title" id="title">
-            <a href="index" title="">
-              <h4>东莞格力</br><span>中央空调群控系统</span></h4>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-9 col-md-12 col-sm-12">
-          <div id="nav" class="right">
-            <div class="container clearfix">
-              <ul id="jetmenu" class="jetmenu blue">
-                <li class="active"><a href="/index">监控中心</a>
+  <header class="header" style="margin: 0;background-color: rgb(9, 136, 240);">
+    <p id="Date" style="color: aliceblue;text-align: right;margin-right: 20px;height: 20px;"> </p>
+    <div class="container" style="margin: 0;width: 100%;position: relative;" >    
+        <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 500px;margin-left: -50px;">
+          <div id="nav" class="right" style="position: relative;">
+            <div  class="container clearfix">
+              <ul  id="jetmenu" class="jetmenu blue" >
+                <li  class="active"><a style="color: aliceblue;" href="/index">监控中心</a>
                 </li>
-                <li><a href="/TrendAnalysis">趋势分析</a>
+                <li><a style="color: aliceblue;" href="/TrendAnalysis">趋势分析</a>
                 </li>
                
-                <li><a href="#">操作日志及异常信息</a>
+                <li><a style="color: aliceblue;" href="/log.html">操作日志及异常信息</a>
                 </li>
-                <li><a href="#">定时设置</a>
+                <li><a style="color: aliceblue;" href="#">定时设置</a>
                 </li>
-                <li style="width: 300px;height:50px;border: 1px solid blue;float:right">
-                  <form action="/login" method="post" style="position: relative;">
-                     <div style="float: left;height: 20px; width: 80px;margin: 5px;"><input style="font-size: 10px;margin: 0;" type="text" name="username"  placeholder="账号"/></div>
-                     <div style="float: left;height: 20px; width: 80px;margin: 5px;"><input style="font-size: 10px;margin: 0px;" type="text" name="password"  placeholder="密码"/></div>
-                      <input style="float: left;height: 40px; width: 60px;margin: 5px;" type="submit" value="登录"/>
-                  </form>
-                </li>
+                
               </ul>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 450px;margin: 0 auto;">
+          <div class="site-title" id="title">
+          <a href="index.html" title="">
+              <h1 style="color: aliceblue;">东莞格力中央空调群控系统</h1>
+          </a>
+          </div>
+       </div>
+
+              <div id="login" style="width: 250px;height:50px;float: right;">
+                <form action="" method="post" style="position: relative;">
+                  <div style="float: left; height: 20px; width: 40px;"><input style="font-size: 10px;margin: 0;width: 80px;height: 20px;" type="text" name="username"  placeholder="账号"/></div>
+                  <div style="float: left;margin-left: 30px;"><input style="font-size: 10px;margin: 0;width: 80px;height: 20px" type="text" name="password"  placeholder="密码"/></div>
+                  <input style="margin-top: 2px; float: left;margin-left: 10px;height: 20px; width: 60px;font-size:small;padding: 0;" type="submit" value="登录"/></div>
+                  <input  id="outlog"style="margin-top: 2px; float: left;margin-left: 10px;height: 20px; width: 60px;font-size:small;padding: 0;display:none;" onclick="func2()" type="submit" value="注销"/></div>
+                </form>
+              </div>
+
+
+      
     </div>
+    <p class="mui-progressbar mui-progressbar-infinite"></p>
   </header>
   <div style="position: relative;">
     <img src="img/main5.jpg" alt="" class="img-responsive">  
@@ -120,6 +146,8 @@
               <li class="mui-table-view-cell" style="height: 30px;">
                 阀门开启延时(s)<span class="mui-badge mui-badge-inverted"><input id="valv" type="text"  placeholder="1.0" style="width: 70px;height: 20px;margin: auto -10px;"></span>
               </li>
+              <div id="Date" style="float:right ;width: 300px;margin-right: 0;"> </div>
+
         </ul>
       </div>
     </div>
@@ -254,32 +282,7 @@
     </div>
 
   </div>
-  <footer class="footer">
-    <div class="copyrights">
-      <div class="container">
-        <div class="col-lg-6 col-md-6 col-sm-12 columns footer-left">
-          <p>Copyright ©GREE 2019 - 2019 All rights reserved.</p>
-        </div>
-        <!-- end widget -->
-        <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
-          <div class="footer-menu right">
-            <ul class="menu">
-              <li><a href="index">监控中心</a></li>
-              <li><a href="TrendAnalysis">趋势分析</a></li>
-              <li><a href="#">能耗统计</a></li>
-              <li><a href="#">异常报警</a></li>
-              <li><a href="contact">定时设置</a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- end large-6 -->
-      </div>
-      <!-- end container -->
-    </div>
-    <!-- end copyrights -->
-  </footer>
-  <!-- end footer -->
-  <div class="dmtop">Scroll to Top</div>
+  
   <script src="js/mui.min.js"></script>
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
@@ -298,6 +301,27 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>  
+  <script>
+    function func2(){
+      $.ajax({
+        url : "/logout",
+        type : 'GET',
+        dataType: "text",
+      });  
+      window.location.reload()
+    };
+      $.ajax({
+        url : "/getUser",
+        type : 'GET',
+        dataType: "text",
+        success : function(d){
+          if(d!="null"){
+            document.getElementById("login").innerHTML = d;
+            document.getElementById("outlog").style.display = "block";
+          }
+        }
+      });  
+  </script>
   <script>
     //mui("#wp1").switch().toggle();
     var wp1 = document.getElementById("wp1").classList;

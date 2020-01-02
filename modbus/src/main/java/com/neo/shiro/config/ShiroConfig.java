@@ -25,20 +25,22 @@ public class ShiroConfig {
 
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 
-		filterChainDefinitionMap.put("/static/**", "anon");//允许访问的文件
-		filterChainDefinitionMap.put("/index", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/1912/**", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/getData", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/getUser", "anon");//允许访问的文件
 
-		//filterChainDefinitionMap.put("/1912/js/**", "anon");//允许访问的文件
-		//filterChainDefinitionMap.put("/1912/lib/**", "anon");//允许访问的文件
-		//filterChainDefinitionMap.put("/1912/css/**", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/js/**", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/lib/**", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/css/**", "anon");//允许访问的文件
+		filterChainDefinitionMap.put("/img/**", "anon");//允许访问的文件
 
 		filterChainDefinitionMap.put("/logout", "logout");//登出页面
 
 		filterChainDefinitionMap.put("/**", "authc");
+//
+		shiroFilterFactoryBean.setLoginUrl("/index");//拦截器工厂设置登录路径
 
-		shiroFilterFactoryBean.setLoginUrl("/login");//拦截器工厂设置登录路径
-
-		shiroFilterFactoryBean.setSuccessUrl("/index2");//拦截器工厂设置登录跳转路径
+		//shiroFilterFactoryBean.setSuccessUrl("/index");//拦截器工厂设置登录跳转路径
 
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");//拦截器工厂设置未授权路径
 

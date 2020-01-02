@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="css/mui.min.css">
 </head>
 <body>
-    <header class="header" style="margin: 0;">
+    <header class="header" style="margin: 0;background-color: rgb(9, 136, 240);">
     <div class="container" style="margin: 0;" >
         <div class="site-header clearfix"></div>
         <div class="col-lg-3 col-md-3 col-sm-12 title-area">
@@ -50,9 +50,29 @@
         </div>
     </div>
     </header>
+    <h1>hello</h1>
+    <div style="position: relative; height: 100px;width: 100%;background-color: rgb(9, 136, 240);">
+        <div style="float: left;height: 100%;width: 600px;border: 1px solid white;">
+            <ul id="jetmenu" class="jetmenu blue">
+                <li><a href="/index">监控中心</a>
+                </li>
+                <li ><a href="/TrendAnalysis">趋势分析</a>
+                </li>
+                <li class="active"><a href="#">操作日志及异常信息</a>
+                </li>
+                <li><a href="#" >定时设置</a>
+                </li>
+            </ul>
+
+        </div>
+        <div style="float: right;height: 100%;width: 200px;border: 1px solid white;"></div>
+        <div style="position: relative; margin: 0 auto; height: 100%;width: 200px;border: 1px solid white;">
+           <p style=" text-align: center;position:absolute; border: 1px solid white;">123</p>
+        </div>
+
+    </div>
 
     <script>
-    
         setInterval(function(){   
             var date = new Date();   
             var year = date.getFullYear();    //获取当前年份   
