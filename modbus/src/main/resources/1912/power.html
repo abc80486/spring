@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <title>东莞格力群控系统</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+  <link href="lib/hover/hoverex-all.css" rel="stylesheet">
+  <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
+  <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/colors/blue.css">
+  <link rel="stylesheet" href="css/mui.min.css">
+
+  <script>
+    setInterval(function(){   
+        var date = new Date();   
+        var year = date.getFullYear();    //获取当前年份   
+        var mon = date.getMonth()+1;      //获取当前月份   
+        var da = date.getDate();          //获取当前日   
+        var day = date.getDay();          //获取当前星期几   
+        var h = date.getHours();          //获取小时   
+        var m = date.getMinutes();        //获取分钟   
+        var s = date.getSeconds();        //获取秒   
+        var d = document.getElementById('Date');  
+        switch(day){
+            case 0 : day = "日"; break;
+            case 1 : day = "一"; break;
+            case 2 : day = "二"; break;
+            case 3 : day = "三"; break;
+            case 4 : day = "四"; break;
+            case 5 : day = "五"; break;
+            case 6 : day = "六"; 
+        }  
+        d.innerHTML= '北京时间： '+ year+' 年 '+mon+' 月 '+da+' 日  '+'  星期'+day+'   '+h+':'+m+':'+s;  
+    },1000)
+</script>
+
+
+<style type="text/css">
+			.hor-minimalist-a{	
+				font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+				font-size: 12px;	
+				background: #fff;	
+				width: 360px;	
+				border-collapse: collapse;	
+				text-align: left;
+			}
+			.hor-minimalist-a th{	
+				font-size: 14px;	
+				font-weight: normal;	
+				color: #039;	
+				padding: 10px 8px;	
+				border-bottom: 2px solid #6678b1;
+			}
+			.hor-minimalist-a td{	
+				color: #669;	
+				padding: 9px 8px 0px 8px;
+			}
+			#hor-minimalist-a tbody tr:hover td{	
+				color: #009;
+			}
+		
+</style>
+</head>
+<body>
+    <header class="header" style="margin: 0;background-color: rgb(9, 136, 240);">
+        <p id="Date" style="color: aliceblue;text-align: right;margin-right: 20px;height: 20px;"> </p>
+        <div class="container" style="margin: 0;width: 100%;position: relative;" >    
+            <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 500px;margin-left: -50px;">
+              <div id="nav" class="right" style="position: relative;">
+                <div  class="container clearfix">
+                  <ul  id="jetmenu" class="jetmenu blue" >
+                    <li ><a style="color: aliceblue;" href="/index">监控中心</a>
+                    </li>
+                    <li ><a style="color: aliceblue;" href="/TrendAnalysis">趋势分析</a>
+                    </li>
+                    <li class="active"><a style="color: aliceblue;" href="/power">能耗统计</a>
+                    </li>
+                    <li><a style="color: aliceblue;" href="/log.html">异常信息</a>
+                    </li>
+                    <li><a style="color: aliceblue;" href="#">定时设置</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 450px;margin: 0 auto;">
+              <div class="site-title" id="title">
+              <a href="index" title="">
+                  <h1 style="color: aliceblue;">东莞格力中央空调群控系统</h1>
+              </a>
+              </div>
+           </div>
+        </div>
+        <p class="mui-progressbar mui-progressbar-infinite"></p>
+      </header>
+
+      <div class="mui-content-padded">
+        <h5>设备耗电量(千瓦时)</h5>
+        <table class="hor-minimalist-a" summary="Employee Pay Sheet" style="margin: 0;">
+            <thead>
+                <tr>
+                    <th scope="col">设备</th>
+                    <th scope="col">今日用电</th>
+                    <th scope="col">本周用电</th>
+                    <th scope="col">本月用电</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>水泵电机1</td><td>30</td> <td>310</td><td>1220</td>
+                </tr>
+                <tr>
+                    <td>水泵电机2</td><td>20</td><td>182</td><td>725</td>
+                </tr>
+                <tr><td>水泵电机3</td> <td>35</td><td>250</td><td>980</td>
+                </tr>
+                <tr>
+                    <td>机组1</td><td>8</td><td>50</td><td>210</td>
+                </tr>
+                <tr>
+                    <td>机组2</td><td>8</td><td>50</td><td>210</td>
+                </tr>
+                <tr>
+                    <td>空调</td><td>8</td><td>50</td><td>210</td>
+                </tr>
+                <tr>
+                    <td>合计</td><td>93千瓦时</td><td>792千瓦时</td><td>3135千瓦时</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        
+    </div>
+</body>

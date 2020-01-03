@@ -6,7 +6,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 public class test {
     public static void main(String[] args) {
         
-            Object result = new SimpleHash("Sha256","123456","admin8d78869f470951332959580424d4bf4f",2);
+            Object result = new SimpleHash("MD5","123456","zhang8d78869f470951332959580424d4bf4f",2);
             System.out.println(":"+result);
 
             String str = "hello";  

@@ -57,7 +57,7 @@ public class GetSData {
     }
     
     public static void main(String[] args){
-        System.out.println(fileIn("resources/hello.txt"));
+        System.out.println(fileIn("inputdata\\a71.json"));
 
      }
 
