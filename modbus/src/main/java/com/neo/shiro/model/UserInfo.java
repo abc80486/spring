@@ -6,6 +6,10 @@ import java.util.List;
 
 @Entity
 public class UserInfo implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1833852197311544912L;
     @Id
     @GeneratedValue
     private Integer uid;
