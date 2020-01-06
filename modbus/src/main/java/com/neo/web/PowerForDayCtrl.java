@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,12 +23,20 @@ public class PowerForDayCtrl {
     @Autowired
     PowerForDayMapper powerForDayMapper;
 
-    @GetMapping(value = "select")
+    //@GetMapping(value = "select")
     public PowerForDay select(Date time) {
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
         return powerForDayMapper.selectByTime(f.format(time));
     }
-    
+    public PowerForDay selectRange(Date sdate,Date edate) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
+        return powerForDayMapper.selectByTimeRange(f.format(sdate),f.format(edate));
+    }
+    public PowerForDay selectDay(Date time) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
+        return powerForDayMapper.selectByOneDay(f.format(time));
+    }
+
     @GetMapping("save")
     public String save(){
 
@@ -47,35 +56,54 @@ public class PowerForDayCtrl {
     @GetMapping("power")
     public Map<String,Object> data(){
         Map<String,Object> d = new HashMap<String,Object>();
+        int wp1 = Integer.valueOf(ScadaImpl.data.get(30).toString());
+        int wp2 = Integer.valueOf(ScadaImpl.data.get(32).toString());
+        int wp3 = Integer.valueOf(ScadaImpl.data.get(34).toString());
+     
+
         PowerForDay last=null;
-        try{
-             last = select(new Date());
-        }catch(Exception e){
-            System.out.println("获取电量失败！");
-            select(new Date());
+        
+        last = select(new Date());
+        if(last==null){
+            System.out.println(new Date()+"---->>>>  获取电量失败！");
+            save();
+            return data();
+            //return null;
         }
-        d.put("wp1powerDay", Integer.valueOf(ScadaImpl.data.get(30).toString()) - Integer.valueOf(last.getWp1power()));
-        d.put("wp2powerDay", Integer.valueOf(ScadaImpl.data.get(32).toString()) - Integer.valueOf(last.getWp1power()));
-        d.put("wp3powerDay", Integer.valueOf(ScadaImpl.data.get(34).toString()) - Integer.valueOf(last.getWp1power()));
-        
-        
+        d.put("wp1powerDay", wp1 - Integer.valueOf(last.getWp1power()));
+        d.put("wp2powerDay", wp2 - Integer.valueOf(last.getWp2power()));
+        d.put("wp3powerDay", wp3 - Integer.valueOf(last.getWp3power()));
+        List<Date> date = Util.dateCal(new Date());
+        last = select(date.get(0));//
+        d.put("wp1powerWeek", wp1 - Integer.valueOf(last.getWp1power()));
+        d.put("wp2powerWeek", wp2 - Integer.valueOf(last.getWp2power()));
+        d.put("wp3powerWeek", wp3 - Integer.valueOf(last.getWp3power()));
+        last = select(date.get(1));//
+        d.put("wp1powerMon", wp1 - Integer.valueOf(last.getWp1power()));
+        d.put("wp2powerMon", wp2 - Integer.valueOf(last.getWp2power()));
+        d.put("wp3powerMon", wp3 - Integer.valueOf(last.getWp3power()));
+        PowerForDay tem=null;
+        try {
+            last = selectRange(date.get(2), date.get(1));
+            tem = selectDay(date.get(1));
+
+        } catch (Exception e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }finally{
+            if(last==null || tem==null){
+                System.out.println("累计电量为空");
+                d.put("wp1powerLastMon", 0);
+                d.put("wp2powerLastMon", 0);
+                d.put("wp3powerLastMon", 0);  
+
+            }
+            else{
+                d.put("wp1powerLastMon", Integer.valueOf(tem.getWp1power())-Integer.valueOf(last.getWp1power()));
+                d.put("wp2powerLastMon", Integer.valueOf(tem.getWp2power())-Integer.valueOf(last.getWp2power()));
+                d.put("wp3powerLastMon", Integer.valueOf(tem.getWp3power())-Integer.valueOf(last.getWp3power()));    
+            }
+        }
         return d;
     }
-    @GetMapping("isPower")
-    public boolean ispower(){
-        try{
-            PowerForDay last = select(new Date());
-        }catch(Exception e){
-            return false;
-        }
-        return true;
-    }
-
-    public static Set<Date> dateCal(Date time){
-        Set<Date> d = new HashSet<Date>();
-
-        return d;
-    }
-
-    
 }

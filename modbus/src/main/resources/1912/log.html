@@ -18,82 +18,96 @@
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/colors/blue.css">
   <link rel="stylesheet" href="css/mui.min.css">
+
+   <script>
+    setInterval(function(){   
+        var date = new Date();   
+        var year = date.getFullYear();    //获取当前年份   
+        var mon = date.getMonth()+1;      //获取当前月份   
+        var da = date.getDate();          //获取当前日   
+        var day = date.getDay();          //获取当前星期几   
+        var h = date.getHours();          //获取小时   
+        var m = date.getMinutes();        //获取分钟   
+        var s = date.getSeconds();        //获取秒   
+        var d = document.getElementById('Date');  
+        switch(day){
+            case 0 : day = "日"; break;
+            case 1 : day = "一"; break;
+            case 2 : day = "二"; break;
+            case 3 : day = "三"; break;
+            case 4 : day = "四"; break;
+            case 5 : day = "五"; break;
+            case 6 : day = "六"; 
+        } 
+        //var tem;
+       // tem = mom - 1;
+       
+       //document.getElementById("last"+4).innerHTML = year-1+"-"+mon+"用电";
+        d.innerHTML= '北京时间： '+ year+' 年 '+mon+' 月 '+da+' 日  '+'  星期'+day+'   '+h+':'+m+':'+s;  
+    },1000)
+</script>
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="js/echarts-all.js"></script>
+
+
+<style type="text/css">
+			.hor-minimalist-a{	
+				font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+				font-size: 12px;	
+				background: #fff;	
+				width:100%;	
+				border-collapse: collapse;	
+				text-align: left;
+			}
+			.hor-minimalist-a th{	
+				font-size: 14px;	
+				font-weight: normal;	
+				color: #039;	
+				padding: 10px 8px;	
+				border-bottom: 2px solid #6678b1;
+			}
+			.hor-minimalist-a td{	
+				color: #669;	
+				padding: 9px 8px 0px 8px;
+			}
+			#hor-minimalist-a tbody tr:hover td{	
+				color: #009;
+			}
+		
+</style>
 </head>
-<body>
+<body style="width: 1920px;">
     <header class="header" style="margin: 0;background-color: rgb(9, 136, 240);">
-    <div class="container" style="margin: 0;" >
-        <div class="site-header clearfix"></div>
-        <div class="col-lg-3 col-md-3 col-sm-12 title-area">
-            <div class="site-title" id="title">
-            <a href="index.html" title="">
-                <h4>东莞格力</br><span>中央空调群控系统</span></h4>
-            </a>
+        <p id="Date" style="color: aliceblue;text-align: right;margin-right: 20px;height: 20px;"> </p>
+        <div class="container" style="margin: 0;width: 100%;position: relative;" >    
+            <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 40%;margin-left: -50px;">
+              <div id="nav" class="right" style="position: relative;">
+                <div  class="container clearfix">
+                  <ul  id="jetmenu" class="jetmenu blue" >
+                    <li ><a style="color: aliceblue;" href="/index">监控中心</a>
+                    </li>
+                    <li ><a style="color: aliceblue;" href="/TrendAnalysis">趋势分析</a>
+                    </li>
+                    <li ><a style="color: aliceblue;" href="/power">能耗统计</a>
+                    </li>
+                    <li class="active"><a style="color: aliceblue;" href="/log.html">日志信息</a>
+                    </li>
+                    <li><a style="color: aliceblue;" href="#">定时设置</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+    
+            <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 40%;margin: 0 auto;">
+              <div class="site-title" id="title">
+              <a href="index" title="">
+                  <h1 style="color: aliceblue;">东莞格力中央空调群控系统</h1>
+              </a>
+              </div>
+           </div>
         </div>
-        <div class="col-lg-9 col-md-12 col-sm-12">
-            <div id="nav" class="right">
-            <div class="container clearfix">
-                <ul id="jetmenu" class="jetmenu blue">
-                <li><a href="/index">监控中心</a>
-                </li>
-                <li ><a href="/TrendAnalysis">趋势分析</a>
-                </li>
-                <li class="active"><a href="#">操作日志及异常信息</a>
-                </li>
-                <li><a href="#" >定时设置</a>
-                </li>
-                </ul>
-                <div id="Date" style="float:right ;width: 300px;margin-right: -100px;"> </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </header>
-    <h1>hello</h1>
-    <div style="position: relative; height: 100px;width: 100%;background-color: rgb(9, 136, 240);">
-        <div style="float: left;height: 100%;width: 600px;border: 1px solid white;">
-            <ul id="jetmenu" class="jetmenu blue">
-                <li><a href="/index">监控中心</a>
-                </li>
-                <li ><a href="/TrendAnalysis">趋势分析</a>
-                </li>
-                <li class="active"><a href="#">操作日志及异常信息</a>
-                </li>
-                <li><a href="#" >定时设置</a>
-                </li>
-            </ul>
-
-        </div>
-        <div style="float: right;height: 100%;width: 200px;border: 1px solid white;"></div>
-        <div style="position: relative; margin: 0 auto; height: 100%;width: 200px;border: 1px solid white;">
-           <p style=" text-align: center;position:absolute; border: 1px solid white;">123</p>
-        </div>
-
-    </div>
-
-    <script>
-        setInterval(function(){   
-            var date = new Date();   
-            var year = date.getFullYear();    //获取当前年份   
-            var mon = date.getMonth()+1;      //获取当前月份   
-            var da = date.getDate();          //获取当前日   
-            var day = date.getDay();          //获取当前星期几   
-            var h = date.getHours();          //获取小时   
-            var m = date.getMinutes();        //获取分钟   
-            var s = date.getSeconds();        //获取秒   
-            var d = document.getElementById('Date');  
-            switch(day){
-                case 0 : day = "日"; break;
-                case 1 : day = "一"; break;
-                case 2 : day = "二"; break;
-                case 3 : day = "三"; break;
-                case 4 : day = "四"; break;
-                case 5 : day = "五"; break;
-                case 6 : day = "六"; 
-            }  
-            d.innerHTML= year+' 年 '+mon+' 月 '+da+' 日  '+'  星期'+day+'   '+h+':'+m+':'+s;  
-        },1000)
-    </script>
+        <p class="mui-progressbar mui-progressbar-infinite"></p>
+      </header>
 </body>
 </html>

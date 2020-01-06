@@ -170,123 +170,82 @@
         </table> 
       </div>
 
-      <div id="power" style="width: 100%;height: 630px;"></div>
-    <script>
-        function getpower(){
-        $.ajax({
-            url: "/PowerForDay/power",
-            type: "GET",
-            data: {
+      <div id="power22" style="width: 100%;height: 100%;"></div>
 
-            },
-            success: function(data){
-                //alert(data.wp1powerMon);
-                document.getElementById("wp1_day_power").innerHTML = data.wp1powerDay/1000.0;
-                document.getElementById("wp1_week_power").innerHTML = data.wp1powerWeek/1000.0;
-                document.getElementById("wp1_mon_power").innerHTML = data.wp1powerMon/1000.0;
-                document.getElementById("wp1_lmon_power").innerHTML = data.wp1powerLastMon/1000.0;
+       <script type="text/javascript" src="js/echarts-all.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("power22");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
 
-                document.getElementById("wp2_day_power").innerHTML = data.wp2powerDay/1000.0;
-                document.getElementById("wp2_week_power").innerHTML = data.wp2powerWeek/1000.0;
-                document.getElementById("wp2_mon_power").innerHTML = data.wp2powerMon/1000.0;
-                document.getElementById("wp2_lmon_power").innerHTML = data.wp2powerLastMon/1000.0;
+//setTimeout(function () {
 
-                document.getElementById("wp3_day_power").innerHTML = data.wp3powerDay/1000.0;
-                document.getElementById("wp3_week_power").innerHTML = data.wp3powerWeek/1000.0;
-                document.getElementById("wp3_mon_power").innerHTML = data.wp3powerMon/1000.0;
-                document.getElementById("wp3_lmon_power").innerHTML = data.wp3powerLastMon/1000.0;
-            
-                document.getElementById("day_power").innerHTML = (data.wp1powerDay + data.wp2powerDay + data.wp3powerDay)/1000.0+" kwh";
-                document.getElementById("week_power").innerHTML = (data.wp1powerWeek + data.wp2powerWeek + data.wp3powerWeek)/1000.0+" kwh";
-                document.getElementById("mon_power").innerHTML = (data.wp1powerMon + data.wp2powerMon + data.wp3powerMon)/1000.0+" kwh";
-                document.getElementById("lmon_power").innerHTML = (data.wp1powerLastMon + data.wp2powerLastMon + data.wp3powerLastMon)/1000.0+" kwh";
-                powere(data);
-               
+    option = {
+        legend: {},
+        tooltip: {
+            trigger: 'axis',
+            showContent: false
+        },
+        dataset: {
+            source: [
+                ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+                ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+                ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+                ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+                ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+            ]
+        },
+        xAxis: {type: 'category'},
+        yAxis: {gridIndex: 0},
+        grid: {top: '55%'},
+        series: [
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {
+                type: 'pie',
+                id: 'pie',
+                radius: '30%',
+                center: ['50%', '25%'],
+                label: {
+                    formatter: '{b}: {@2012} ({d}%)'
+                },
+                encode: {
+                    itemName: 'product',
+                    value: '2012',
+                    tooltip: '2012'
+                }
             }
-        });
-        return getpower;
-     };
-     getpower();
-     setInterval(getpower(),10*1000);
-    </script>
+        ]
+    };
 
-<script type="text/javascript">
-    var dom = document.getElementById("power");
-    var myChart = echarts.init(dom);
-    var app = {};
-    option = null;
-    function powere(data){
-        option = {
-            legend: {},
-            tooltip: {
-                trigger: 'axis',
-                showContent: false
-            },
-            
-            dataset: {
-                source: [
-                    ['product', '今日', '本周', '本月', '上月'],
-                    ['水泵电机1',data.wp1powerDay/1000.0, data.wp1powerWeek/1000.0, data.wp1powerMon/1000.0, data.wp1powerLastMon/1000.0],
-                    ['水泵电机2', data.wp2powerDay/1000.0, data.wp2powerWeek/1000.0, data.wp2powerMon/1000.0, data.wp2powerLastMon/1000.0],
-                    ['水泵电机3', data.wp3powerDay/1000.0, data.wp3powerWeek/1000.0, data.wp3powerMon/1000.0, data.wp3powerLastMon/1000.0],
-                    ['机组1', 0, 0, 0, 0],
-                    ['机组2', 0, 0, 0, 0],
-                    ['空调', 0, 0, 0, 0],
-                ]
-            },
-            xAxis: {type: 'category'},
-            yAxis: {gridIndex: 0},
-            grid: {top: '55%'},
-            series: [
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-
-                {
-                    type: 'pie',
+    myChart.on('updateAxisPointer', function (event) {
+        var xAxisInfo = event.axesInfo[0];
+        if (xAxisInfo) {
+            var dimension = xAxisInfo.value + 1;
+            myChart.setOption({
+                series: {
                     id: 'pie',
-                    radius: '30%',
-                    center: ['50%', '25%'],
                     label: {
-                        //formatter: '{b}: {@2012} ({d}%)'
+                        formatter: '{b}: {@[' + dimension + ']} ({d}%)'
                     },
                     encode: {
-                       // itemName: 'product',
-                       // value: '水泵电机1',
-                       // tooltip: '水泵电机1'
+                        value: dimension,
+                        tooltip: dimension
                     }
                 }
-            ]
-        };
-    
-        myChart.on('updateAxisPointer', function (event) {
-            var xAxisInfo = event.axesInfo[0];
-            if (xAxisInfo) {
-                var dimension = xAxisInfo.value + 1;
-                myChart.setOption({
-                    series: {
-                        id: 'pie',
-                        label: {
-                            formatter: '{b}: {@[' + dimension + ']} ({d}%)'
-                        },
-                        encode: {
-                            value: dimension,
-                            tooltip: dimension
-                        }
-                    }
-                });
-            }
-        });
-    
-        myChart.setOption(option);
-    };
-   // powere("");
-    //});;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
-  </script>
-</body>
+            });
+        }
+    });
+
+    myChart.setOption(option);
+
+//});;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

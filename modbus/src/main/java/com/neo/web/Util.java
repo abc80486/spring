@@ -8,9 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class test {
+public class Util{
     public static void main(String[] args){
-        System.out.println(dateCal(new Date()));
+        //System.out.println(dateCal(new Date()));
     }
     //获得当周的第一天（星期一为第一天）、获得月初日期，获得前三个月1号的日期
     public static List<Date> dateCal(Date time){
@@ -40,6 +40,8 @@ public class test {
             date.add(Calendar.MONTH, -1);
             d.add(date.getTime());
         }
+        date.add(Calendar.MONTH, -9);
+        d.add(date.getTime());
         return d;
     }
 
