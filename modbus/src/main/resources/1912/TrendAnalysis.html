@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="css/colors/blue.css">
   <link rel="stylesheet" href="css/mui.min.css">
 
-  <script>
+   <script>
     setInterval(function(){   
         var date = new Date();   
         var year = date.getFullYear();    //获取当前年份   
@@ -38,17 +38,49 @@
             case 4 : day = "四"; break;
             case 5 : day = "五"; break;
             case 6 : day = "六"; 
-        }  
+        } 
+        //var tem;
+       // tem = mom - 1;
+       
+       //document.getElementById("last"+4).innerHTML = year-1+"-"+mon+"用电";
         d.innerHTML= '北京时间： '+ year+' 年 '+mon+' 月 '+da+' 日  '+'  星期'+day+'   '+h+':'+m+':'+s;  
     },1000)
 </script>
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="js/echarts-all.js"></script>
 
+
+<style type="text/css">
+			.hor-minimalist-a{	
+				font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+				font-size: 12px;	
+				background: #fff;	
+				width:100%;	
+				border-collapse: collapse;	
+				text-align: left;
+			}
+			.hor-minimalist-a th{	
+				font-size: 14px;	
+				font-weight: normal;	
+				color: #039;	
+				padding: 10px 8px;	
+				border-bottom: 2px solid #6678b1;
+			}
+			.hor-minimalist-a td{	
+				color: #669;	
+				padding: 9px 8px 0px 8px;
+			}
+			#hor-minimalist-a tbody tr:hover td{	
+				color: #009;
+			}
+		
+</style>
 </head>
-<body>
+<body style="width: 1920px;height: 1080px;margin: 0 auto;">
     <header class="header" style="margin: 0;background-color: rgb(9, 136, 240);">
         <p id="Date" style="color: aliceblue;text-align: right;margin-right: 20px;height: 20px;"> </p>
         <div class="container" style="margin: 0;width: 100%;position: relative;" >    
-            <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 500px;margin-left: -50px;">
+            <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 40%;margin-left: -50px;">
               <div id="nav" class="right" style="position: relative;">
                 <div  class="container clearfix">
                   <ul  id="jetmenu" class="jetmenu blue" >
@@ -56,48 +88,45 @@
                     </li>
                     <li class="active"><a style="color: aliceblue;" href="/TrendAnalysis">趋势分析</a>
                     </li>
-                   
-                    <li><a style="color: aliceblue;" href="/log.html">操作日志及异常信息</a>
+                    <li ><a style="color: aliceblue;" href="/power.html">能耗统计</a>
+                    </li>
+                    <li ><a style="color: aliceblue;" href="/log.html">日志信息</a>
                     </li>
                     <li><a style="color: aliceblue;" href="#">定时设置</a>
                     </li>
-                    
                   </ul>
                 </div>
               </div>
             </div>
     
-            <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 450px;margin: 0 auto;">
+            <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 40%;margin: 0 auto;">
               <div class="site-title" id="title">
-              <a href="index.html" title="">
+              <a href="index" title="">
                   <h1 style="color: aliceblue;">东莞格力中央空调群控系统</h1>
               </a>
               </div>
            </div>
-    
-    
-          
         </div>
         <p class="mui-progressbar mui-progressbar-infinite"></p>
       </header>
-    <div style="position: relative;left:15px;top:10px;height: 560px;width:1260px;border:rgb(152, 161, 161) solid 2px;">
-        <div  style="position: absolute;left:15px;top:10px;border:rgb(152, 161, 161) solid 2px;height: 250px;width: 910px;">
+    <div style="position: relative;left:15px;top:10px;height: 90%;width:98%;border:rgb(152, 161, 161) solid 2px;">
+        <div  style="position: absolute;left:1%;top:1%;border:rgb(152, 161, 161) solid 2px;height: 50%;width: 70%;">
             <span style="font-size: 5px;margin-left: 12px;">设备运行时间统计</span>
-            <div id="dayRuntime" style="position: absolute;left:15px;top:30px;height: 200px;width:280px;border:rgb(152, 161, 161) solid 2px;"></div>    
-            <div id="weekRuntime" style="position: absolute;left:310px;top:30px;height: 200px;width:280px;border:rgb(152, 161, 161) solid 2px;"></div>    
-            <div id="monthRuntime" style="position: absolute;left:605px;top:30px;height: 200px;width:280px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="dayRuntime" style="position: absolute;left:1%;top:6%;height: 92%;width:32%;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="weekRuntime" style="position: absolute;left:34%;top:6%;height: 92%;width:32%;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="monthRuntime" style="position: absolute;left:67%;top:6%;height: 92%;width:32%;border:rgb(152, 161, 161) solid 2px;"></div>    
         </div>
 
-        <div  style="position:absolute;left:940px;top:10px;border:rgb(152, 161, 161) solid 2px;height: 250px;width: 300px;">
+        <div  style="position:absolute;left:73%;top:1%;border:rgb(152, 161, 161) solid 2px;height: 50%;width: 26%;">
             <span style="font-size: 5px;margin-left: 12px;">设备在线数量</span>
-            <div id="equipmentNum" style="position: absolute;left:15px;top:30px;height: 200px;width:270px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="equipmentNum" style="position: absolute;left:1%;top:4%;height:94%;width:98%;border:rgb(152, 161, 161) solid 2px;"></div>    
         </div>
 
-        <div  style="position: absolute;left:15px;top:280px;border:rgb(152, 161, 161) solid 2px;height: 250px;width: 1225px;">
+        <div  style="position: absolute;left:1%;top:53%;border:rgb(152, 161, 161) solid 2px;height: 45%;width:98%;">
             <span style="font-size: 5px;margin-left: 12px;">供水管道数据检测</span>
-            <div id="tube1" style="position: absolute;left:15px;top:30px;height: 200px;width:575px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            <div id="tube1" style="position: absolute;left:1%;top:6%;height: 90%;width:48%;border:rgb(152, 161, 161) solid 2px;"></div>    
            <!--- <div id="tube2" style="position: absolute;left:310px;top:30px;height: 200px;width:280px;border:rgb(152, 161, 161) solid 2px;"></div>    
-            --> <div id="tube3" style="position: absolute;left:605px;top:30px;height: 200px;width:605px;border:rgb(152, 161, 161) solid 2px;"></div>    
+            --> <div id="tube3" style="position: absolute;left:51%;top:6%;height: 90%;width:48%;border:rgb(152, 161, 161) solid 2px;"></div>    
         </div>
     </div>
     <script src="lib/jquery/jquery.min.js"></script>

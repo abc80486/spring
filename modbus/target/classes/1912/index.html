@@ -49,54 +49,53 @@
 
   
   <!-- end topbar -->
-<body>
+<body style="width: 1920px;margin: 0 auto;height: 1080px;">
   <header class="header" style="margin: 0;background-color: rgb(9, 136, 240);">
     <p id="Date" style="color: aliceblue;text-align: right;margin-right: 20px;height: 20px;"> </p>
     <div class="container" style="margin: 0;width: 100%;position: relative;" >    
-        <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 500px;margin-left: -50px;">
+        <div class="col-lg-9 col-md-12 col-sm-12" style="float: left;width: 40%;margin-left: -50px;">
           <div id="nav" class="right" style="position: relative;">
             <div  class="container clearfix">
               <ul  id="jetmenu" class="jetmenu blue" >
-                <li  class="active"><a style="color: aliceblue;" href="/index">监控中心</a>
+                <li class="active"><a style="color: aliceblue;" href="/index">监控中心</a>
                 </li>
-                <li><a style="color: aliceblue;" href="/TrendAnalysis">趋势分析</a>
+                <li ><a style="color: aliceblue;" href="/TrendAnalysis">趋势分析</a>
                 </li>
-               
-                <li><a style="color: aliceblue;" href="/log.html">操作日志及异常信息</a>
+                <li ><a style="color: aliceblue;" href="/power.html">能耗统计</a>
                 </li>
-                <li><a style="color: aliceblue;" href="#">定时设置</a>
+                <li ><a style="color: aliceblue;" href="/log.html">日志信息</a>
                 </li>
-                
+                <li><a style="color: aliceblue;" href="/timer.html">定时设置</a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 450px;margin: 0 auto;">
+        <div class="col-lg-3 col-md-3 col-sm-12 title-area" style="width: 40%;margin: 0 auto;">
           <div class="site-title" id="title">
           <a href="index.html" title="">
               <h1 style="color: aliceblue;">东莞格力中央空调群控系统</h1>
           </a>
           </div>
        </div>
-
-              <div id="login" style="width: 250px;height:50px;float: right;">
-                <form action="" method="post" style="position: relative;">
-                  <div style="float: left; height: 20px; width: 40px;"><input style="font-size: 10px;margin: 0;width: 80px;height: 20px;" type="text" name="username"  placeholder="账号"/></div>
-                  <div style="float: left;margin-left: 30px;"><input style="font-size: 10px;margin: 0;width: 80px;height: 20px" type="text" name="password"  placeholder="密码"/></div>
+              <div id="login" style="width: 380px;height:50px;left: 85%; position: relative;">
+                <form action="" method="post" style="position: absolute;">
+                  <div id="logg" style="float: left;">
+                    <div style="float: left; height: 20px; width: 40px;"><input style="font-size: 10px;margin: 0;width: 80px;height: 20px;" type="text" name="username"  placeholder="账号"/></div>
+                    <div style="float: left;margin-left: 30px;"><input style="font-size: 10px;margin: 0;width: 80px;height: 20px" type="text" name="password"  placeholder="密码"/></div>
+                  </div>
+                  <div id="loggb" style="float: left;">
                   <input style="margin-top: 2px; float: left;margin-left: 10px;height: 20px; width: 60px;font-size:small;padding: 0;" type="submit" value="登录"/></div>
-                  <input  id="outlog"style="margin-top: 2px; float: left;margin-left: 10px;height: 20px; width: 60px;font-size:small;padding: 0;display:none;" onclick="func2()" type="submit" value="注销"/></div>
+                  </div>
                 </form>
               </div>
-
-
-      
     </div>
     <p class="mui-progressbar mui-progressbar-infinite"></p>
   </header>
-  <div style="position: relative;">
+  <div style="position: relative;left:250px;">
     <img src="img/main5.jpg" alt="" class="img-responsive">  
-    <div style="position: absolute;top:0%;right: 10px;">
+    <div style="position: absolute;top:0%;left: 1100px;">
       <div class="mui-content-padded" style="width: 250px;">
         <h6>组合式空调</h6>
         <ul class="mui-table-view" style="font-size: 6px;">
@@ -123,7 +122,7 @@
       </div>
     </div>
 
-    <div style="position: absolute;top:270px;right: 10px;">
+    <div style="position: absolute;top:270px;left: 1100px;">
       <div class="mui-content-padded" style="width: 250px;">
         <h6></h6>
 
@@ -316,8 +315,8 @@
         dataType: "text",
         success : function(d){
           if(d!="null"){
-            document.getElementById("login").innerHTML = d;
-            document.getElementById("outlog").style.display = "block";
+            document.getElementById("logg").innerHTML = "<h5 style='color:white'>"+d+"</h5>";
+            document.getElementById("loggb").innerHTML = '<input  id="outlog"style="margin-top: 2px;float:left;margin-left: 10px;height: 20px; width: 60px;font-size:small;padding: 0;" onclick="func2()" type="submit" value="注销"/></div>'
           }
         }
       });  

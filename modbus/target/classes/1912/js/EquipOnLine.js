@@ -17,7 +17,7 @@ function EquipmentOnLine(id){
                 //alert(data.running);
             },
             error : function(e){
-                alert(e);
+                //alert(e);
             },
         });
         option = {
@@ -29,14 +29,14 @@ function EquipmentOnLine(id){
                 orient: 'vertical',
                 x: 'left',
                 data:['设备运行数量','设备停止数量','设备离线数量'],
-            itemWidth: 24,   // 设置图例图形的宽
-            itemHeight: 18,  // 设置图例图形的高
+                itemWidth: 24,   // 设置图例图形的宽
+                itemHeight: 18,  // 设置图例图形的高
             },
             series: [
                 {
                     type:'pie',
                     radius: ['50%', '70%'],
-                    center: ['70%','55%'],
+                    center: ['60%','50%'],
                     avoidLabelOverlap: false,
                     itemStyle : {
                         normal : {
@@ -64,7 +64,7 @@ function EquipmentOnLine(id){
         return ine;   
     };
     setTimeout(ine(),1);
-    setInterval(ine(),1*1000);
+    setInterval(ine(),17*1000);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
