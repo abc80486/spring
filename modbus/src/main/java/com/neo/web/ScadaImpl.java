@@ -68,11 +68,17 @@ public class ScadaImpl {
     @Scheduled(cron = "* * * * * ?")
     public static boolean getData() throws ModbusProtocolException, ModbusNumberException, ModbusIOException {
           int quantity = 100;
-          coil01 = master.readCoils(SLAVEID, 0, quantity);
-          coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
-          register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
-          register04 = master.readInputRegisters(SLAVEID, 0, quantity);
+          try{
 
+          
+            coil01 = master.readCoils(SLAVEID, 0, quantity);
+            coil02 = master.readDiscreteInputs(SLAVEID, 0, quantity);
+            register03 = master.readHoldingRegisters(SLAVEID, 0, quantity);
+            register04 = master.readInputRegisters(SLAVEID, 0, quantity);
+          }catch(Exception e){
+              System.out.println(new Date()+ " Get controller data error.");
+              return false;
+          }
           //List<Object> data = new ArrayList<>();
           data.clear();
           data.add(ScadaImpl.coil01[4]);

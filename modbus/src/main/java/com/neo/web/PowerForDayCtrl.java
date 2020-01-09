@@ -12,10 +12,13 @@ import com.neo.mapper.PowerForDayMapper;
 import com.neo.shiro.model.PowerForDay;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@EnableScheduling   // 2.开启定时任务
 @RestController
 @RequestMapping("/PowerForDay")
 public class PowerForDayCtrl {
@@ -37,8 +40,9 @@ public class PowerForDayCtrl {
         return powerForDayMapper.selectByOneDay(f.format(time));
     }
 
-    @GetMapping("save")
-    public String save(){
+    //@GetMapping("save")
+    @Scheduled(cron = "0 1 0 * * ?")
+    public  String  save(){
 
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM//dd");
 
@@ -48,8 +52,12 @@ public class PowerForDayCtrl {
         powerForDay.setWp1power(ScadaImpl.data.get(30).toString());
         powerForDay.setWp2power(ScadaImpl.data.get(32).toString());
         powerForDay.setWp3power(ScadaImpl.data.get(34).toString());
-
-        powerForDayMapper.insert(powerForDay);
+        //if(select(new Date())==null)
+        try{
+            powerForDayMapper.insert(powerForDay);
+        }catch(Exception e){
+            System.out.println(new Date()+" 能耗统计异常.");
+        }
         return powerForDay.toString();
     }
     //获取今天的耗电量
@@ -65,7 +73,7 @@ public class PowerForDayCtrl {
         
         last = select(new Date());
         if(last==null){
-            System.out.println(new Date()+"---->>>>  获取电量失败！");
+            System.out.println(new Date()+"---->>>>  初始化电量累计值！");
             save();
             return data();
             //return null;
