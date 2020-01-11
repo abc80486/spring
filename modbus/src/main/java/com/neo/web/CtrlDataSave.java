@@ -101,7 +101,7 @@ public class CtrlDataSave {
 
             //System.out.println(now.getTime()-wp1Date);
         if(temp!=dataNum) {
-            get();
+            //get();
             servicesCtrlMapper.insertStatusData(temp);
             servicesCtrlMapper.insertTest(data);
             System.out.println("状态数据改变，已经保存。。。");
@@ -114,7 +114,8 @@ public class CtrlDataSave {
        // wp1Date = new Date().getTime();
         return data+"</br>"+dataNum+"</br>"+dataLast;
     }
-    
+
+    @Scheduled(cron = "1 1 0 * * ?")
     public String get(){
         Date date = new Date();
         SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd");
