@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "com.neo.TEST.DependencyInjection.Setter.Main",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "com.neo.TEST.DependencyInjection.Constructor.Main",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "com.neo.TEST.parent.Main",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "com.neo.TEST.BeanPostProcessor.Main",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - MainApp",
             "request": "launch",
             "mainClass": "com.neo.TEST.MainApp",

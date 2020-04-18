@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Definition for textEditor bean -->
+   <bean id="class2" class="com.neo.TEST.DependencyInjection.Constructor.Class2">
+       <constructor-arg ref="class1"/> 
+   </bean>
+
+   <!-- Definition for spellChecker bean -->
+   <bean id="class1" class="com.neo.TEST.DependencyInjection.Constructor.Class1">
+   </bean>
+
+</beans>
