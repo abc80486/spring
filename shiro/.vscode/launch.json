@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Use",
+            "request": "launch",
+            "mainClass": "com.neo.tools.Use",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "com.neo.TEST.DependencyInjection.Setter.Main",
