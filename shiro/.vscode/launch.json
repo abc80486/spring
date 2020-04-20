@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - CreKLine",
+            "request": "launch",
+            "mainClass": "com.neo.sevice.bit.CreKLine",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Use",
+            "request": "launch",
+            "mainClass": "com.neo.sevice.bit.Use",
+            "projectName": "spring-boot-shiro"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Use",
             "request": "launch",
             "mainClass": "com.neo.tools.Use",

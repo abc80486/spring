@@ -1,4 +1,4 @@
-package com.neo.tools;
+package com.neo.sevice.bit;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -9,6 +9,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -122,11 +124,6 @@ public class Use {
                             }                                
                             if((p2 - p3)/p2*100>f/n){
                                 cun++;
-                                //System.out.println(new Date(t1)+" "+p1);
-                                //System.out.println(new Date(t2)+" "+p2);
-                                //System.out.println(new Date(t3)+" "+p3);
-                                //System.out.println("");
-                                //i = ind - 1;
                                 break;
                                 
                             }
@@ -136,11 +133,6 @@ public class Use {
                                 t3 = d.getJSONArray(kp).getLongValue(0);
                             }    
                             if((p3-p1)/p1*100 > f/n) {cun++;
-                                //System.out.println(new Date(t1)+" "+p1);
-                                //System.out.println(new Date(t2)+" "+p2);
-                                //System.out.println(new Date(t3)+" "+p3);
-                                //System.out.println("");
-                                //i = ind - 1;
                                 break;}
                         }
                     }
@@ -150,6 +142,65 @@ public class Use {
         }
         System.out.println(sum+"  "+cun);
         return cun;
+    }
+    public static JSONArray calRate(JSONArray da,int step){
+        JSONArray re = new JSONArray();
+        int size = da.size();
+        JSONArray no = new JSONArray();
+
+        if(size<=step){
+            no.add(da.getJSONArray(0).getDate(0));
+            no.add(calRate(da,0,size));
+            re.add(no);
+        }else{
+            Date t;
+            for(int i=0;i<size-step;i++){
+                no = new JSONArray();
+                t = da.getJSONArray(i).getDate(0);
+                no.add(t);
+                no.add(calRate(da,i,i+step-1));
+                re.add(no);
+                
+            }
+        }
+
+
+        return re;
+    }
+    public  static double calRate(JSONArray da,int l,int h){
+        double low = da.getJSONArray(l).getDoubleValue(3);
+        double high = da.getJSONArray(l).getDoubleValue(2);
+        Date t1 = da.getJSONArray(l).getDate(0);
+        Date t2 = t1;
+        int k=l;
+        JSONArray tem;
+        for(int i=l;i<h;i++){
+            tem = da.getJSONArray(i);
+            if(tem.getDoubleValue(3)<low) {
+                low = tem.getDoubleValue(3);
+                t1 = tem.getDate(0);
+                k = i;
+            }
+            if(tem.getDoubleValue(2)>high) {
+                high = tem.getDoubleValue(2);
+                t2 = tem.getDate(0);
+            }
+        }
+        //System.out.println(""+t1+" "+low+" "+high+" "+t2+" "+(high-low));
+        if(t1==t2) {
+            //判断是上涨还是下跌
+            if(da.getJSONArray(k).getDoubleValue(4)>=da.getJSONArray(k).getDoubleValue(4)){
+                return (high-low)/low*100;
+            }else return (high-low)/high*-100;
+        }else if(t2.getTime()>t1.getTime()) return (high-low)/low*100;
+        else return (high-low)/high*-100;
+    }
+
+    public static double calRaise2(Date s,Date e,String interval){
+        String data =  get_binance_kline("BTCUSDT",interval,s.getTime(),e.getTime());
+        JSONArray da= JSON.parseArray(data);
+        int size = da.size(); 
+        return calRate(da, 0, size);
     }
     public static double calRaise(Date s,Date e,String interval){
         String data =  get_binance_kline("BTCUSDT",interval,s.getTime(),e.getTime());
@@ -174,7 +225,7 @@ public class Use {
                 t2 = tem.getDate(0);
             }
         }
-        System.out.println(""+t1+" "+low+" "+high+" "+t2+" "+(high-low));
+       // System.out.println(""+t1+" "+low+" "+high+" "+t2+" "+(high-low));
         if(t1==t2) {
             //判断是上涨还是下跌
             if(da.getJSONArray(k).getDoubleValue(4)>=da.getJSONArray(k).getDoubleValue(4)){
@@ -185,37 +236,20 @@ public class Use {
     }
 
     public static void main(String arg[]) throws ParseException {
-        //System.out.println(data);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        double re = calRaise(sdf.parse("2020-03-03 00:00:00"), sdf.parse("2020-03-15 00:00:00"), "1h");
-        System.out.println(re);
-        //cal(da, 5, 4.0, 2, 4);
-/*
-        for(int i=0;i<size;++i){
+        Date s = sdf.parse("2020-04-10 00:00:00");
+        Date e = sdf.parse("2020-04-25 00:00:00");
+        String data =  get_binance_kline("BTCUSDT","15m",s.getTime(),e.getTime());
+        JSONArray da= JSON.parseArray(data);
 
-            JSONArray t = da.getJSONArray(i);
-            Date time = t.getDate(0);
-            double open = t.getDoubleValue(1);
-            double high = t.getDoubleValue(2);
-            double low = t.getDoubleValue(3);
-            double close = t.getDoubleValue(4);
-
-            boolean k = close >= open;
-            double tem = k?low:high;
-            //振幅
-            double r = (high-low)/tem*100.0;
-            //回调幅度
-            double p = k?(high-close)/high*100:(close-low)/low*100;
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-
-            if(r>=3.0){
-                //System.out.print(sdf.format(time)+"     ");
-                //System.out.println(r+"   "+p);
-            }
+        JSONArray re = calRate(da, 4);
+        //System.out.println(calRate(da, 5));
+        for(int i=0;i<re.size();i++) {
+            Double tem = re.getJSONArray(i).getDoubleValue(1);
+            if(tem < -4.0 || tem > 4.0)
+            System.out.println(sdf.format(re.getJSONArray(i).getDate(0))+" "+tem);
         }
-        //System.out.println(da.getJSONArray(0).getDoubleValue(1));
-*/
+        
     }
     public static String get_binance_kline(String symbol,String interval,int limit,long start,long end ) {
 		String url = "https://www.binance.com/api/v3/klines?";
