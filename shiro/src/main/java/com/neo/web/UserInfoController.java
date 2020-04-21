@@ -22,7 +22,7 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping("/userList")
-    @RequiresPermissions("userInfo:view")//权限管理;
+    //@RequiresPermissions("userInfo:view")//权限管理;
     public List<UserInfo> userInfo(){
         System.out.println(userInfoService.findAll().toString());
         return  userInfoService.findAll();
@@ -33,7 +33,7 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping("/userAdd")
-    @RequiresPermissions("userInfo:add")//权限管理;
+    //@RequiresPermissions("userInfo:add")//权限管理;
     public String userInfoAdd(){
         return "userInfoAdd";
     }

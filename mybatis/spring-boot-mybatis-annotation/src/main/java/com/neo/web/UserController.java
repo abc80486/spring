@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neo.model.MinuteData;
 import com.neo.model.User;
+import com.neo.services.MinuteDataService;
+import com.neo.mapper.MinuteDataMapper;
 import com.neo.mapper.UserMapper;
 
 @RestController
@@ -16,7 +19,16 @@ public class UserController {
 	
 	@Autowired
 	private UserMapper userMapper;
-	
+    
+    @Autowired
+	private MinuteDataMapper data;
+    
+    @RequestMapping("/getDatas")
+    public  List<MinuteData> getByTimeNum() {
+		List<MinuteData> d = data.getByTimeNum(1587316500000l, 4);
+		return d;
+    }
+    
 	@RequestMapping("/getUsers")
 	public List<User> getUsers() {
 		List<User> users=userMapper.getAll();

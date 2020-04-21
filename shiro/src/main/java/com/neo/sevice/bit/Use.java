@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -234,6 +238,78 @@ public class Use {
         }else if(t2.getTime()>t1.getTime()) return (high-low)/low*100;
         else return (high-low)/high*-100;
     }
+//  
+    public static Connection dbCon() { 
+
+        Connection con = null;
+
+        String driver = "com.mysql.cj.jdbc.Driver";
+        
+        String url = "jdbc:mysql://localhost:3306/bit?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true";
+        
+        String user = "dabing";
+        
+        String password = "123456";	
+        
+        try {
+            Class. forName(driver);
+        
+        } catch (ClassNotFoundException e ) {
+            con = null;
+            System.out.println("DATABASE CONNECT ERROR CLASS NOT FOUND EXCEPTION!");
+        }
+        
+        try {
+            con = DriverManager. getConnection(url, user, password); 
+        } catch (SQLException e ) {
+                    con = null;
+                    System.out.println("DATABASE CONNECT ERROR SQLEXCEPTION!");
+        }
+        return con ;   
+    }
+
+    public static ResultSet dbSL(Connection con,String select){
+        //Statement sm ;
+        ResultSet rs;
+        try{
+            rs = con.createStatement().executeQuery(select);
+            if (null == rs)
+                return null;
+        }catch (Exception e){
+            System.out.println("DATABASE QUERY ERROR!");
+            return null;
+        }
+         return rs;
+    }
+
+
+    public static JSONArray getDataForTimeNum(Date s,int num){
+
+        JSONArray re = new JSONArray();
+        Connection con = dbCon();
+        ResultSet r;
+        String sql = "select * from bit.bn_kline_m where start_time>="+s.getTime()+" limit "+ num;
+
+        if(null != con){
+            System.out.println("数据库连接成功");
+        }else{
+            System.out.println("数据库连接失败");      
+        }
+
+        r = dbSL(con, sql);
+
+
+        try {
+            //int size = r.getRow();
+            while(r.next()){
+                System.out.println(r.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return re;
+
+    }
 
     public static void main(String arg[]) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -242,6 +318,8 @@ public class Use {
         String data =  get_binance_kline("BTCUSDT","15m",s.getTime(),e.getTime());
         JSONArray da= JSON.parseArray(data);
 
+        getDataForTimeNum(s, 10);
+        /*
         JSONArray re = calRate(da, 4);
         //System.out.println(calRate(da, 5));
         for(int i=0;i<re.size();i++) {
@@ -249,6 +327,7 @@ public class Use {
             if(tem < -4.0 || tem > 4.0)
             System.out.println(sdf.format(re.getJSONArray(i).getDate(0))+" "+tem);
         }
+        */
         
     }
     public static String get_binance_kline(String symbol,String interval,int limit,long start,long end ) {

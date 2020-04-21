@@ -1,5 +1,8 @@
-c:\Users\xiangbin\iCloudDrive\code\java\java\SPRING\spring-boot-mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\enums\UserSexEnum.java
-c:\Users\xiangbin\iCloudDrive\code\java\java\SPRING\spring-boot-mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\web\UserController.java
-c:\Users\xiangbin\iCloudDrive\code\java\java\SPRING\spring-boot-mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\model\User.java
-c:\Users\xiangbin\iCloudDrive\code\java\java\SPRING\spring-boot-mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\MybatisAnnotationApplication.java
-c:\Users\xiangbin\iCloudDrive\code\java\java\SPRING\spring-boot-mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\mapper\UserMapper.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\enums\UserSexEnum.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\web\UserController.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\services\MinuteDataService.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\mapper\MinuteDataMapper.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\model\User.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\MybatisAnnotationApplication.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\mapper\UserMapper.java
+c:\Users\xiangbin\Documents\dabing\spring\mybatis\spring-boot-mybatis-annotation\src\main\java\com\neo\model\MinuteData.java
