@@ -21,14 +21,14 @@ public class UserController {
 	private UserMapper userMapper;
     
     @Autowired
-	private MinuteDataMapper data;
-    
-    @RequestMapping("/getDatas")
-    public  List<MinuteData> getByTimeNum() {
-		List<MinuteData> d = data.getByTimeNum(1587316500000l, 4);
-		return d;
+    private MinuteDataService mds;
+
+    @RequestMapping("/getByTimeNum")
+    public  List<MinuteData> getByTimeNum(long time , int num) {
+        return mds.getByTimeNum(time, num);
     }
-    
+
+
 	@RequestMapping("/getUsers")
 	public List<User> getUsers() {
 		List<User> users=userMapper.getAll();
