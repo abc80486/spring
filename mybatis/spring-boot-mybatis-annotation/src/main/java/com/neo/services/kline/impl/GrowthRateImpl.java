@@ -38,6 +38,7 @@ public class GrowthRateImpl implements GrowthRateService {
 
         high = d.get(s).getTop_price();
         low = d.get(s).getLow_price();
+
         //re.add(d.get(s).getStart_time()/1.0);
 
         int j=0;
@@ -67,6 +68,7 @@ public class GrowthRateImpl implements GrowthRateService {
                 re.add(r*100);
             }
         }
+        re.add(d.get(s).getStart_time()/1.0);
         return re;
     }
 
@@ -84,15 +86,18 @@ public class GrowthRateImpl implements GrowthRateService {
             re.add(a);
         }
 
-        for(int i=0;i<re.size();i++){
+        for(int i=0;i<re.size()-8;i++){
             for(int j=0;j<l;j++){
                 if(re.get(i).get(j) >= 2*1.0){
                     //计算从当前时间范围内回调范围
-                    for(int m=i;m<k+T[j];m++){
-                        if(re.get(k).get(j) <=1*1.0){
-                            
+                    System.out.println(re.get(i));
+                    for(int m=i;m<i+T[j];m++){
+                        if(re.get(m).get(j) <=-1){
+                            System.out.println(re.get(m));
                         }
                     }
+
+                    System.out.println("--------");
 
                 }
             }
@@ -100,19 +105,6 @@ public class GrowthRateImpl implements GrowthRateService {
         return re;  
     }
 
-    public double calRange(List<List<Double>> d,int f,int k,int n){
-
-        double P=0;
-        for(int i=0;i<d.size();i++){
-            if(d.get(i).get(0)>=f*1.0){
-                if(d.get(i+3).get(0)<f/n*1.0){
-                    System.out.println();
-                }
-            }
-        }
-
-        return P;
-    }
 
     @Override
     public List<Double> calGRforTimes(List<MinuteData> d, int T) {
