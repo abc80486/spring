@@ -12,7 +12,8 @@ import com.neo.services.kline.GrowthRateService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -74,6 +75,7 @@ public class GrowthRateImpl implements GrowthRateService {
 
 
     public List<List<Double>> calGrowthRate(List<MinuteData> d, int[] T){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 
         //int[] T = { 4, 8, 16, 24, 48, 96, 192, 384, 672 };
         List<List<Double>> re = new ArrayList<List<Double>>();
@@ -86,28 +88,43 @@ public class GrowthRateImpl implements GrowthRateService {
             re.add(a);
         }
 
-        for(int i=0;i<re.size()-8;i++){
+        int r1=0,r2=0;
+
+        for(int i=0;i<re.size()-k;i++){
             for(int j=0;j<l;j++){
                 if(re.get(i).get(j) >= 2*1.0){
                     //计算从当前时间范围内回调范围
-                    System.out.println(re.get(i));
+                    ++r1;
                     for(int m=i;m<i+T[j];m++){
-                        if(re.get(m).get(j) <=-1){
-                            System.out.println(re.get(m));
+                        if(re.get(m).get(j) <= 0.0){
+
+                            System.out.print(re.get(i).get(j)+" ");
+                            System.out.println(sdf.format(new Date(Math.round(re.get(i).get(l)))));            
+
+                            System.out.print(re.get(m).get(j)+" ");
+                            System.out.println(sdf.format(new Date(Math.round(re.get(m).get(l)))));
+                            
+                            System.out.println("--------");
+                            ++r2;
+                            break;
                         }
                     }
-
-                    System.out.println("--------");
-
                 }
             }
         }
+        System.out.println(r1+" "+r2+" "+r2*1.0/r1*100);
         return re;  
     }
 
 
     @Override
     public List<Double> calGRforTimes(List<MinuteData> d, int T) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Double> calGrowthRate(List<MinuteData> d, int T) {
         // TODO Auto-generated method stub
         return null;
     }

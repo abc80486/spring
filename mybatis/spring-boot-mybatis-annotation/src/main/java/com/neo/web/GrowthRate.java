@@ -58,7 +58,7 @@ public class GrowthRate {
     public List<List<Double>> getGrowth() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 
-        int[] T = {8};
+        int[] T = {12};
         long ti=0;
         try {
             ti = sdf.parse("2020-01-01 00:00:00").getTime();
@@ -66,7 +66,7 @@ public class GrowthRate {
             e.printStackTrace();
         }
 
-        List<MinuteData> d = mds.getByTimeNum(ti, 1000);
+        List<MinuteData> d = mds.getByTimeNum(ti, 2000);
         return gr.calGrowthRate(d,T);
 
         //return "yes";
