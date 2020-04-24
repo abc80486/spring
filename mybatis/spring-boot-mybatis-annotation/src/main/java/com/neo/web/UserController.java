@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.neo.model.MinuteData;
 import com.neo.model.User;
-import com.neo.services.MinuteDataService;
 import com.neo.mapper.MinuteDataMapper;
 import com.neo.mapper.UserMapper;
 
@@ -20,13 +19,6 @@ public class UserController {
 	@Autowired
 	private UserMapper userMapper;
     
-    @Autowired
-    private MinuteDataService mds;
-
-    @RequestMapping("/getByTimeNum")
-    public  List<MinuteData> getByTimeNum(long time , int num) {
-        return mds.getByTimeNum(time, num);
-    }
 
 
 	@RequestMapping("/getUsers")

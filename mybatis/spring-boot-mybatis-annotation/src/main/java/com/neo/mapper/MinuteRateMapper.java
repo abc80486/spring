@@ -19,10 +19,10 @@ public interface MinuteRateMapper {
     void delete(Long time);
 
 	@Select("SELECT * FROM bn_kline_gr_m WHERE start_time >= ${time} limit ${num}")
-    List<MinuteRate> getByTimeNum(Long time,int num);
+    List<MinuteRate> get(Long time,int num);
 
     @Select("SELECT * FROM bn_kline_gr_m WHERE start_time >= ${time}")
-    List<MinuteRate> getByTime(Long time);
+    List<MinuteRate> get(Long time);
 
 
 

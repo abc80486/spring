@@ -1,0 +1,132 @@
+package com.neo.services.MinuteDataService.Impl;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import javax.annotation.Resource;
+
+import com.neo.mapper.MinuteDataMapper;
+import com.neo.model.MinuteData;
+import com.neo.model.MinuteRate;
+import com.neo.services.MinuteDataService.MinuteDataService;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class MinuteDataServiceImpl implements MinuteDataService {
+ 
+    @Resource
+    private MinuteDataMapper data;
+
+    @Override
+    public List<MinuteData> get(long time, int num) {
+        List<MinuteData> d = data.get(time, num);
+        if (d.size() == num)
+            return d;
+        else {
+            System.out.println("数据量不足");
+            return null;
+        }
+    }
+
+    @Override
+    public List<MinuteData> get(long time) {
+        return data.get(time);
+    }
+
+    @Override
+    public List<MinuteRate> getGrowthRate(List<MinuteData> d, int T) {
+
+        /*
+        
+        */
+        List<MinuteRate> re = new ArrayList<MinuteRate>();
+        int size = d.size();
+        for(int i=0;i<=size-T;i++) re.add( getGrowthRate(d, i,i+T-1) );
+        for(int i=size-T+1;i<size;i++) re.add(getGrowthRate(d, i, size-1));
+        return re;
+    }
+
+    @Override
+    public MinuteRate getGrowthRate(List<MinuteData> d, int low,int high) {
+        MinuteRate re = new MinuteRate();
+        
+        /*
+        1.判断参数。1.1若低位大于等于高位，显示错误信息，返回空值；1.2数据集的长度小于高位数值，
+          显示错误信息，返回空值；
+        2.程序模型。从数列中获取最值；设置标志数值为初值；遍历数列,获取最值所在的位置;计算振幅；
+          
+        */
+        if(low>high){return null;};
+        if(high>=d.size()){return null;};
+
+        double p1 = d.get(low).getLow_price();
+        int t1 = low;
+        double p2 = d.get(low).getTop_price();
+        int t2 = low;
+
+        for(int i=low;i<=high;i++){
+            if(d.get(i).getLow_price() < p1){ p1 = d.get(i).getLow_price(); t1 = i;}
+            if(d.get(i).getTop_price() > p2){ p2 = d.get(i).getTop_price(); t2 = i;}
+        }
+
+        double range;
+        if(t1<t2)  range = (p2-p1)/p1*100;
+        else if(t1==t2) {
+            if(d.get(t1).getOpen_price()<d.get(t1).getClose_price()) range = (p2-p1)/p1*100;
+            else range = (p1-p2)/p2*100;
+        }else range = (p1-p2)/p2*100;
+
+        re.setStart_time(d.get(low).getStart_time());
+        re.setEnd_time(d.get(high).getEnd_time()+1);
+        re.setLow_price(p1);
+        re.setHigh_price(p2);
+        re.setLow_time(d.get(t1).getStart_time());
+        re.setHigh_time(d.get(t2).getStart_time());
+        re.setRange_price(range);
+    
+        return re;
+    }
+
+    @Override
+    public List<MinuteData> get(long stime, long etime) {
+        return data.get(stime, etime);
+    }
+
+    @Override
+    public List<MinuteRate> getGrowthRate(long time, int T) {
+        return getGrowthRate(get(time), T);
+    }
+
+    @Override
+    public List<Double> getCallBackPort(List<MinuteRate> d,int k) {
+    //数据中增长率间隔必须与给定T相同
+        //MinuteRate[] re=null;
+        List<Double> re = new ArrayList<>();
+        for(int i=0;i<d.size()-k;i++){
+
+            double p1 = d.get(i).getRange_price(),p2 = d.get(i).getHigh_price();
+            double p3 = d.get(i).getLow_price();
+
+            double m = Double.MAX_VALUE,n = Double.MIN_VALUE;
+            int flag=0;
+            for(int j=i+1;j<=i+1+k;j++){
+                if(d.get(j).getStart_time() > d.get(i).getHigh_time()){
+                    m = Math.min(d.get(j).getLow_price(),m);
+                    n = Math.max(d.get(j).getHigh_price(),n);    
+                    flag = 1;
+                }
+            }
+            double  p;
+            
+            if(p1 >= 0) p = ((m-p2)/p2);
+            else p = ((n-p3)/p3);
+
+            if(flag==1) re.add(p);
+        }
+        
+        return re;
+    }
+
+
+}

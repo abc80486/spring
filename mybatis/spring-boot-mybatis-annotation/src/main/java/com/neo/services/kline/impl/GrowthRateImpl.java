@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 
 import com.neo.model.MinuteData;
-import com.neo.services.MinuteDataService;
 import com.neo.services.kline.GrowthRateService;
 
 import java.text.ParseException;
