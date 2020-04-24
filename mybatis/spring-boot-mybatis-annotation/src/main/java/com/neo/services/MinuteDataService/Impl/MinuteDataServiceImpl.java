@@ -10,17 +10,18 @@ import com.neo.model.MinuteData;
 import com.neo.model.MinuteRate;
 import com.neo.services.MinuteDataService.MinuteDataService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MinuteDataServiceImpl implements MinuteDataService {
  
-    @Resource
+    @Autowired
     private MinuteDataMapper data;
 
     @Override
     public List<MinuteData> get(long time, int num) {
-        List<MinuteData> d = data.get(time, num);
+        List<MinuteData> d = data.getByTimeNum(time, num);
         if (d.size() == num)
             return d;
         else {
@@ -31,7 +32,8 @@ public class MinuteDataServiceImpl implements MinuteDataService {
 
     @Override
     public List<MinuteData> get(long time) {
-        return data.get(time);
+        List<MinuteData> d = data.getBySTime(time);
+        return d;
     }
 
     @Override
@@ -42,8 +44,8 @@ public class MinuteDataServiceImpl implements MinuteDataService {
         */
         List<MinuteRate> re = new ArrayList<MinuteRate>();
         int size = d.size();
-        for(int i=0;i<=size-T;i++) re.add( getGrowthRate(d, i,i+T-1) );
-        for(int i=size-T+1;i<size;i++) re.add(getGrowthRate(d, i, size-1));
+        for(int i=0;i<=size-T-1;i++) re.add( getGrowthRate(d, i,i+T-1) );//定值
+        for(int i=size-T;i<size;i++) re.add(getGrowthRate(d, i, size-1));//波动值
         return re;
     }
 
@@ -90,7 +92,7 @@ public class MinuteDataServiceImpl implements MinuteDataService {
 
     @Override
     public List<MinuteData> get(long stime, long etime) {
-        return data.get(stime, etime);
+        return data.getBySDTime(stime, etime);
     }
 
     @Override
@@ -99,11 +101,11 @@ public class MinuteDataServiceImpl implements MinuteDataService {
     }
 
     @Override
-    public List<Double> getCallBackPort(List<MinuteRate> d,int k) {
+    public List<Double> getCallBack(List<MinuteRate> d,int k) {
     //数据中增长率间隔必须与给定T相同
         //MinuteRate[] re=null;
         List<Double> re = new ArrayList<>();
-        for(int i=0;i<d.size()-k;i++){
+        for(int i=0;i<d.size()-k-1;i++){
 
             double p1 = d.get(i).getRange_price(),p2 = d.get(i).getHigh_price();
             double p3 = d.get(i).getLow_price();
@@ -122,10 +124,44 @@ public class MinuteDataServiceImpl implements MinuteDataService {
             if(p1 >= 0) p = ((m-p2)/p2);
             else p = ((n-p3)/p3);
 
-            if(flag==1) re.add(p);
+            if(flag==1) re.add(p*100);
+            /*
+            if(d.get(i).getRange_price()>=2.0 || d.get(i).getRange_price()<=-2.0){
+                System.out.println(d.get(i)+" "+p*100);
+                if(p1>=0) System.out.println(m);
+                else System.out.println(m);
+            }*/
         }
         
         return re;
+    }
+
+    @Override
+    public Double getCallBackPro(long stime, long etime, int T, double f, int k, int n) {
+        // TODO Auto-generated method stub
+        List<MinuteData> sd = get(stime, etime);
+        List<MinuteRate> d = getGrowthRate(sd, T);
+        List<Double> cb = getCallBack(d, k*T);
+        int cun=0,sum=0;
+        for(int i=0;i<cb.size();i++){
+            double tag = d.get(i).getRange_price();
+            if(tag>=f || tag<=-1.0*f){
+                System.out.print(d.get(i)+" ");
+                sum++;
+               if(tag>=0 && cb.get(i)<=-1.0*f/n) {
+                   cun++;
+                   System.out.print(cb.get(i));
+               }
+               if(tag<0 && cb.get(i)>=f/n) {
+                   cun++;
+                   System.out.print(cb.get(i));
+               }
+               System.out.println("");
+            }
+            //
+        }
+        System.out.println(cun+","+sum+","+cun*1.0/sum*100);
+        return cun*1.0/sum*100;
     }
 
 

@@ -5,13 +5,15 @@ import javax.annotation.Resource;
 import com.neo.mapper.MinuteRateMapper;
 import com.neo.model.MinuteRate;
 import com.neo.services.MinuteRateService.MinuteRateService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MinuteRateServiceImpl implements MinuteRateService {
 
-    @Resource
-    MinuteRateMapper minuteDataMapper;
+    @Autowired
+    private MinuteRateMapper minuteDataMapper;
 
     @Override
     public void insert(MinuteRate d) {
@@ -25,11 +27,11 @@ public class MinuteRateServiceImpl implements MinuteRateService {
 
     @Override
     public List<MinuteRate> get(Long time, int num) {
-        return minuteDataMapper.get(time,num);
+        return minuteDataMapper.getByTimeNum(time,num);
     }
 
     @Override
     public List<MinuteRate> get(Long time) {
-        return minuteDataMapper.get(time);
+        return minuteDataMapper.getByTime(time);
     }
 }

@@ -17,7 +17,9 @@ public interface MinuteDataService {
 
     List<MinuteRate> getGrowthRate(long time,int T);//根据时间和间隔获取振幅列表
 
-    List<Double> getCallBackPort(List<MinuteRate> d,int k);
+    List<Double> getCallBack(List<MinuteRate> d,int k);
+
+    Double getCallBackPro(long stime,long etime,int T,double f,int k,int n);
 
 
 }
