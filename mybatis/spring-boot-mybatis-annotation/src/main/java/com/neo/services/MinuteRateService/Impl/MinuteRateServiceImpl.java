@@ -34,4 +34,9 @@ public class MinuteRateServiceImpl implements MinuteRateService {
     public List<MinuteRate> get(Long time) {
         return minuteDataMapper.getByTime(time);
     }
+
+    @Override
+    public void update(MinuteRate d, int val) {
+        minuteDataMapper.update(d, val);
+    }
 }

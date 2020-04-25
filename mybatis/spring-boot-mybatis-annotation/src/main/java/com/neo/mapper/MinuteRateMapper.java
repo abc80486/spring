@@ -24,6 +24,9 @@ public interface MinuteRateMapper {
     @Select("SELECT * FROM bn_kline_gr_m WHERE start_time >= ${time}")
     List<MinuteRate> getByTime(Long time);
 
+    @Update("UPDATE bn_kline_gr_m SET start_time=${d.start_time},end_time=${d.end_time},low_price=${d.low_price},high_price=${d.high_price},range_price=${d.range_price} WHERE val=${val}")
+	void update(MinuteRate d,int val);
+
 
 
 }

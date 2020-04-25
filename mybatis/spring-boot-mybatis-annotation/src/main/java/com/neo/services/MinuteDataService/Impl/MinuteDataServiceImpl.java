@@ -102,17 +102,17 @@ public class MinuteDataServiceImpl implements MinuteDataService {
 
     @Override
     public List<Double> getCallBack(List<MinuteRate> d,int k) {
-    //数据中增长率间隔必须与给定T相同
+    //数据中增长率间隔必须大于给定T
         //MinuteRate[] re=null;
         List<Double> re = new ArrayList<>();
-        for(int i=0;i<d.size()-k-1;i++){
+        for(int i=0;i<d.size()-k;i++){
 
             double p1 = d.get(i).getRange_price(),p2 = d.get(i).getHigh_price();
             double p3 = d.get(i).getLow_price();
 
             double m = Double.MAX_VALUE,n = Double.MIN_VALUE;
             int flag=0;
-            for(int j=i+1;j<=i+1+k;j++){
+            for(int j=i+1;j<=i+k;j++){
                 if(d.get(j).getStart_time() > d.get(i).getHigh_time()){
                     m = Math.min(d.get(j).getLow_price(),m);
                     n = Math.max(d.get(j).getHigh_price(),n);    
@@ -160,6 +160,7 @@ public class MinuteDataServiceImpl implements MinuteDataService {
             }
             //
         }
+        System.out.println(sd.size()+","+d.size()+","+cb.size());
         System.out.println(cun+","+sum+","+cun*1.0/sum*100);
         return cun*1.0/sum*100;
     }

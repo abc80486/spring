@@ -14,6 +14,7 @@ import com.neo.model.MinuteData;
 import com.neo.model.MinuteRate;
 import com.neo.model.User;
 import com.neo.services.MinuteDataService.MinuteDataService;
+import com.neo.services.com.LatelyGrowthRateService;
 import com.neo.services.kline.GrowthRateService;
 import com.neo.mapper.MinuteDataMapper;
 import com.neo.mapper.UserMapper;
@@ -26,6 +27,16 @@ public class GrowthRate {
     @Autowired
     private MinuteDataService mds;
 
+
+    @Autowired
+    private LatelyGrowthRateService lgrs;
+
+    @RequestMapping("/getLatelyGrowthRate")
+    public List<MinuteRate> getLatelyGrowthRate(){
+        List<MinuteRate> re;
+        re = lgrs.update();
+        return re;
+    }
 
     @RequestMapping("/get")
     public List<MinuteData> get() {

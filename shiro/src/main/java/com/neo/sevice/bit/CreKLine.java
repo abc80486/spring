@@ -224,9 +224,9 @@ public class CreKLine {
         public static Connection dbCon() { 
                 String driver = "com.mysql.jdbc.Driver";
                 
-                String url = "jdbc:mysql://47.57.123.90:3306/bit";
+                String url = "jdbc:mysql://localhost:3306/bit?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true";
                 
-                String user = "root";
+                String user = "dabing";
                 
                 String password = "123456";	
                 

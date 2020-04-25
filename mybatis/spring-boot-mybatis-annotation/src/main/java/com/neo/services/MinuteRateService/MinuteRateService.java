@@ -13,5 +13,6 @@ public interface MinuteRateService {
 
     List<MinuteRate> get(Long time);
 
-    
+    void update(MinuteRate d,int val);
+
 }
