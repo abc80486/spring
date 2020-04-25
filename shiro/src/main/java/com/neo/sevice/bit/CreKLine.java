@@ -85,7 +85,7 @@ public class CreKLine {
     public static void insrDB(){
         long db_time = GetDBStime();
         Date now = new Date();
-        while ((now.getTime()-db_time)>1000*60*60*24) {//一天前数据
+        while ((now.getTime()-db_time)>1000*60*60) {//一天前数据
             System.out.println(now+" "+get_bnbtc_kline(db_time + 5, 1000)+" "+new Date(db_time));
             db_time = GetDBStime();
             now = new Date();
