@@ -1,7 +1,6 @@
 package com.neo.services.MinuteRateService.Impl;
 
 import java.util.List;
-import javax.annotation.Resource;
 import com.neo.mapper.MinuteRateMapper;
 import com.neo.model.MinuteRate;
 import com.neo.services.MinuteRateService.MinuteRateService;

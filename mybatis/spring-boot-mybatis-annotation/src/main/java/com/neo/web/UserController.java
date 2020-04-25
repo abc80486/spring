@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neo.model.MinuteData;
 import com.neo.model.User;
-import com.neo.mapper.MinuteDataMapper;
 import com.neo.mapper.UserMapper;
 
 @RestController

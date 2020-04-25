@@ -3,7 +3,6 @@ package com.neo.services.MinuteDataService.Impl;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
 
 import com.neo.mapper.MinuteDataMapper;
 import com.neo.model.MinuteData;
@@ -138,7 +137,6 @@ public class MinuteDataServiceImpl implements MinuteDataService {
 
     @Override
     public Double getCallBackPro(long stime, long etime, int T, double f, int k, int n) {
-        // TODO Auto-generated method stub
         List<MinuteData> sd = get(stime, etime);
         List<MinuteRate> d = getGrowthRate(sd, T);
         List<Double> cb = getCallBack(d, k*T);
@@ -163,6 +161,11 @@ public class MinuteDataServiceImpl implements MinuteDataService {
         System.out.println(sd.size()+","+d.size()+","+cb.size());
         System.out.println(cun+","+sum+","+cun*1.0/sum*100);
         return cun*1.0/sum*100;
+    }
+
+    @Override
+    public MinuteData insert(MinuteData d) {
+        return data.insert(d);
     }
 
 
