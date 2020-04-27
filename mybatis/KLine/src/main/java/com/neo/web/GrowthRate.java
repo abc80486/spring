@@ -55,19 +55,20 @@ public class GrowthRate {
         //return "yes";
     
     }
-    @RequestMapping("/cb")
-    public double callback() {
+    @RequestMapping("/callBack")
+    public double callBack(String st,String et,int T,double f,int k,int n) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 
         long stime=0;
         long etime=0;
         try {
-            stime = sdf.parse("2020-01-01 00:00:00").getTime();
-            etime = sdf.parse("2020-04-18 00:00:00").getTime();
+            stime = sdf.parse(st).getTime();
+            etime = sdf.parse(et).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return mds.getCallBackPro(stime, etime, 12, 4, 1, 2);
+        return mds.getCallBackPro(stime, etime, T, f, k, n);
+        //http://localhost:8080/callBack?st=2018-01-01%2000:00:00&et=2020-01-01%2000:00:00&T=16&f=10&k=1&n=2
     }
 
     @RequestMapping("/BNKLine")
