@@ -123,7 +123,7 @@ public class CreKLine {
 
         JSONArray b = JSON.parseArray(data);
         //System.out.println(b);
-        for (int j = 0;j<b.size(); j++) {
+        for (int j = 0;j<b.size()-1; j++) {
             JSONArray c = b.getJSONArray(j);
             String sql = "insert bit.bn_kline_m(start_time,open_price,top_price,low_price,close_price,";
             sql += "amount,end_time,quantity,exchange_lots,vol_amount,vol_quantity) values(";
