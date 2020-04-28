@@ -10,6 +10,9 @@ public class CallBack implements Serializable{
 
     private static final long serialVersionUID = 1782377866L;
 
+
+    private long startTime;
+
     private long latelyTime;
 
     private int cycle;

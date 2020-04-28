@@ -167,10 +167,12 @@ public class MinuteDataServiceImpl implements MinuteDataService {
 
         List<CallBackRate> cbr = new ArrayList<CallBackRate>();
 
+        re.setStartTime(sd.get(0).getStart_time());
         re.setLatelyTime(sd.get(sd.size()-1).getEnd_time()+1);
         re.setCycle(T);
         re.setK(k);
         re.setN(n);
+        cbr.add(null);
         for(int f=1;f<=14;f++){
             int cun = 0, sum = 0;
             for (int i = 0; i < cb.size(); i++) {
@@ -180,17 +182,17 @@ public class MinuteDataServiceImpl implements MinuteDataService {
                     if (tag >= 0 && cb.get(i) <= -1.0 * f / n) {
                         cun++;
                     }
-                    if (tag < 0 && cb.get(i) >= f / n) {
+                    if (tag < 0 && cb.get(i) >= 1.0*f / n) {
                         cun++;
                     }
                 }
             }
             CallBackRate temp = new CallBackRate();
-            temp.setCun(cun);temp.setSum(sum);temp.setP(cun*1.0/sum);
-            cbr.add(null);cbr.add(temp);
+            temp.setCun(cun);temp.setSum(sum);temp.setP(sum!=0?cun*1.0/sum*100:0);
+            cbr.add(temp);
         }
-
-        return null;
+        re.setRate(cbr);
+        return re;
     }
 
     @Override

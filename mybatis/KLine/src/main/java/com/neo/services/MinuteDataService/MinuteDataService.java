@@ -21,7 +21,7 @@ public interface MinuteDataService {
 
     Double getCallBackPro(long stime,long etime,int T,double f,int k,int n);
 
-    CallBack getCallBackPro(long stime,long etime,int T,int k,int n);
+    CallBack getCallBackPro(long stime,long etime,int T,int k,int n);//获取回调列表
 
     MinuteData insert(MinuteData d);
 
