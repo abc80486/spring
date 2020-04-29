@@ -6,4 +6,5 @@ import com.neo.model.MinuteRate;
 
 public interface LatelyGrowthRateService {
     public List<MinuteRate> update();
+    public boolean predict();
 }

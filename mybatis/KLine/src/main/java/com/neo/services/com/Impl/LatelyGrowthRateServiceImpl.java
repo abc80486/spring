@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.neo.mapper.PredictMapper;
 import com.neo.model.MinuteData;
 import com.neo.model.MinuteRate;
+import com.neo.model.Predict;
 import com.neo.services.MinuteDataService.MinuteDataService;
 import com.neo.services.MinuteRateService.MinuteRateService;
 import com.neo.services.com.LatelyGrowthRateService;
@@ -26,11 +28,15 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
     @Autowired
     private MinuteRateService mrs;
 
+    @Autowired
+    private PredictMapper pm;
+
     @Scheduled(cron = "20 */16 * * * ?")
     public void updateData(){
         int[] low={1,4,16,24,48,96,192,384,672};
+        List<MinuteRate> latelyGr = update();
         for(int i=0;i<low.length;i++){
-            mrs.update(update().get(i),low[i]);
+            mrs.update(latelyGr.get(i),low[i]);
         }
         System.out.println(new Date()+" 最近一周的增长率更新成功");
     }
@@ -49,7 +55,41 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
         }
         return re;
     }
+    public List<Predict> predict(List<MinuteRate> mr){
+        List<Predict> re = new ArrayList<Predict>();
+        int[] T={1,4,16,24,48,96,192,384,672};
+        for(int i=1;i<mr.size();i++){
+            MinuteRate tp = mr.get(i);
+            for(int j=14;j>=2;j-=2){
+                if(tp.getRange_price()>j){
+                    Predict p = new Predict();
+                    p.setT(T[i]);
+                    int k = 15*60*1000;
+                    p.setStartTime(tp.getHigh_time()+k);
+                    p.setEndTime(tp.getHigh_time()+k*T[i]+k);
+                    int n=2;
+                    p.setPredictValue(tp.getHigh_price()*(1-tp.getRange_price()/n/100));
+                    p.setRate(tp.getRange_price()/2*-1);
+                    re.add(p);
+                    break;
+                }
+            }
+        }
+        return re;
+    }
 
 
+    public boolean predict(){
+        List<MinuteRate> mr = update();
+        List<Predict> re = predict(mr);
+        for(int i=0;i<re.size();i++){
+            try{
+                pm.insert(re.get(i));
+            }catch(Exception e){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
