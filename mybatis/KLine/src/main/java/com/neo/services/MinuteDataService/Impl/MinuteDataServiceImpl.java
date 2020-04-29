@@ -250,7 +250,7 @@ public class MinuteDataServiceImpl implements MinuteDataService {
         return true;
     }
 
-    @Scheduled(cron = "0 */16 * * * ?")
+    @Scheduled(cron = "0 16,31,46,01 * * * ?")
     public boolean updateDate(){
         boolean t = insertFor15m(1000);
         if(t==true)  System.out.println(new Date()+" 最新成交数据更新成功");

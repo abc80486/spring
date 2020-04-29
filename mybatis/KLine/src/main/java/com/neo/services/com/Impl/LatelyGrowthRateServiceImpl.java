@@ -31,15 +31,30 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
     @Autowired
     private PredictMapper pm;
 
-    @Scheduled(cron = "20 */16 * * * ?")
+    @Scheduled(cron = "10 16,31,46,01 * * * ?")
     public void updateData(){
         int[] low={1,4,16,24,48,96,192,384,672};
         List<MinuteRate> latelyGr = update();
+
         for(int i=0;i<low.length;i++){
             mrs.update(latelyGr.get(i),low[i]);
         }
         System.out.println(new Date()+" 最近一周的增长率更新成功");
+
+        List<Predict> re = predict(latelyGr);
+        for(int i=0;i<re.size();i++){
+            try{
+                Predict p = pm.selectForCycle(re.get(i).getT());
+                if(p==null || re.get(i).getEndTime() > p.getEndTime())
+                    pm.insert(re.get(i));
+            }catch(Exception e){
+                System.out.println(e.toString());
+                return;
+            }
+        }
+        System.out.println(new Date()+" 最近一周的价格预测更新成功");
     }
+
     public List<MinuteRate> update(){
         String[] val={"15m","1h","4h","6h","12h","1d","2d","4d","7d"};
         int[] low={1,4,16,24,48,96,192,384,672};
@@ -84,8 +99,11 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
         List<Predict> re = predict(mr);
         for(int i=0;i<re.size();i++){
             try{
-                pm.insert(re.get(i));
+                Predict p = pm.selectForCycle(re.get(i).getT());
+                if(p==null || re.get(i).getEndTime() > p.getEndTime())
+                    pm.insert(re.get(i));
             }catch(Exception e){
+                System.out.println(e.toString());
                 return false;
             }
         }

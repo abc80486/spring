@@ -98,15 +98,4 @@ public class GrowthRate {
         return cb;
         //http://localhost:8080/callBack?st=2018-01-01%2000:00:00&et=2020-01-01%2000:00:00&T=16&f=10&k=1&n=2
     }
-
-    @RequestMapping("/BNKLine")
-    public List<MinuteData> BNKLine(){
-        return GetKlineData.Kline_15m(1L, 10);
-    }
-    @RequestMapping("/insertFor15m")
-    public boolean insertFor15m(){
-        return mds.insertFor15m(2);
-    }
-
-
 }
