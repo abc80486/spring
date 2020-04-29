@@ -244,7 +244,7 @@ public class MinuteDataServiceImpl implements MinuteDataService {
                 data.insert(d.get(i));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(new Date()+" 交易数据更新失败，请检查网络");
             return false;
         }
         return true;

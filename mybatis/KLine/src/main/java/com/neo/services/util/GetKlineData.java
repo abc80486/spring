@@ -68,6 +68,7 @@ public class GetKlineData {
 //System.out.print(url);
         List<MinuteData> re = new ArrayList<MinuteData>();
         JSONArray sd = JSON.parseArray(url);
+        if(null == sd) return null;
         for(int i=0;i<sd.size();i++){
             JSONArray tm = sd.getJSONArray(i);
             MinuteData temp = new MinuteData();
