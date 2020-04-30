@@ -18,6 +18,7 @@ public interface PredictService {
     boolean updateResult();
 
     //计算预测成功的概率
+    double correctRate();
 
 
 }

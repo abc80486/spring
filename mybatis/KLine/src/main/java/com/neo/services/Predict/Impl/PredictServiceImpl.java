@@ -11,7 +11,10 @@ import com.neo.services.Predict.PredictService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 @Service
 public class PredictServiceImpl implements PredictService {
 
@@ -88,6 +91,16 @@ public class PredictServiceImpl implements PredictService {
         }
         System.out.println(new Date()+" predict表更新预测结果数量 " + size);
         return true;
+    }
+
+   
+    @RequestMapping("/predict/correctRate")
+    @Override
+    public double correctRate() {
+        int y = pm.numCorrect();
+        int n = pm.numError();
+        
+        return y*100.0/(y+n);
     }
 
 }
