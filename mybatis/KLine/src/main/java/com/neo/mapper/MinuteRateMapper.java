@@ -11,8 +11,8 @@ import com.neo.model.MinuteRate;
 
 public interface MinuteRateMapper {
     
-
-    @Insert("INSERT INTO bn_kline_gr_m  VALUES(${start_time}, ${end_time}, ${low_price},${high_price},${low_time},${high_time},${range_price})")
+    //
+    @Insert("INSERT INTO bn_kline_gr_m(val,start_time,end_time,low_price,high_price,low_time,high_time,range_price})  VALUES(${val},#{dsc},${start_time}, ${end_time}, ${low_price},${high_price},${low_time},${high_time},${range_price})")
 	void insert(MinuteRate d);
 
     @Delete("DELETE FROM bn_kline_gr_m WHERE start_time = ${time}")
@@ -25,7 +25,10 @@ public interface MinuteRateMapper {
     List<MinuteRate> getByTime(Long time);
 
     @Update("UPDATE bn_kline_gr_m SET start_time=${d.start_time},end_time=${d.end_time},low_price=${d.low_price},high_price=${d.high_price},low_time=${d.low_time},high_time=${d.high_time},range_price=${d.range_price} WHERE val=${val}")
-	void update(MinuteRate d,int val);
+    void update(MinuteRate d,int val);
+    
+    @Delete("DELETE FROM bn_kline_gr_m")
+    void deleteAll();
 
 
 
