@@ -76,7 +76,7 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
         for(int i=1;i<T.length;i++){
             MinuteRate tp = mr.get(i);
             for(int j=14;j>=2;j-=2){
-                if(tp.getRange_price()>j){
+                if(tp.getRange_price()>=j){
                     Predict p = new Predict();
                     p.setT(T[i]);
                     int k = 15*60*1000;
@@ -84,6 +84,18 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
                     p.setEndTime(tp.getHigh_time()+k*T[i]+k);
                     int n=2;
                     p.setPredictValue(tp.getHigh_price()*(1-tp.getRange_price()/n/100));
+                    p.setRate(tp.getRange_price()/2*-1);
+                    re.add(p);
+                    break;
+                }
+                if(tp.getRange_price()<=j*-1){
+                    Predict p = new Predict();
+                    p.setT(T[i]);
+                    int k = 15*60*1000;
+                    p.setStartTime(tp.getLow_time()+k);
+                    p.setEndTime(tp.getLow_time()+k*T[i]+k);
+                    int n=2;
+                    p.setPredictValue(tp.getLow_price()*(1-tp.getRange_price()/n/100));
                     p.setRate(tp.getRange_price()/2*-1);
                     re.add(p);
                     break;

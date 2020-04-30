@@ -14,6 +14,7 @@ import com.neo.model.MinuteData;
 import com.neo.model.MinuteRate;
 import com.neo.services.CallBack.CallBackService;
 import com.neo.services.MinuteDataService.MinuteDataService;
+import com.neo.services.Predict.PredictService;
 import com.neo.services.com.LatelyGrowthRateService;
 import com.neo.services.util.GetKlineData;
 
@@ -29,6 +30,14 @@ public class GrowthRate {
 
     @Autowired
     private LatelyGrowthRateService lgrs;
+
+    @Autowired
+    private PredictService ps;
+
+    @RequestMapping("/predict/test")
+    public boolean predictTest(){
+        return ps.updateResult();
+    } 
 
     @RequestMapping("/getLatelyGrowthRate")
     public List<MinuteRate> getLatelyGrowthRate(){

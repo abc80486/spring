@@ -9,6 +9,7 @@ public class Predict implements Serializable{
 
     private static final long serialVersionUID = 422677L;
 
+    private int id;
     private int T;
     private long startTime;
     private long endTime;
