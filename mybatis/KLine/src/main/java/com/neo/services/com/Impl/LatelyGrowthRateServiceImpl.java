@@ -72,11 +72,12 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
     }
     public List<Predict> predict(List<MinuteRate> mr){
         List<Predict> re = new ArrayList<Predict>();
-        int[] T={1,4,16,24,48,96,192,384,672};
+        int[] T={1,4,16,24,48,96,192,384,672,960,1344};
+        int[] P={1,2, 4, 4, 6, 6,  8, 10, 12, 12,  15};
         for(int i=1;i<T.length;i++){
             MinuteRate tp = mr.get(i);
-            for(int j=14;j>=2;j-=2){
-                if(tp.getRange_price()>=j){
+            //for(int j=14;j>=2;j-=2){
+                if(tp.getRange_price()>=P[i]){
                     Predict p = new Predict();
                     p.setT(T[i]);
                     int k = 15*60*1000;
@@ -88,7 +89,7 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
                     re.add(p);
                     break;
                 }
-                if(tp.getRange_price()<=j*-1){
+                if(tp.getRange_price()<=P[i]*-1){
                     Predict p = new Predict();
                     p.setT(T[i]);
                     int k = 15*60*1000;
@@ -100,7 +101,7 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
                     re.add(p);
                     break;
                 }
-            }
+            //}
         }
         return re;
     }
