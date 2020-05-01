@@ -39,20 +39,23 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
         for(int i=0;i<low.length;i++){
             mrs.update(latelyGr.get(i),low[i]);
         }
-        System.out.println(new Date()+" 最近一周的增长率更新成功");
-
+        System.out.println(new Date()+" 60天内的增长率数据更新成功");
+        //System.out.println(latelyGr);
         List<Predict> re = predict(latelyGr);
+        //System.out.println(latelyGr);
+        //System.out.println(re);
+        int k=0;
         for(int i=0;i<re.size();i++){
             try{
                 Predict p = pm.selectForCycle(re.get(i).getT());
                 if(p==null || re.get(i).getEndTime() > p.getEndTime())
-                    pm.insert(re.get(i));
+                    {pm.insert(re.get(i));++k;}
             }catch(Exception e){
                 System.out.println(e.toString());
                 return;
             }
         }
-        System.out.println(new Date()+" 最近一周的价格预测更新成功");
+        System.out.println(new Date()+" predict表添加预测数目："+k+"\n");
     }
 
     public List<MinuteRate> update(){
@@ -76,7 +79,6 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
         int[] P={1,2, 4, 4, 6, 6,  8, 10, 12, 12,  15};
         for(int i=1;i<T.length;i++){
             MinuteRate tp = mr.get(i);
-            //for(int j=14;j>=2;j-=2){
                 if(tp.getRange_price()>=P[i]){
                     Predict p = new Predict();
                     p.setT(T[i]);
@@ -87,7 +89,6 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
                     p.setPredictValue(tp.getHigh_price()*(1-tp.getRange_price()/n/100));
                     p.setRate(tp.getRange_price()/2*-1);
                     re.add(p);
-                    break;
                 }
                 if(tp.getRange_price()<=P[i]*-1){
                     Predict p = new Predict();
@@ -99,9 +100,7 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
                     p.setPredictValue(tp.getLow_price()*(1-tp.getRange_price()/n/100));
                     p.setRate(tp.getRange_price()/2*-1);
                     re.add(p);
-                    break;
                 }
-            //}
         }
         return re;
     }
