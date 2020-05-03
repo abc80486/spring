@@ -7,6 +7,7 @@ import com.neo.model.Predict;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.lang.Nullable;
 
 public interface PredictMapper {
 
@@ -27,6 +28,12 @@ public interface PredictMapper {
 
     @Select("SELECT COUNT(result) FROM predict WHERE result = -1")
     int numError();
+
+    @Select("SELECT COUNT(result) FROM predict WHERE result = 1 AND T = ${value}")
+    int numCorrectOnCycle(int T);
+
+    @Select("SELECT COUNT(result) FROM predict WHERE result = -1 AND T = ${value}")
+    int numErrorOnCycle(int T);
 
 
 

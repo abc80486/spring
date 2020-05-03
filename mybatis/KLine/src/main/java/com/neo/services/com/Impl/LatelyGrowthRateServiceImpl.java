@@ -76,7 +76,7 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
     public List<Predict> predict(List<MinuteRate> mr){
         List<Predict> re = new ArrayList<Predict>();
         int[] T={1,4,16,24,48,96,192,384,672,960,1344};
-        int[] P={1,2, 4, 4, 6, 6,  8, 10, 12, 12,  15};
+        int[] P={1,2, 2, 4, 6, 6,  8, 10, 12, 15,  20};
         for(int i=1;i<T.length;i++){
             MinuteRate tp = mr.get(i);
                 if(tp.getRange_price()>=P[i]){

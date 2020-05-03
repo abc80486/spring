@@ -10,7 +10,9 @@ import com.neo.services.MinuteDataService.MinuteDataService;
 import com.neo.services.Predict.PredictService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -89,7 +91,7 @@ public class PredictServiceImpl implements PredictService {
             System.out.println(new Date()+"predict表更新预测结果失败");
             return false;
         }
-        System.out.println(new Date()+" predict表更新预测结果数量 " + size);
+        System.out.println(new Date()+" predict表更新预测结果数量：" + size +"\n");
         return true;
     }
 
@@ -102,5 +104,15 @@ public class PredictServiceImpl implements PredictService {
         
         return y*100.0/(y+n);
     }
+
+    @RequestMapping("/predict/correctRate/{T}")
+    @Override
+    public double correctRate(@PathVariable int T) {
+        int y = pm.numCorrectOnCycle(T);
+        int n = pm.numErrorOnCycle(T);
+        
+        return y*100.0/(y+n);
+    }
+
 
 }

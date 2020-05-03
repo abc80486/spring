@@ -19,6 +19,7 @@ public interface PredictService {
 
     //计算预测成功的概率
     double correctRate();
+    public double correctRate(int T) ;
 
 
 }
