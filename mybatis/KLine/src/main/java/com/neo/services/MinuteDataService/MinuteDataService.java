@@ -11,6 +11,8 @@ public interface MinuteDataService {
 
     List<MinuteData> get(long time) ;//根据时间获取数据
 
+    boolean updateDate();
+
     MinuteRate getGrowthRate(List<MinuteData> d,int low,int high);//根据数据列表获取T间隔的振幅
 
     List<MinuteRate> getGrowthRate(List<MinuteData> d,int T);//根据数据列表获取T间隔的振幅

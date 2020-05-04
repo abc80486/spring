@@ -47,8 +47,8 @@ public class GrowthRate {
     }
 
     @RequestMapping("/predict")
-    public boolean predict(){
-        return lgrs.predict();
+    public void predict(){
+        ps.predict();
     }
     @RequestMapping("/get")
     public List<MinuteData> get() {

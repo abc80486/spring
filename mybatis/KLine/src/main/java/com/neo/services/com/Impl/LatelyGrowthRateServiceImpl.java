@@ -10,6 +10,7 @@ import com.neo.model.MinuteRate;
 import com.neo.model.Predict;
 import com.neo.services.MinuteDataService.MinuteDataService;
 import com.neo.services.MinuteRateService.MinuteRateService;
+import com.neo.services.Predict.PredictService;
 import com.neo.services.com.LatelyGrowthRateService;
 import com.neo.services.util.GetKlineData;
 
@@ -18,7 +19,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-@EnableScheduling
 @Service
 public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
    
@@ -29,9 +29,9 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
     private MinuteRateService mrs;
 
     @Autowired
-    private PredictMapper pm;
+    private PredictService ps;
 
-    @Scheduled(cron = "10 16,31,46,01 * * * ?")
+    @Override
     public void updateData(){
         int[] low={1,4,16,24,48,96,192,384,672,960,1344,2808,4320,5616};
         List<MinuteRate> latelyGr = update();
@@ -41,21 +41,21 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
         }
         System.out.println(new Date()+" 60天内的增长率数据更新成功");
         //System.out.println(latelyGr);
-        List<Predict> re = predict(latelyGr);
+        List<Predict> re = ps.predict(latelyGr);
         //System.out.println(latelyGr);
         //System.out.println(re);
         int k=0;
         for(int i=0;i<re.size();i++){
             try{
-                Predict p = pm.selectForCycle(re.get(i).getT());
+                Predict p = ps.selectForCycle(re.get(i).getT());
                 if(p==null || re.get(i).getEndTime() > p.getEndTime())
-                    {pm.insert(re.get(i));++k;}
+                    {ps.insert(re.get(i));++k;}
             }catch(Exception e){
                 System.out.println(e.toString());
                 return;
             }
         }
-        System.out.println(new Date()+" predict表添加预测数目："+k+"\n");
+        System.out.println(new Date()+" predict表添加预测数目："+k);
     }
 
     public List<MinuteRate> update(){
@@ -72,54 +72,6 @@ public class LatelyGrowthRateServiceImpl implements LatelyGrowthRateService {
             re.add(k);
         }
         return re;
-    }
-    public List<Predict> predict(List<MinuteRate> mr){
-        List<Predict> re = new ArrayList<Predict>();
-        int[] T={1,4,16,24,48,96,192,384,672,960,1344};
-        int[] P={1,2, 2, 4, 6, 6,  8, 10, 12, 15,  20};
-        for(int i=1;i<T.length;i++){
-            MinuteRate tp = mr.get(i);
-                if(tp.getRange_price()>=P[i]){
-                    Predict p = new Predict();
-                    p.setT(T[i]);
-                    int k = 15*60*1000;
-                    p.setStartTime(tp.getHigh_time()+k);
-                    p.setEndTime(tp.getHigh_time()+k*T[i]+k);
-                    int n=2;
-                    p.setPredictValue(tp.getHigh_price()*(1-tp.getRange_price()/n/100));
-                    p.setRate(tp.getRange_price()/2*-1);
-                    re.add(p);
-                }
-                if(tp.getRange_price()<=P[i]*-1){
-                    Predict p = new Predict();
-                    p.setT(T[i]);
-                    int k = 15*60*1000;
-                    p.setStartTime(tp.getLow_time()+k);
-                    p.setEndTime(tp.getLow_time()+k*T[i]+k);
-                    int n=2;
-                    p.setPredictValue(tp.getLow_price()*(1-tp.getRange_price()/n/100));
-                    p.setRate(tp.getRange_price()/2*-1);
-                    re.add(p);
-                }
-        }
-        return re;
-    }
-
-
-    public boolean predict(){
-        List<MinuteRate> mr = update();
-        List<Predict> re = predict(mr);
-        for(int i=0;i<re.size();i++){
-            try{
-                Predict p = pm.selectForCycle(re.get(i).getT());
-                if(p==null || re.get(i).getEndTime() > p.getEndTime())
-                    pm.insert(re.get(i));
-            }catch(Exception e){
-                System.out.println(e.toString());
-                return false;
-            }
-        }
-        return true;
     }
 
 }

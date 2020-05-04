@@ -35,6 +35,11 @@ public interface PredictMapper {
     @Select("SELECT COUNT(result) FROM predict WHERE result = -1 AND T = ${value}")
     int numErrorOnCycle(int T);
 
+    //time时间内的预测指数，单位毫秒，如24小时内的平均预测价格，time = 24*60*60*1000
+    @Select("")
+    double predictIndex(long time);
+
+
 
 
 

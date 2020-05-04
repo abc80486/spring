@@ -2,6 +2,7 @@ package com.neo.services.Predict;
 
 import java.util.List;
 
+import com.neo.model.MinuteRate;
 import com.neo.model.Predict;
 
 public interface PredictService {
@@ -19,7 +20,14 @@ public interface PredictService {
 
     //计算预测成功的概率
     double correctRate();
-    public double correctRate(int T) ;
+
+    double correctRate(int T) ;
+
+    List<Predict> predict(List<MinuteRate> mr);
+
+    void predict();
+
+    
 
 
 }

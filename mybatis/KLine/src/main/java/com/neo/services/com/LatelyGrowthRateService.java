@@ -5,6 +5,8 @@ import java.util.List;
 import com.neo.model.MinuteRate;
 
 public interface LatelyGrowthRateService {
-    public List<MinuteRate> update();
-    public boolean predict();
+
+    List<MinuteRate> update();
+    
+    void updateData();
 }
