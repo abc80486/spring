@@ -20,7 +20,7 @@ public interface PredictMapper {
     @Update("UPDATE predict SET resultValue = ${resultValue} , result = ${result} WHERE id = ${id} ")
     void update(int id,double resultValue,int result);//根据id更新表字段
 
-    @Select("SELECT * FROM predict WHERE from_unixtime(endTime/1000+1*60*60)<current_timestamp() AND result=0 ")
+    @Select("SELECT * FROM predict WHERE result=0")
     List<Predict> getPredicted();    //获取预测结束且没有预测结果的数据
 
     @Select("SELECT COUNT(result) FROM predict WHERE result = 1")

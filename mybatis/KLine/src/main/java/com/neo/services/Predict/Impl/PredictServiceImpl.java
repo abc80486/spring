@@ -63,13 +63,15 @@ public class PredictServiceImpl implements PredictService {
     public boolean updateResult() {
         List<Predict> lp = getPredicted();
         int size = lp.size();
+        int num=0;
         try{
             for(int i=0;i<size;i++){
                 Predict p = lp.get(i);
-                List<MinuteData> d = mds.get(p.getStartTime(), p.getT());
+                List<MinuteData> d = mds.get(p.getStartTime());
+                //mds.getGrowthRate(d, low, high)
                 if(d.size()!=p.getT()){
-                    System.out.println(new Date()+" 成交数据未更新");
-                    return false;
+                    //System.out.println(new Date()+" 成交数据未更新");
+                    //return false;
                 }
                 double resultValueLow = d.get(0).getLow_price(),resultValueHigh = d.get(0).getTop_price();
                 int result;
@@ -80,22 +82,22 @@ public class PredictServiceImpl implements PredictService {
                     if(n>resultValueHigh) resultValueHigh = n;
                 }
                 if(p.getRate()<=0) {
-                    if(resultValueLow <= p.getPredictValue()) result = 1;
-                    else result = -1;
+                    if(resultValueLow <= p.getPredictValue()) {result = 1;}
+                    else if(p.getEndTime()<new Date().getTime()) result = -1;else continue;
                     update(p.getId(), resultValueLow, result);
                     //System.out.println(resultValueHigh+" "+result);
                 }else{
-                    if(resultValueHigh >= p.getPredictValue()) result = 1;
-                    else result = -1;
+                    if(resultValueHigh >= p.getPredictValue()) {result = 1;}
+                    else if(p.getEndTime()<new Date().getTime()) result = -1;else continue;
                     update(p.getId(), resultValueHigh, result);               
                 }
-
+                ++num;
             }
         }catch(Exception e){
-            System.out.println(new Date()+"predict表更新预测结果失败");
+            System.out.println(new Date()+" predict表更新预测结果失败");
             return false;
         }
-        System.out.println(new Date()+" predict表更新预测结果数量：" + size);
+        System.out.println(new Date()+" predict表更新预测结果数量：" + num);
         return true;
     }
 
